@@ -1,37 +1,54 @@
-dp-repo-template
-================
+dp-dd-backend-test
+====================
+Integration tests for backend components - CSV Chopper, DB Uploader and API.
 
-A template git repository for DP repos:
+Getting Started
+===============
+Install Java and maven
 
-* Standardised files for CHANGELOG, CONTRIBUTING, LICENSE and README
-* Default template for GitHub pull requests
+``
+brew install java
+brew install maven
 
-### Getting started
+``
 
-After creating a new repository on GitHub, use these commands to initialise
-it using this repository as a template:
+Pre-requisites
+==============
+Edit the values in the local_config.yml to point to the following apps
+1. CSV Splitter
+2. DB-Postgres
+3. API Endpoint
+Ensure that the above apps are running.
+Kafka and zookeeper are set up
+The CSV file is uploaded to the S3 bucket
+Include the CSV file under /resources/csvs
 
-* `git clone git@github.com:ONSdigital/dp-repo-template dp-new-repo-name`
-* `cd dp-new-repo-name`
-* `git remote set-url origin git@github.com:ONSdigital/dp-new-repo-name`
+To clone the project
 
-Remember to update the [README](README.md) and [CHANGELOG](CHANGELOG.md) files.
+``
+git clone https://github.com/ONSdigital/dp-dd-backend-test 
+``
 
-### Configuration
+To run the tests
+``
+mvn clean test
+``
+Runs the backendTest
 
-An overview of the configuration options available, either as a table of
-environment variables, or with a link to a configuration guide.
+Init Setup
+==========
+Deletes the following tables:
+``
+dimensional_data_point
+dimensional_data_set
+dimensional_data_set_concept_system
+``
 
-| Environment variable | Default | Description
-| -------------------- | ------- | -----------
-| BIND_ADDR            | :8080   | The host and port to bind to
+What it does
+============
 
-### Contributing
-
-See [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-### License
-
-Copyright ©‎ 2016, Office for National Statistics (https://www.ons.gov.uk)
-
-Released under MIT license, see [LICENSE](LICENSE.md) for details.
+Gets the number of rows from the CSV file
+Chops the CSV file and populates the Kafka queue
+DBLoader reads the Kafka queue and uploads the database
+Asserts the database rows and the rows in the CSV file
+Calls the dataset api and confirms the title of the dataset 

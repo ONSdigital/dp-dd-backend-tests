@@ -1,0 +1,11 @@
+config:
+  splitter: http://localhost:21000/splitter
+  dbloader: http://localhost:9000
+  postgres: jdbc:postgresql://localhost:5432/data_discovery
+  endPoint: http://localhost:8080/datasets
+  s3_bucket:
+ # file_path: test.csv
+  #file_path: small-example.csv
+  file_path: WDAT0801new.csv
+
+
