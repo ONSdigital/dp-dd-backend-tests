@@ -2,16 +2,6 @@ dp-dd-backend-test
 ====================
 Integration tests for backend components - CSV Chopper, DB Uploader and API.
 
-Getting Started
-===============
-Install Java and maven
-
-``
-brew install java
-brew install maven
-
-``
-
 Pre-requisites
 ==============
 Edit the values in the local_config.yml to point to the following apps
@@ -25,24 +15,26 @@ Include the CSV file under /resources/csvs
 
 To clone the project
 
-``
+````
 git clone https://github.com/ONSdigital/dp-dd-backend-test 
-``
+````
 
 To run the tests
-``
+````
 mvn clean test
-``
+````
+
+
 Runs the backendTest
 
 Init Setup
 ==========
 Deletes the following tables:
-``
+````
 dimensional_data_point
 dimensional_data_set
 dimensional_data_set_concept_system
-``
+````
 
 What it does
 ============
