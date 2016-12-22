@@ -5,6 +5,12 @@ import io.restassured.path.json.JsonPath;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import static org.testng.Assert.*;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.junit.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import java.io.IOException;
@@ -24,7 +30,7 @@ public class BackendTest {
 	int rowsInCSV = 0;
 	String tables[] = {dimDataPoint, dimConceptSys,dimDataSet};
 	@BeforeTest
-	 public void setConfig(){
+	public void initTest() {
 // Delete the data in the DB, get the rows in the CSV and ensure the api has nothing to display
 		dbLoader.connectToDB();
 		dbLoader.deleteData(tables);
@@ -32,8 +38,9 @@ public class BackendTest {
 		assertTrue(numOfRows==0,"All rows are not deleted. Number of rows: " +numOfRows);
 		rowsInCSV = csvOps.returnRows(config.getFilepath());
 		System.out.println("Number of rows in CSV "+rowsInCSV);
-		assertTrue(((JsonPath) ep.checkEndPoint()).get().toString().equalsIgnoreCase("[]"),
-				"There is some data in the DataBase " +((JsonPath) ep.checkEndPoint()).get().toString());
+		ep.checkEndPoint();
+		assertTrue(ep.dataSetTotal() == 0,
+				"There are some dataset still in the API in the DataBase " + ep.returnJson());
 
 	}
 
@@ -61,16 +68,8 @@ public class BackendTest {
 	public void apiTest(){
 	// check for the csv file in the dataset
 		boolean fileExists = false;
-		JsonPath jsonResponse = ep.checkEndPoint();
-		ArrayList<Object> titles= jsonResponse.get("title");
-		for(Object filekey: titles){
-			String value = (String) filekey;
-			if(value.equalsIgnoreCase(config.getFilepath())){
-				fileExists = true;
-				break;
-			}
-		}
-		assertTrue(fileExists, "The data set for "+config.getFilepath()+ " does not exists");
+		ep.checkEndPoint();
+		Assert.assertTrue(ep.titleExists(config.getFilepath()));
 	}
 
 

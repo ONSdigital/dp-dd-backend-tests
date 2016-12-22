@@ -5,13 +5,20 @@ Integration tests for backend components - CSV Chopper, DB Uploader and API.
 Pre-requisites
 ==============
 Edit the values in the local_config.yml to point to the following apps
+````
 1. CSV Splitter
 2. DB-Postgres
 3. API Endpoint
+````
 Ensure that the above apps are running.
-Kafka and zookeeper are set up
-The CSV file is uploaded to the S3 bucket
+
+Kafka and zookeeper are set up.
+
+The CSV file is uploaded to the S3 bucket.
+
 Include the CSV file under /resources/csvs
+
+<p>
 
 To clone the project
 
@@ -29,7 +36,8 @@ Runs the backendTest
 
 Init Setup
 ==========
-Deletes the following tables:
+The test deletes the data from the following tables:
+
 ````
 dimensional_data_point
 dimensional_data_set

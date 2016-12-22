@@ -22,7 +22,9 @@ public class CSVOps {
 			csvReader = new CSVReader(new FileReader(localFile));
 			String[] nextLine;
 			while ((nextLine = csvReader.readNext()) != null) {
-				numberOfLines++;
+				if (!nextLine[0].contains("***")) {
+					numberOfLines++;
+				}
 			}
 		} catch (FileNotFoundException fileNotFoundException) {
 			fileNotFoundException.printStackTrace();
@@ -31,4 +33,6 @@ public class CSVOps {
 		}
 		return numberOfLines-headers;
 	}
+
+
 }

@@ -15,9 +15,16 @@ public class Chopper {
 
 
 	Config config = new Config();
+
+	public static void main(String[] args) {
+		Chopper csv = new Chopper();
+		csv.startChopper();
+	}
+
 	public String getSplitter(){
 	return	config.getSplitter();
 	}
+
 	public String getFilepath(){
 	return	config.getFilepath();
 	}
