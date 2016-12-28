@@ -4,9 +4,9 @@ config:
   postgres: jdbc:postgresql://localhost:5432/data_discovery
   endPoint: http://localhost:8080/datasets
   fileUpload: http://localhost:20019
-  s3_bucket:
-#  file_path: Open-Data-small.csv
-  file_path: small-example.csv
+  file_path: Open-Data-small.csv
+
+#  file_path: small-example.csv
 #  file_path: AF001EW.ArmedForces_in_Databaker_format.csv
 #  file_path: WDAT0801new.csv
 

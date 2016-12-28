@@ -22,7 +22,7 @@ public class BackendTest {
 	Chopper chopper = new Chopper();
 	CSVOps csvOps = new CSVOps();
 	DBLoader dbLoader = new DBLoader();
-	EndPoint ep = new EndPoint();
+	DimensionalAPI ep = new DimensionalAPI();
 	String dimDataPoint = "dimensional_data_point";
 	String dimDataSet = "dimensional_data_set";
 	String dimConceptSys= "dimensional_data_set_concept_system";
@@ -87,8 +87,6 @@ public class BackendTest {
 		}
 
 	}
-
-
 
 
 

@@ -8,55 +8,27 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import scala.Array;
-import scala.util.parsing.json.JSON;
 
-import java.util.Arrays;
-import java.util.Iterator;
 
 import static io.restassured.RestAssured.expect;
 
-public class EndPoint {
+public class DimensionalAPI {
 	Config config = new Config();
 	RestAssured restAssured = new RestAssured();
 	String responseString = null;
 	ResponseBody responseBody;
-	String jsonStr = "{\n" +
-			"  \"items\": [\n" +
-			"    {\n" +
-			"      \"id\": \"88f28a15-66ae-4f2a-b397-52eed08988db\",\n" +
-			"      \"title\": \"Open-Data-small.csv\",\n" +
-			"      \"url\": \"http://localhost:8080/datasets/88f28a15-66ae-4f2a-b397-52eed08988db\",\n" +
-			"      \"metadata\": {\n" +
-			"        \"description\": \"No description available.\"\n" +
-			"      },\n" +
-			"      \"dimensionsUrl\": \"http://localhost:8080/datasets/88f28a15-66ae-4f2a-b397-52eed08988db/dimensions\"\n" +
-			"    },\n" +
-			"    {\n" +
-			"      \"id\": \"36c3c45e-b26b-468f-9f0e-2edca8fea40a\",\n" +
-			"      \"title\": \"small-example.csv\",\n" +
-			"      \"url\": \"http://localhost:8080/datasets/36c3c45e-b26b-468f-9f0e-2edca8fea40a\",\n" +
-			"      \"metadata\": {\n" +
-			"        \"description\": \"No description available.\"\n" +
-			"      },\n" +
-			"      \"dimensionsUrl\": \"http://localhost:8080/datasets/36c3c45e-b26b-468f-9f0e-2edca8fea40a/dimensions\"\n" +
-			"    }\n" +
-			"  ],\n" +
-			"  \"first\": \"http://localhost:8080/datasets?page=1&size=20\",\n" +
-			"  \"last\": \"http://localhost:8080/datasets?page=0&size=20\",\n" +
-			"  \"page\": 1,\n" +
-			"  \"count\": 2,\n" +
-			"  \"totalPages\": 0,\n" +
-			"  \"itemsPerPage\": 20,\n" +
-			"  \"startIndex\": 0,\n" +
-			"  \"total\": 2\n" +
-			"}";
+
 	JSONParser parser = new JSONParser();
 
-	public void checkEndPoint() {
+	public String returnResponseAsString() {
+		return responseString;
+	}
+
+	public String checkEndPoint() {
 		RestAssured.baseURI = config.getDatasetEndPoint();
 		responseBody = expect().statusCode(200).when().get().body();
 		responseString = responseBody.asString();
+		return responseString;
 	}
 
 	public boolean titleExists(String title) {
