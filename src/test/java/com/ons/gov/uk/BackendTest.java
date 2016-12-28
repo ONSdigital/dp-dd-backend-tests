@@ -1,7 +1,6 @@
 package com.ons.gov.uk;
 
 import com.ons.gov.uk.core.Config;
-import io.restassured.path.json.JsonPath;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import static org.testng.Assert.*;

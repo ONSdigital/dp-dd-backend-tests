@@ -2,7 +2,6 @@ package com.ons.gov.uk;
 
 import com.ons.gov.uk.core.Config;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.ResponseBody;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

@@ -1,7 +1,6 @@
 package com.ons.gov.uk;
 
 import com.ons.gov.uk.core.Config;
-
 import java.sql.*;
 import java.util.Properties;
 

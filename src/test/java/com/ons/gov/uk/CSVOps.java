@@ -1,11 +1,7 @@
 package com.ons.gov.uk;
 
 
-
-
-import com.ons.gov.uk.core.Config;
 import com.opencsv.CSVReader;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
