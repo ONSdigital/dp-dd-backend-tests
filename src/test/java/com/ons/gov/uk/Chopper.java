@@ -15,10 +15,12 @@ public class Chopper {
 
 
 	Config config = new Config();
+	HttpClient httpClient = HttpClientBuilder.create().build();
+	HttpResponse chopResponse = null;
+	HttpPost callChopper = new HttpPost(getSplitter());
 
-	public static void main(String[] args) {
-		Chopper csv = new Chopper();
-		csv.startChopper();
+	public Chopper() {
+		callChopper.addHeader("content-type", "application/json");
 	}
 
 	public String getSplitter(){
@@ -30,12 +32,13 @@ public class Chopper {
 	}
 
 	public HttpResponse startChopper() {
-		HttpClient httpClient = HttpClientBuilder.create().build();
-		HttpResponse chopResponse = null;
-		HttpPost callChopper = new HttpPost(getSplitter());
+		callChop(getFilepath());
+		return chopResponse;
+	}
+
+	public void callChop(String fileName) {
 		try {
-			callChopper.addHeader("content-type", "application/json");
-			String entity = "{\"filePath\":\""+getFilepath()+"\"} ";
+			String entity = "{\"filePath\":\"" + fileName + "\"} ";
 			StringEntity paramToSend = new StringEntity(entity);
 			callChopper.setEntity(paramToSend);
 		} catch (UnsupportedEncodingException encodingError) {
@@ -47,9 +50,7 @@ public class Chopper {
 		catch (IOException ioException) {
 			ioException.printStackTrace();
 		}
-
-		return chopResponse;
-
 	}
+
 
 }

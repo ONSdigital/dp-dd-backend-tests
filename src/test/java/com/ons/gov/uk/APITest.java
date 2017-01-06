@@ -53,7 +53,7 @@ public class APITest {
 			int numberOfItems = jsonObject1.size();
 			Assert.assertEquals(numberOfItems, Integer.parseInt(count), "Number of datasets :" +
 					numberOfItems + "\n" + "Value of Count :" + count);
-			Assert.assertEquals(numberOfItems, Integer.parseInt(count), "Number of datasets :" +
+			Assert.assertEquals(numberOfItems, Integer.parseInt(total), "Number of datasets :" +
 					numberOfItems + "\n" + "Value of Total :" + total);
 		} catch (Exception ee) {
 			ee.printStackTrace();

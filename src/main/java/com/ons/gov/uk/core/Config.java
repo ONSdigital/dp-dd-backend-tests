@@ -10,8 +10,10 @@ public class Config {
 	private String splitter;
 	private String filepath;
 	private String dbLoader;
-	private String datasetEndPoint;
+	private String datasetEndPointReal;
+	private String datasetEndPointStub;
 	private String postgres;
+	private boolean stub = true;
 
 	public Config(){
 		loadConfig("/files/local_config.yml");
@@ -31,11 +33,17 @@ public class Config {
 		if (config.containsKey("file_path")) {
 			filepath = (String) config.get("file_path");
 		}
-		if (config.containsKey("endPoint")) {
-			datasetEndPoint = (String) config.get("endPoint");
+		if (config.containsKey("endPoint_real")) {
+			datasetEndPointReal = (String) config.get("endPoint_real");
+		}
+		if (config.containsKey("endPoint_stub")) {
+			datasetEndPointStub = (String) config.get("endPoint_stub");
 		}
 		if (config.containsKey("postgres")) {
 			postgres = (String) config.get("postgres");
+		}
+		if (config.containsKey("backend")) {
+			stub = ((String) config.get("backend")).equalsIgnoreCase("stub");
 		}
 	}
 
@@ -66,12 +74,24 @@ public class Config {
 		this.dbLoader = dbLoader;
 	}
 
-	public String getDatasetEndPoint() {
-		return datasetEndPoint;
+	public String getEndPointReal() {
+		return datasetEndPointReal;
 	}
 
-	public void setDatasetEndPoint(String datasetEndPoint) {
-		this.datasetEndPoint = datasetEndPoint;
+	public String getEndPointStub() {
+		return datasetEndPointStub;
+	}
+
+	public void setDatasetEndPointReal(String datasetEndPoint) {
+		this.datasetEndPointReal = datasetEndPoint;
+	}
+
+	public void setDatasetEndPointStub(String datasetEndPoint) {
+		this.datasetEndPointStub = datasetEndPoint;
+	}
+
+	public boolean isBackendStub() {
+		return stub;
 	}
 
 

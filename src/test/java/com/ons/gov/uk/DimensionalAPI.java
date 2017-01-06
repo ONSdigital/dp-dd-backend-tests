@@ -1,6 +1,7 @@
 package com.ons.gov.uk;
 
 import com.ons.gov.uk.core.Config;
+
 import io.restassured.RestAssured;
 import io.restassured.response.ResponseBody;
 import org.json.simple.JSONArray;
@@ -9,7 +10,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 
+import java.net.URLDecoder;
+
 import static io.restassured.RestAssured.expect;
+
 
 public class DimensionalAPI {
 	Config config = new Config();
@@ -24,24 +28,45 @@ public class DimensionalAPI {
 	}
 
 	public String checkEndPoint() {
-		RestAssured.baseURI = config.getDatasetEndPoint();
+		RestAssured.urlEncodingEnabled = true;
+		String endPoint = config.isBackendStub() ? config.getEndPointStub() : config.getEndPointReal();
+		RestAssured.baseURI = endPoint;
 		responseBody = expect().statusCode(200).when().get().body();
 		responseString = responseBody.asString();
 		return responseString;
 	}
 
-	public boolean titleExists(String title) {
+	public JSONArray getItems(String keyArray) throws Exception {
+		if (responseString == null) {
+			checkEndPoint();
+		}
+		return (JSONArray) ((JSONObject) parser.parse(responseString)).get(keyArray);
+	}
+
+	//
+	public JSONArray getItems(String url, String keyArray) throws Exception {
+		if (url == null) {
+			checkEndPoint();
+			url = responseString;
+		}
+		return (JSONArray) ((JSONObject) parser.parse(url)).get(keyArray);
+	}
+
+
+	public JSONArray getValue(String jsonString) throws Exception {
+		return (JSONArray) parser.parse(jsonString);
+	}
+
+	public boolean titleExists(String title) throws Exception {
 		boolean exists = false;
 		try {
-			JSONObject jsonObject = (JSONObject) parser.parse(responseString);
-			JSONArray jsonObject1 = (JSONArray) jsonObject.get("items");
+			JSONArray jsonObject1 = getItems("items");
 			for (int i = 0; i < jsonObject1.size(); i++) {
 				JSONObject jo = (JSONObject) jsonObject1.get(i);
 				if (jo.get("title").equals(title)) {
 					exists = true;
 					break;
 				}
-				System.out.println(jo.get("title"));
 			}
 
 
@@ -68,6 +93,24 @@ public class DimensionalAPI {
 			ee.printStackTrace();
 		}
 		return totalDataSets;
+	}
+
+	public String waitForApiToLoad(String title) {
+		try {
+			while (!titleExists(title)) {
+				Thread.sleep(2000);
+				checkEndPoint();
+			}
+		} catch (Exception ee) {
+			ee.printStackTrace();
+		}
+		return responseString;
+	}
+
+	public String callTheLink(String url) {
+		url = URLDecoder.decode(url);
+		return expect().statusCode(200).when().get(url).body().asString();
+
 	}
 
 
