@@ -1,5 +1,6 @@
 package com.ons.gov.uk;
 
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -11,7 +12,7 @@ public class APITest {
 	JSONParser parser = new JSONParser();
 	String responseFromAPI = null;
 
-	public APITest() {
+	public APITest() throws Exception {
 		responseFromAPI = dimensionalAPI.checkEndPoint();
 	}
 
@@ -59,6 +60,7 @@ public class APITest {
 			ee.printStackTrace();
 		}
 	}
+
 
 	public String message(String key, String value) {
 		return "The value for the key : " + key + "  is :" + value;

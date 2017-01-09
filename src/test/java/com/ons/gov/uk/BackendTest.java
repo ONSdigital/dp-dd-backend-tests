@@ -3,17 +3,14 @@ package com.ons.gov.uk;
 import com.ons.gov.uk.core.Config;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
-import static org.testng.Assert.*;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
 import java.io.IOException;
-import java.util.ArrayList;
+
+import static org.testng.Assert.assertTrue;
+
 
 
 public class BackendTest {
@@ -68,7 +65,11 @@ public class BackendTest {
 	// check for the csv file in the dataset
 		boolean fileExists = false;
 		ep.checkEndPoint();
-		Assert.assertTrue(ep.titleExists(config.getFilepath()));
+		try {
+			Assert.assertTrue(ep.titleExists(config.getFilepath()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 
