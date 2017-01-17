@@ -1,14 +1,12 @@
 package com.ons.gov.uk;
 
 import com.ons.gov.uk.core.Config;
-
 import io.restassured.RestAssured;
 import io.restassured.response.ResponseBody;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 
 import java.net.URLDecoder;
 
@@ -63,7 +61,7 @@ public class DimensionalAPI {
 			JSONArray jsonObject1 = getItems("items");
 			for (int i = 0; i < jsonObject1.size(); i++) {
 				JSONObject jo = (JSONObject) jsonObject1.get(i);
-				if (jo.get("title").equals(title)) {
+				if (jo.get("title").toString().contains(title)) {
 					exists = true;
 					break;
 				}
@@ -96,10 +94,12 @@ public class DimensionalAPI {
 	}
 
 	public String waitForApiToLoad(String title) {
+		int counter = 0;
 		try {
-			while (!titleExists(title)) {
+			while (!titleExists(title) && counter < 10) {
 				Thread.sleep(2000);
 				checkEndPoint();
+				counter++;
 			}
 		} catch (Exception ee) {
 			ee.printStackTrace();

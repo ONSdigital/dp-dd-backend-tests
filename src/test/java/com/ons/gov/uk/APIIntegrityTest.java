@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class APIIntegrityTest {
-	Chopper chopper = new Chopper();
 	DimensionalAPI dimAPI = new DimensionalAPI();
 	JSONParser parser = new JSONParser();
 	String responseFromAPI = null;
@@ -23,7 +22,6 @@ public class APIIntegrityTest {
 	ArrayList <String> optionUrls = new ArrayList <String>();
 	CSVOps csvOps = new CSVOps();
 	HashMap <String, ArrayList <String>> dimOptionsCSV;
-	ArrayList <String> dimFromCSV = new ArrayList <String>();
 	HashMap <String, ArrayList <String>> optionsFromAPI = new HashMap <String, ArrayList <String>>();
 	ArrayList <String> dimFromAPI = new ArrayList <String>();
 
@@ -36,7 +34,7 @@ public class APIIntegrityTest {
 
 	public void getCSVDimensions() {
 		if (!dimAPI.waitForApiToLoad(csvFile).contains(csvFile)) {
-			chopper.callChop(csvFile);
+			new FileUploader();
 		}
 		try {
 			csvOps.populateDimensionFilters(csvFile);
@@ -44,9 +42,6 @@ public class APIIntegrityTest {
 			ee.printStackTrace();
 		}
 		dimOptionsCSV = csvOps.getDimOptionsFromCSV();
-		for (String key : dimOptionsCSV.keySet()) {
-			dimFromCSV.add(key);
-		}
 	}
 
 	public void getDimensionUrl() {
@@ -88,9 +83,10 @@ public class APIIntegrityTest {
 		int npe = 0;
 		for (int index = 0; index < optionUrls.size(); index++) {
 			JSONArray dimArray = returnDimOptions(optionUrls.get(index));
+			String option = getName(optionUrls.get(index), "name");
 			try {
-				optionsFromAPI.put(Integer.toString(index), populateOptionsFromAPI(dimArray));
-				assertOptionExists(optionsFromAPI.get(Integer.toString(index)), getExpectedOptions(dimFromCSV.get(index - npe)));
+				optionsFromAPI.put(option, populateOptionsFromAPI(dimArray));
+				//			assertOptionExists(optionsFromAPI.get(Integer.toString(index)), getExpectedOptions(dimFromCSV.get(index - npe)));
 			} catch (NullPointerException ee) {
 				//			ee.printStackTrace();
 				System.out.println("****Exception Handled****");
@@ -98,7 +94,11 @@ public class APIIntegrityTest {
 			}
 
 		}
+		for (String key : dimOptionsCSV.keySet()) {
+			assertOptionExists(optionsFromAPI.get(key), dimOptionsCSV.get(key));
+		}
 	}
+
 
 	public ArrayList <String> populateOptionsFromAPI(JSONArray dimArray) {
 		ArrayList <String> options = new ArrayList <String>();
@@ -109,6 +109,15 @@ public class APIIntegrityTest {
 		return options;
 	}
 
+	public String getName(String url, String name) {
+		String value = null;
+		try {
+			String jsonString = dimAPI.callTheLink(url);
+			value = ((JSONObject) new JSONParser().parse(jsonString)).get(name).toString();
+		} catch (Exception ee) {
+		}
+		return value;
+	}
 
 	public JSONArray returnDimOptions(String url) throws Exception {
 		String jsonString = dimAPI.callTheLink(url);
@@ -133,7 +142,7 @@ public class APIIntegrityTest {
 	public void assertOptionExists(ArrayList <String> actualOptions, ArrayList <String> expectedOptions) {
 		Assert.assertEquals(actualOptions.size(), expectedOptions.size());
 		for (int index = 0; index < expectedOptions.size(); index++) {
-			//		System.out.println("Actual Options "+ actualOptions.get(index) +"*********      "+" Expected Options "+ expectedOptions.get(index));
+			System.out.println("Actual Options " + actualOptions.get(index) + "*********      " + " Expected Options " + expectedOptions.get(index));
 			Assert.assertTrue(expectedOptions.contains(actualOptions.get(index)),
 					"Option " + actualOptions.get(index) + " is not present in the CSV");
 		}

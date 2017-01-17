@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 
 public class CSVOps {
@@ -17,6 +18,7 @@ public class CSVOps {
 	HashMap <String, ArrayList <String>> dimAndOptions = new HashMap <String, ArrayList <String>>();
 	ArrayList <String> dimension1 = new ArrayList <String>();
 	ArrayList <String> dimension2 = new ArrayList <String>();
+	ArrayList <String> dimension3 = new ArrayList <String>();
 
 	public static void main(String[] args) throws Exception {
 		CSVOps cv = new CSVOps();
@@ -50,18 +52,22 @@ public class CSVOps {
 	public int returnRows(String fileName) {
 		int headers = 1;
 		readCSV(fileName);
-		return numberOfLines-headers;
+		return numberOfLines - headers;
 	}
 
 	public void populateDimensionFilters(String file) throws IOException {
 		String localFile = "src/main/resources/csvs/" + file;
 		String[] nextLine;
-		String filter1 = null, filter2 = null;
+		String filter1 = null, filter2 = null, filter3 = null;
 		csvReader = new CSVReader(new FileReader(localFile));
 		while ((nextLine = csvReader.readNext()) != null) {
 			if (!nextLine[0].contains("***")) {
 				filter1 = nextLine[10];
 				filter2 = nextLine[12];
+				try {
+					filter3 = nextLine[14];
+				} catch (Exception ee) {
+				}
 				if (!nextLine[10].contains("Dimension_1")) {
 					if (!dimension1.contains(nextLine[11])) {
 						dimension1.add(nextLine[11]);
@@ -69,11 +75,36 @@ public class CSVOps {
 					if (!dimension2.contains(nextLine[13])) {
 						dimension2.add(nextLine[13]);
 					}
+					try {
+						if (!dimension3.contains(nextLine[15])) {
+							dimension3.add(nextLine[15]);
+						}
+					} catch (Exception ee) {
+					}
 				}
 			}
+
+
 		}
 		dimAndOptions.put(filter1, dimension1);
 		dimAndOptions.put(filter2, dimension2);
+		try {
+			if (filter3 != null) {
+				dimAndOptions.put(filter3, dimension3);
+			}
+
+		} catch (Exception ee) {
+		}
+
+		cleanUpHashMap();
 	}
 
+	public void cleanUpHashMap() {
+		Set <String> keySet = dimAndOptions.keySet();
+		for (String key : keySet) {
+			if (key == null) {
+				keySet.remove(dimAndOptions);
+			}
+		}
+	}
 }

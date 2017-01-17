@@ -15,7 +15,6 @@ import static org.testng.Assert.assertTrue;
 
 public class BackendTest {
 	Config config = new Config();
-	Chopper chopper = new Chopper();
 	CSVOps csvOps = new CSVOps();
 	DBLoader dbLoader = new DBLoader();
 	DimensionalAPI ep = new DimensionalAPI();
@@ -46,7 +45,7 @@ public class BackendTest {
 	// Have the file under /resources/csvs
 	@Test(groups = "chopper")
 	public void startChopper(){
-	 	assertCSVChopper(chopper.startChopper());
+		// assertCSVChopper(chopper.startChopper());
 	}
 
 	// Wait for the dataset to load. Checks for the rows until the update has stopped
