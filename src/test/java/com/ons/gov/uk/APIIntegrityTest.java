@@ -35,6 +35,10 @@ public class APIIntegrityTest {
 	public void getCSVDimensions() {
 		if (!dimAPI.waitForApiToLoad(csvFile).contains(csvFile)) {
 			new FileUploader();
+			try {
+				Thread.sleep(20000);
+			} catch (InterruptedException ee) {
+			}
 		}
 		try {
 			csvOps.populateDimensionFilters(csvFile);
@@ -56,7 +60,6 @@ public class APIIntegrityTest {
 				}
 			}
 		} catch (Exception ee) {
-			//		ee.printStackTrace();
 		}
 	}
 
@@ -69,30 +72,19 @@ public class APIIntegrityTest {
 				try {
 					dimFromAPI.add(((JSONObject) dimArray.get(index)).get("id").toString());
 				} catch (NullPointerException ee) {
-					//	ee.printStackTrace();
 				}
 				optionUrls.add(((JSONObject) dimArray.get(index)).get("url").toString());
 			}
 		} catch (Exception ee) {
-			ee.printStackTrace();
 		}
 	}
 
 	@Test(groups = {"options"}, dependsOnGroups = {"dimension"})
 	public void testOptions() throws Exception {
-		int npe = 0;
 		for (int index = 0; index < optionUrls.size(); index++) {
 			JSONArray dimArray = returnDimOptions(optionUrls.get(index));
 			String option = getName(optionUrls.get(index), "name");
-			try {
 				optionsFromAPI.put(option, populateOptionsFromAPI(dimArray));
-				//			assertOptionExists(optionsFromAPI.get(Integer.toString(index)), getExpectedOptions(dimFromCSV.get(index - npe)));
-			} catch (NullPointerException ee) {
-				//			ee.printStackTrace();
-				System.out.println("****Exception Handled****");
-				npe++;
-			}
-
 		}
 		for (String key : dimOptionsCSV.keySet()) {
 			assertOptionExists(optionsFromAPI.get(key), dimOptionsCSV.get(key));
@@ -128,7 +120,7 @@ public class APIIntegrityTest {
 			}
 			optionArray = dimAPI.getItems(jsonString, "options");
 		} catch (Exception ee) {
-			//		ee.printStackTrace();
+
 		}
 		return optionArray;
 	}
@@ -142,7 +134,6 @@ public class APIIntegrityTest {
 	public void assertOptionExists(ArrayList <String> actualOptions, ArrayList <String> expectedOptions) {
 		Assert.assertEquals(actualOptions.size(), expectedOptions.size());
 		for (int index = 0; index < expectedOptions.size(); index++) {
-			System.out.println("Actual Options " + actualOptions.get(index) + "*********      " + " Expected Options " + expectedOptions.get(index));
 			Assert.assertTrue(expectedOptions.contains(actualOptions.get(index)),
 					"Option " + actualOptions.get(index) + " is not present in the CSV");
 		}

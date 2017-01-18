@@ -37,10 +37,6 @@ public class FileUploader {
 		}
 	}
 
-	public static void main(String[] args) {
-		new FileUploader();
-	}
-
 	public void setDriver() {
 		File file = new File(getChromeDriverFileLocation());
 		if (file.exists()) {
@@ -63,9 +59,12 @@ public class FileUploader {
 	public void openFileUploader() {
 		File fileToUpload = new File("src/main/resources/csvs/" + new Config().getFilepath());
 		String filePath = fileToUpload.getAbsolutePath();
+		System.out.println("File to be uploaded ***  " + filePath);
 		driver.get(new Config().getFileuploader());
 		driver.findElement(fileUpload).sendKeys(filePath);
 		driver.findElement(upload).click();
-//		System.out.println("End of the file");
+		driver.close();
+		driver.quit();
 	}
+
 }

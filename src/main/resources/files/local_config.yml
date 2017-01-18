@@ -2,14 +2,14 @@ config:
 #  splitter: http://localhost:21000/splitter
   dbloader: http://localhost:20097
   postgres: jdbc:postgresql://localhost:5432/data_discovery
-  endPoint_real: http://localhost:20099/datasets
+  endPoint_real: https://discovery.onsdigital.co.uk/dd/api/datasets
   endPoint_stub: http://localhost:20099/datasets
   fileUploader: http://localhost:20019
   backend: real
 #   or real
   fileUpload: http://localhost:20019
-#  file_path: Open-Data-new-format.csv
-  file_path: ReMapped-AF001EW.csv
+  file_path: Open-Data-new-format.csv
+#  file_path: ReMapped-AF001EW.csv
 #  file_path: Open-Data-small.csv
 #  file_path: small-example.csv
 #  file_path: AF001EW.ArmedForces_in_Databaker_format.csv
