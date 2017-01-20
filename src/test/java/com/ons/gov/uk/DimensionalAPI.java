@@ -18,7 +18,6 @@ public class DimensionalAPI {
 	RestAssured restAssured = new RestAssured();
 	String responseString = null;
 	ResponseBody responseBody;
-
 	JSONParser parser = new JSONParser();
 
 	public String returnResponseAsString() {

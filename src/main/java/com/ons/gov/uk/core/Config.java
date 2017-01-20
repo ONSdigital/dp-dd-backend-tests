@@ -12,6 +12,7 @@ public class Config {
 	private String datasetEndPointReal;
 	private String datasetEndPointStub;
 	private String postgres;
+	private String jobCreator;
 	private boolean stub = true;
 
 	public Config(){
@@ -51,6 +52,9 @@ public class Config {
 		if (config.containsKey("backend")) {
 			stub = ((String) config.get("backend")).equalsIgnoreCase("stub");
 		}
+		if (config.containsKey("jobcreator")) {
+			jobCreator = (String) config.get("jobcreator");
+		}
 	}
 
 	public void overrideConfigFromEnvironmentVariables() {
@@ -62,11 +66,19 @@ public class Config {
 		if (fileName != null) {
 			filepath = fileName;
 		}
+		String jobCreate = System.getProperty("jobcreator");
+		if (jobCreate != null) {
+			jobCreator = jobCreate;
+		}
 
 	}
 
 	public String getPostgres() {
 		return postgres;
+	}
+
+	public String getJobCreator() {
+		return jobCreator;
 	}
 
 	public String getFilepath() {
