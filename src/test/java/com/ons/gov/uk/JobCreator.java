@@ -95,9 +95,10 @@ public class JobCreator {
 	public void waitForURL(String jobID) {
 		try {
 			while (counter != 0) {
-				Thread.sleep(5000);
-				returnCSVUrl(jobID);
 				counter--;
+				Thread.sleep(500);
+				returnCSVUrl(jobID);
+
 			}
 		} catch (Exception ee) {
 		}
@@ -119,7 +120,6 @@ public class JobCreator {
 			in = new BufferedInputStream(new URL(url).openStream());
 			try {
 				fout = new FileOutputStream(csvFile, true);
-				fout.write(20);
 			} catch (FileNotFoundException ee) {
 
 			}

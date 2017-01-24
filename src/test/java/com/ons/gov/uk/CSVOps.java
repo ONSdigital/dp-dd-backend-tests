@@ -20,10 +20,7 @@ public class CSVOps {
 	ArrayList <String> dimension2 = new ArrayList <String>();
 	ArrayList <String> dimension3 = new ArrayList <String>();
 
-	public static void main(String[] args) throws Exception {
-		CSVOps cv = new CSVOps();
-		cv.populateDimensionFilters("Open-Data-new-format.csv");
-	}
+
 
 	public HashMap <String, ArrayList <String>> getDimOptionsFromCSV() {
 		return dimAndOptions;
@@ -62,22 +59,22 @@ public class CSVOps {
 		csvReader = new CSVReader(new FileReader(localFile));
 		while ((nextLine = csvReader.readNext()) != null) {
 			if (!nextLine[0].contains("***")) {
-				filter1 = nextLine[10];
-				filter2 = nextLine[12];
+				filter1 = nextLine[11];
+				filter2 = nextLine[13];
 				try {
-					filter3 = nextLine[14];
+					filter3 = nextLine[15];
 				} catch (Exception ee) {
 				}
 				if (!nextLine[10].contains("Dimension_1")) {
-					if (!dimension1.contains(nextLine[11])) {
-						dimension1.add(nextLine[11]);
+					if (!dimension1.contains(nextLine[12])) {
+						dimension1.add(nextLine[12]);
 					}
-					if (!dimension2.contains(nextLine[13])) {
-						dimension2.add(nextLine[13]);
+					if (!dimension2.contains(nextLine[14])) {
+						dimension2.add(nextLine[14]);
 					}
 					try {
-						if (!dimension3.contains(nextLine[15])) {
-							dimension3.add(nextLine[15]);
+						if (!dimension3.contains(nextLine[16])) {
+							dimension3.add(nextLine[16]);
 						}
 					} catch (Exception ee) {
 					}
