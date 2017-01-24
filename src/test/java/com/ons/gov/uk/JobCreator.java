@@ -26,6 +26,7 @@ public class JobCreator {
 	public String fileName = null;
 	Config config = new Config();
 	RestAssured restAssured = new RestAssured();
+	int counter = 200;
 
 	public String request(String dataSetId, HashMap <String, ArrayList <String>> filters) throws JsonProcessingException {
 		CreateJob request = new CreateJob();
@@ -65,32 +66,42 @@ public class JobCreator {
 		String urlToDownloadFile = null;
 		RestAssured.baseURI = config.getJobCreator();
 		Response response = given().contentType("application/json").get("/job/" + jobID);
-		int counter = 10;
 		try {
 			if (((JSONObject) new JSONParser().parse(response.asString())).get("status").
 					toString().equalsIgnoreCase("Complete")) {
 				JSONArray getFiles = (JSONArray) ((JSONObject) new JSONParser().parse(response.asString())).get("files");
+				System.out.println(response.asString());
 				for (int i = 0; i < getFiles.size(); i++) {
 					JSONObject jo = (JSONObject) getFiles.get(i);
 					if (jo.get("url").toString() != null) {
 						urlToDownloadFile = jo.get("url").toString();
 						fileName = jo.get("name").toString();
 						break;
+					} else {
+						waitForURL(jobID);
 					}
 				}
 
+			} else {
+				waitForURL(jobID);
 			}
 		} catch (Exception ee) {
-			while (counter != 0) {
-				Thread.sleep(5000);
-				returnCSVUrl(jobID);
-				counter--;
-			}
+			waitForURL(jobID);
 		}
 
 		return urlToDownloadFile;
 	}
 
+	public void waitForURL(String jobID) {
+		try {
+			while (counter != 0) {
+				Thread.sleep(5000);
+				returnCSVUrl(jobID);
+				counter--;
+			}
+		} catch (Exception ee) {
+		}
+	}
 	public void getFile(String url) throws Exception {
 		String dirname = "download/";
 		File dir = new File(dirname);

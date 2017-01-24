@@ -39,7 +39,7 @@ public class CSVFilterTest {
 		String jobID = jobCreator.getJobID(requestJson);
 		Assert.assertNotNull(jobID, "*********Job ID is not created. Job creator might be down.*******");
 		String getURL = jobCreator.returnCSVUrl(jobID);
-		Assert.assertNotNull(getURL, "********* URL to download filtered CSV file is null Job. *******");
+		Assert.assertNotNull(getURL, "********* URL to download filtered CSV file is null. *******");
 		filteredFileName = jobCreator.fileName;
 		jobCreator.getFile(getURL);
 
