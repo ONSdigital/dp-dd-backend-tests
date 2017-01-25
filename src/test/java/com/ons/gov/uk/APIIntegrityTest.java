@@ -132,7 +132,8 @@ public class APIIntegrityTest {
 	}
 
 	public void assertOptionExists(ArrayList <String> actualOptions, ArrayList <String> expectedOptions) {
-		Assert.assertEquals(actualOptions.size(), expectedOptions.size());
+		Assert.assertEquals(actualOptions.size(), expectedOptions.size(), "Actual Size from the API: " + actualOptions.size() + "\n" +
+				"Expected Size: " + expectedOptions.size());
 		for (int index = 0; index < expectedOptions.size(); index++) {
 			Assert.assertTrue(expectedOptions.contains(actualOptions.get(index)),
 					"Option " + actualOptions.get(index) + " is not present in the CSV");

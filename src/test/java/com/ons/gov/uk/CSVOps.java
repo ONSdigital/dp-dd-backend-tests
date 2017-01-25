@@ -65,7 +65,7 @@ public class CSVOps {
 					filter3 = nextLine[15];
 				} catch (Exception ee) {
 				}
-				if (!nextLine[10].contains("Dimension_1")) {
+				if (!nextLine[11].contains("Dimension_1")) {
 					if (!dimension1.contains(nextLine[12])) {
 						dimension1.add(nextLine[12]);
 					}
