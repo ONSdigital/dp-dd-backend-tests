@@ -6,6 +6,7 @@ config:
   endPoint_stub: http://localhost:20098/datasets
   fileUploader: http://localhost:20019
   jobcreator: https://discovery.onsdigital.co.uk/dd/api/jobs
+  endPoint_discovery: https://discovery.onsdigital.co.uk/dd/api/datasets
   backend: real
 #   or real
   fileUpload: http://localhost:20019

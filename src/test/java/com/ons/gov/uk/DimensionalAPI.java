@@ -33,6 +33,14 @@ public class DimensionalAPI {
 		return responseString;
 	}
 
+	public String checkEndPoint(String endPoint) {
+		RestAssured.urlEncodingEnabled = true;
+		RestAssured.baseURI = endPoint;
+		responseBody = expect().statusCode(200).when().get().body();
+		responseString = responseBody.asString();
+		return responseString;
+	}
+
 	public JSONArray getItems(String keyArray) throws Exception {
 		if (responseString == null) {
 			checkEndPoint();

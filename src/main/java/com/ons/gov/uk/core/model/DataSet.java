@@ -21,8 +21,9 @@ public class DataSet {
 	private int page, totalPages, itemsPerPage, startIndex, total;
 	private int count;
 	private List <Items> items;
+
 	private Set <Dimension> dimensions = Collections.emptySet();
-	private String dimensionsUrl;
+
 
 	public int getCount() {
 		return count;
