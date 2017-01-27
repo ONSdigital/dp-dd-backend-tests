@@ -17,8 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 
-
-public class RealStubAPITest {
+public class ValidateAPIStubTest {
 
 	DimensionalAPI dimensionalAPI = new DimensionalAPI();
 	String apiDimUrl = null, stubDimUrl = null;

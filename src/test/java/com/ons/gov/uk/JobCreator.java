@@ -26,7 +26,7 @@ public class JobCreator {
 	public String fileName = null;
 	Config config = new Config();
 	RestAssured restAssured = new RestAssured();
-	int counter = 200;
+	int loopCounter = 5;
 
 	public String request(String dataSetId, HashMap <String, ArrayList <String>> filters) throws JsonProcessingException {
 		CreateJob request = new CreateJob();
@@ -54,8 +54,6 @@ public class JobCreator {
 		Response response = given().cookies("splash", "y")
 				.contentType("application/json").body(jsonStr).post("/job");
 		try {
-//			System.out.println(response.asString());
-//			System.out.println(((JSONObject) new JSONParser().parse(response.asString())).get("id").toString());
 			dataSetId = ((JSONObject) new JSONParser().parse(response.asString())).get("id").toString();
 		} catch (Exception ee) {
 		}
@@ -67,9 +65,9 @@ public class JobCreator {
 		RestAssured.baseURI = config.getJobCreator();
 		Response response = given().cookies("splash", "y").contentType("application/json").get("/job/" + jobID);
 		System.out.println("from returncsv " + response.asString());
+		String status = ((JSONObject) new JSONParser().parse(response.asString())).get("status").toString();
 		try {
-			if (((JSONObject) new JSONParser().parse(response.asString())).get("status").
-					toString().equalsIgnoreCase("Complete")) {
+			if (status.equalsIgnoreCase("Complete")) {
 				JSONArray getFiles = (JSONArray) ((JSONObject) new JSONParser().parse(response.asString())).get("files");
 				for (int i = 0; i < getFiles.size(); i++) {
 					JSONObject jo = (JSONObject) getFiles.get(i);
@@ -90,7 +88,6 @@ public class JobCreator {
 		} catch (Exception ee) {
 			System.out.println(ee.getCause());
 			ee.printStackTrace();
-			waitForURL(jobID);
 		}
 
 		return urlToDownloadFile;
@@ -98,9 +95,9 @@ public class JobCreator {
 
 	public void waitForURL(String jobID) {
 		try {
-			while (counter != 0) {
-				counter--;
-				Thread.sleep(500);
+			while (loopCounter != 0) {
+				loopCounter--;
+				Thread.sleep(100 * loopCounter);
 				returnCSVUrl(jobID);
 
 			}
