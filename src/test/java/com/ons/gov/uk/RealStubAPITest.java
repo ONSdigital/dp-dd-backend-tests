@@ -5,44 +5,54 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ons.gov.uk.core.Config;
 import com.ons.gov.uk.core.model.DataSet;
+import com.ons.gov.uk.core.model.Dimension;
 import com.ons.gov.uk.core.model.Items;
-import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 
+
 public class RealStubAPITest {
-	private static Logger logger = Logger.getLogger(RealStubAPITest.class);
+
 	DimensionalAPI dimensionalAPI = new DimensionalAPI();
+	String apiDimUrl = null, stubDimUrl = null;
+	ObjectMapper mapper = new ObjectMapper();
+	DataSet realDataset = null, stubDataSet = null;
+	List <Items> itemsAPI = null, itemsStub = null;
+	SoftAssert softAssert;
+	String dataListAPI = null, dataListStub = null;
+	String apiDimOptions = null, stubDimOptions = null;
 
-	@Test
-	public void teststubapi() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		Map <String, Object> map;
-		map = new HashMap <String, Object>();
-		DataSet realDataset = null, stubDataSet = null;
-		List <Items> itemsAPI = null, itemsStub = null;
-		String jsonRespAPI = dimensionalAPI.checkEndPoint(new Config().getEndPointReal());
-		String jsonRespStub = dimensionalAPI.checkEndPoint(new Config().getEndPointStub());
-		JSONArray itemRespApi = dimensionalAPI.getItems(jsonRespAPI, "items");
-		JSONArray itemRespStub = dimensionalAPI.getItems(jsonRespStub, "items");
+	@BeforeTest
+	public void init() throws Exception {
+		dataListAPI = dimensionalAPI.checkEndPoint(new Config().getEndPointReal());
+		dataListStub = dimensionalAPI.checkEndPoint(new Config().getEndPointStub());
+		JSONArray itemRespApi = dimensionalAPI.getItems(dataListAPI, "items");
+		JSONArray itemRespStub = dimensionalAPI.getItems(dataListStub, "items");
+		apiDimUrl = dimensionalAPI.getValueForField(itemRespApi.toJSONString(), "url");
+		stubDimUrl = dimensionalAPI.getValueForField(itemRespStub.toJSONString(), "url");
 
-		realDataset = mapper.readValue(jsonRespAPI, new TypeReference <DataSet>() {
+		realDataset = mapper.readValue(dataListAPI, new TypeReference <DataSet>() {
 		});
 		itemsAPI = mapper.readValue(String.valueOf(itemRespApi), new TypeReference <List <Items>>() {
 		});
-		stubDataSet = mapper.readValue(jsonRespStub, new TypeReference <DataSet>() {
+		stubDataSet = mapper.readValue(dataListStub, new TypeReference <DataSet>() {
 		});
 		itemsStub = mapper.readValue(String.valueOf(itemRespStub), new TypeReference <List <Items>>() {
 		});
 
+	}
 
+
+	@Test(groups = "dataset")
+	public void validateDataSetLists() throws Exception {
+		softAssert = new SoftAssert();
 		//Real api assertions
 
 		Assert.assertNotNull(String.valueOf(realDataset.getCount()), "\tReal API Field :  Count       :   is not set");
@@ -68,26 +78,90 @@ public class RealStubAPITest {
 
 		Set <String> setOfStubKeys = itemsStub.get(0).keySet();
 		Set <String> setOfAPIKeys = itemsAPI.get(0).keySet();
-		int stubFailCount = compareKeys(setOfAPIKeys, itemsStub.get(0), "API", "STUB");
-		int apiFailCount = compareKeys(setOfStubKeys, itemsAPI.get(0), "STUB", "API");
-		Assert.assertTrue(stubFailCount == 0 && apiFailCount == 0, "\t****There are mismatches between the STUB & API Items. ");
+		validateFieldsUnderAnItem(setOfAPIKeys, itemsStub.get(0), "API", "STUB");
+		validateFieldsUnderAnItem(setOfStubKeys, itemsAPI.get(0), "STUB", "API");
+		softAssert.assertAll();
 	}
 
-	public int compareKeys(Set <String> setOfKeys, Items items, String stub, String api) {
-		int failureCount = 0;
+	@Test(groups = "dimensions")
+	public void validateDataSetData() throws Exception {
+		softAssert = new SoftAssert();
+		apiDimOptions = dimensionalAPI.callTheLink(apiDimUrl);
+		stubDimOptions = dimensionalAPI.callTheLink(stubDimUrl);
+		DataSet realDataset = null, stubDataSet = null;
+		realDataset = mapper.readValue(apiDimOptions, new TypeReference <DataSet>() {
+		});
+		stubDataSet = mapper.readValue(stubDimOptions, new TypeReference <DataSet>() {
+		});
+		compareDataSetFields(realDataset, stubDataSet);
+		validateFieldsUnderDimension(realDataset.getDimensions().iterator().next(), stubDataSet.getDimensions().iterator().next());
+		printJSONStrings();
+		softAssert.assertAll();
+	}
+
+	public void printJSONStrings() {
+		softAssert.assertEquals(dataListAPI, dataListStub,
+				"\n-----**********----------API DataSetLists-------********------ \n"
+						+ dataListAPI + "\n \n" +
+						"\n \n---------------STUB DataSetLists------------- \n"
+						+ dataListStub + "\n" +
+						"\n------********---------END OF DATALISTS ------*********------- \n \n");
+		String apiDimOptions = null, stubDimOptions = null;
+		softAssert.assertEquals(apiDimOptions, stubDimOptions,
+				"\n-----**********----------API DataSetLists-------********------ \n"
+						+ apiDimOptions + "\n" +
+						"\n---------------STUB DataSetLists------------- \n"
+						+ stubDimOptions + "\n" +
+						"\n------********---------END OF DATALISTS ------*********------- \n \n");
+		softAssert.assertAll();
+	}
+
+	public void validateFieldsUnderDimension(Dimension realDim, Dimension stubDim) {
+		softAssert.assertTrue(realDim.getId() != null && stubDim.getId() != null,
+				"\n---------********-------------------FAILURE--------********----------------\n " +
+						"\n\t VALUE IN STUB -DIMENSION ID : " + stubDim.getId() + "\n" +
+						"\n\t VALUE IN API- DIMENSION ID: " + realDim.getId() + "\n" +
+						"\n---------********---------  END OF FAILURE   --------********----------------\n \n \n");
+
+		softAssert.assertTrue(realDim.getName() != null && stubDim.getName() != null,
+				"\n---------********-------------------FAILURE--------********----------------\n " +
+						"\n\t VALUE IN STUB - DIMENSION NAME : " + stubDim.getName() + "\n" +
+						"\n\t VALUE IN API- DIMENSION NAME: " + realDim.getName() + "\n" +
+						"\n---------********---------  END OF FAILURE   --------********----------------\n\n\n");
+
+		softAssert.assertTrue(realDim.getUrl() != null && stubDim.getUrl() != null,
+				"\n---------********-------------------FAILURE--------********----------------\n " +
+						"\n\tVALUE IN STUB - DIMENSION URL : " + stubDim.getUrl() + "\n" +
+						"\n\tVALUE IN API- : DIMENSION URL: " + realDim.getUrl() + "\n" +
+						"\n---------********---------  END OF FAILURE   --------********----------------\n\n\n");
+
+	}
+
+	public void validateFieldsUnderAnItem(Set <String> setOfKeys, Items items, String stub, String api) {
 		for (String key : setOfKeys) {
-			try {
-				Assert.assertTrue(items.containsKey(key),
-						"\tFAILURE---  The key : " + key + " : exists in " + stub + " *ITEMS* but not in : " + api);
-			} catch (AssertionError ee) {
-				failureCount++;
-				System.out.println(ee.getMessage());
-				logger.info(ee.getMessage());
-
-
-			}
+			softAssert.assertTrue(items.containsKey(key),
+					"\n---------********-------------------FAILURE--------********----------------\n " +
+							"\n\tThe field : " + key.toUpperCase() + " : NOT PRESENT in " + api + "\n" +
+							"\n\t BUT exists in STUB : " + stub + "\n" +
+							"\n---------********---------  END OF FAILURE   --------********----------------\n \n \n");
 		}
-		return failureCount;
 	}
 
+	public void compareDataSetFields(DataSet apiDataSet, DataSet stubDataSet) {
+		assertObjects(apiDataSet.getId(), stubDataSet.getId(), "id");
+		assertObjects(apiDataSet.getS3URL(), stubDataSet.getS3URL(), "S3Url");
+		assertObjects(apiDataSet.getId(), stubDataSet.getId(), "title");
+		assertObjects(apiDataSet.getUrl(), stubDataSet.getUrl(), "url");
+		assertObjects(apiDataSet.getCustomerFacingId(), stubDataSet.getCustomerFacingId(), "customerfacingId");
+	}
+
+	public void assertObjects(String apiField, String stubField, String field) {
+		softAssert.assertTrue(apiField != null && stubField != null,
+				"\n---------********-------------------FAILURE--------********----------------\n " +
+						"\n\tMismatch in the field  :" + field.toUpperCase() + ". between stub and api.\n" +
+						"           \n\t****VALUE IN STUB ***** : " + stubField + "\n" +
+						"           \n\t****VALUE IN API ****** : " + apiField + "\n" +
+						"\n---------********---------  END OF FAILURE   --------********----------------\n \n \n");
+
+	}
 }

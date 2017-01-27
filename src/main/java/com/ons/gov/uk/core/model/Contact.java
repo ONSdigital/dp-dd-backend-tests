@@ -1,5 +1,7 @@
 package com.ons.gov.uk.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -7,6 +9,7 @@ import javax.persistence.Embeddable;
  * Represents a point of contact for a dataset or data resource. There will always be exactly one of these, and we
  * embed it into the parent table to avoid an additional join.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Embeddable
 public class Contact {
 	@Column(name = "contact")

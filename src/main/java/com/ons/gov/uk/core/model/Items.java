@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.LinkedHashMap;
 
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JsonIgnoreProperties(ignoreUnknown = false)
+@JsonInclude(JsonInclude.Include.ALWAYS)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Items extends LinkedHashMap {
 	private String id, S3URL, title, url, dimensionsUrl;
 	private Metadata metadata = new Metadata();

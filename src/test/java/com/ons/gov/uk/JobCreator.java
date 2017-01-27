@@ -51,11 +51,11 @@ public class JobCreator {
 	public String getJobID(String jsonStr) {
 		RestAssured.baseURI = config.getJobCreator();
 		String dataSetId = null;
-		Response response = given()
+		Response response = given().cookies("splash", "y")
 				.contentType("application/json").body(jsonStr).post("/job");
 		try {
-			System.out.println(response.asString());
-			System.out.println(((JSONObject) new JSONParser().parse(response.asString())).get("id").toString());
+//			System.out.println(response.asString());
+//			System.out.println(((JSONObject) new JSONParser().parse(response.asString())).get("id").toString());
 			dataSetId = ((JSONObject) new JSONParser().parse(response.asString())).get("id").toString();
 		} catch (Exception ee) {
 		}
@@ -65,27 +65,31 @@ public class JobCreator {
 	public String returnCSVUrl(String jobID) throws Exception {
 		String urlToDownloadFile = null;
 		RestAssured.baseURI = config.getJobCreator();
-		Response response = given().contentType("application/json").get("/job/" + jobID);
+		Response response = given().cookies("splash", "y").contentType("application/json").get("/job/" + jobID);
+		System.out.println("from returncsv " + response.asString());
 		try {
 			if (((JSONObject) new JSONParser().parse(response.asString())).get("status").
 					toString().equalsIgnoreCase("Complete")) {
 				JSONArray getFiles = (JSONArray) ((JSONObject) new JSONParser().parse(response.asString())).get("files");
-				System.out.println(response.asString());
 				for (int i = 0; i < getFiles.size(); i++) {
 					JSONObject jo = (JSONObject) getFiles.get(i);
 					if (jo.get("url").toString() != null) {
 						urlToDownloadFile = jo.get("url").toString();
 						fileName = jo.get("name").toString();
 						break;
-					} else {
+					} else if (fileName == null) {
+						System.out.println("Filename is null");
 						waitForURL(jobID);
 					}
 				}
 
 			} else {
+				System.out.println("status is not complete");
 				waitForURL(jobID);
 			}
 		} catch (Exception ee) {
+			System.out.println(ee.getCause());
+			ee.printStackTrace();
 			waitForURL(jobID);
 		}
 

@@ -10,12 +10,13 @@ import org.json.simple.parser.ParseException;
 
 import java.net.URLDecoder;
 
-import static io.restassured.RestAssured.expect;
+import static io.restassured.RestAssured.given;
 
 
 public class DimensionalAPI {
 	Config config = new Config();
 	RestAssured restAssured = new RestAssured();
+
 	String responseString = null;
 	ResponseBody responseBody;
 	JSONParser parser = new JSONParser();
@@ -28,7 +29,7 @@ public class DimensionalAPI {
 		RestAssured.urlEncodingEnabled = true;
 		String endPoint = config.isBackendStub() ? config.getEndPointStub() : config.getEndPointReal();
 		RestAssured.baseURI = endPoint;
-		responseBody = expect().statusCode(200).when().get().body();
+		responseBody = given().cookies("splash", "y").expect().statusCode(200).when().get().body();
 		responseString = responseBody.asString();
 		return responseString;
 	}
@@ -36,7 +37,7 @@ public class DimensionalAPI {
 	public String checkEndPoint(String endPoint) {
 		RestAssured.urlEncodingEnabled = true;
 		RestAssured.baseURI = endPoint;
-		responseBody = expect().statusCode(200).when().get().body();
+		responseBody = given().cookies("splash", "y").expect().statusCode(200).when().get().body();
 		responseString = responseBody.asString();
 		return responseString;
 	}
@@ -60,6 +61,10 @@ public class DimensionalAPI {
 
 	public JSONArray getValue(String jsonString) throws Exception {
 		return (JSONArray) parser.parse(jsonString);
+	}
+
+	public String getValueForField(String jsonString, String field) throws Exception {
+		return ((JSONObject) getValue(jsonString).get(0)).get(field).toString();
 	}
 
 	public boolean titleExists(String title) throws Exception {
@@ -116,7 +121,7 @@ public class DimensionalAPI {
 
 	public String callTheLink(String url) {
 		url = URLDecoder.decode(url);
-		return expect().statusCode(200).when().get(url).body().asString();
+		return given().cookies("splash", "y").expect().statusCode(200).when().get(url).body().asString();
 
 	}
 

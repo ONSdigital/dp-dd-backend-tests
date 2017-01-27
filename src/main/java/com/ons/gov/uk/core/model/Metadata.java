@@ -1,11 +1,14 @@
 package com.ons.gov.uk.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
 /**
  * Collects metadata for a dataset/resource.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Embeddable
 public class Metadata {
 	@Column
