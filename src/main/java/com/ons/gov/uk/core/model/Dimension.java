@@ -3,6 +3,7 @@ package com.ons.gov.uk.core.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,7 +15,16 @@ public class Dimension implements Comparable <Dimension> {
 	private String id;
 	private String name;
 	private String url;
+	private String type;
 	private Set <DimensionOption> options = Collections.emptySet();
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public String getId() {
 		return id;
@@ -71,5 +81,15 @@ public class Dimension implements Comparable <Dimension> {
 				", url='" + url + '\'' +
 				", options=" + options +
 				'}';
+	}
+
+	public HashMap <String, Object> getObjectWithValues(Dimension dimension) {
+		HashMap <String, Object> objToRet = new HashMap <>();
+		objToRet.put("id", dimension.getId());
+		objToRet.put("name", dimension.getName());
+		objToRet.put("type", dimension.getType());
+		objToRet.put("url", dimension.getUrl());
+		objToRet.put("options", dimension.getOptions());
+		return objToRet;
 	}
 }

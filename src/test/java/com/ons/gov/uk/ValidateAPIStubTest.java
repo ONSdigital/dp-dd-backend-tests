@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -105,7 +106,6 @@ public class ValidateAPIStubTest {
 						"\n \n---------------STUB DataSetLists------------- \n"
 						+ dataListStub + "\n" +
 						"\n------********---------END OF DATALISTS ------*********------- \n \n");
-		String apiDimOptions = null, stubDimOptions = null;
 		softAssert.assertEquals(apiDimOptions, stubDimOptions,
 				"\n-----**********----------API DataSetLists-------********------ \n"
 						+ apiDimOptions + "\n" +
@@ -116,32 +116,51 @@ public class ValidateAPIStubTest {
 	}
 
 	public void validateFieldsUnderDimension(Dimension realDim, Dimension stubDim) {
-		softAssert.assertTrue(realDim.getId() != null && stubDim.getId() != null,
-				"\n---------********-------------------FAILURE--------********----------------\n " +
-						"\n\t VALUE IN STUB -DIMENSION ID : " + stubDim.getId() + "\n" +
-						"\n\t VALUE IN API- DIMENSION ID: " + realDim.getId() + "\n" +
-						"\n---------********---------  END OF FAILURE   --------********----------------\n \n \n");
+		HashMap <String, Object> apiDimValues = realDim.getObjectWithValues(realDim);
+		HashMap <String, Object> stubDimValues = stubDim.getObjectWithValues(stubDim);
+		Set <String> keyList = apiDimValues.keySet();
+		assertDimensions(apiDimValues, stubDimValues, keyList);
+		keyList = stubDimValues.keySet();
+		assertDimensions(apiDimValues, stubDimValues, keyList);
 
-		softAssert.assertTrue(realDim.getName() != null && stubDim.getName() != null,
-				"\n---------********-------------------FAILURE--------********----------------\n " +
-						"\n\t VALUE IN STUB - DIMENSION NAME : " + stubDim.getName() + "\n" +
-						"\n\t VALUE IN API- DIMENSION NAME: " + realDim.getName() + "\n" +
-						"\n---------********---------  END OF FAILURE   --------********----------------\n\n\n");
+//		softAssert.assertTrue(realDim.getId() != null && stubDim.getId() != null,
+//				"\n---------********-------------------FAILURE--------********----------------\n " +
+//						"\n\t VALUE IN STUB -DIMENSION ID : " + stubDim.getId() + "\n" +
+//						"\n\t VALUE IN API- DIMENSION ID: " + realDim.getId() + "\n" +
+//						"\n---------********---------  END OF FAILURE   --------********----------------\n \n \n");
+//
+//		softAssert.assertTrue(realDim.getName() != null && stubDim.getName() != null,
+//				"\n---------********-------------------FAILURE--------********----------------\n " +
+//						"\n\t VALUE IN STUB - DIMENSION NAME : " + stubDim.getName() + "\n" +
+//						"\n\t VALUE IN API- DIMENSION NAME: " + realDim.getName() + "\n" +
+//						"\n---------********---------  END OF FAILURE   --------********----------------\n\n\n");
+//
+//		softAssert.assertTrue(realDim.getUrl() != null && stubDim.getUrl() != null,
+//				"\n---------********-------------------FAILURE--------********----------------\n " +
+//						"\n\tVALUE IN STUB - DIMENSION URL : " + stubDim.getUrl() + "\n" +
+//						"\n\tVALUE IN API- : DIMENSION URL: " + realDim.getUrl() + "\n" +
+//						"\n---------********---------  END OF FAILURE   --------********----------------\n\n\n");
 
-		softAssert.assertTrue(realDim.getUrl() != null && stubDim.getUrl() != null,
-				"\n---------********-------------------FAILURE--------********----------------\n " +
-						"\n\tVALUE IN STUB - DIMENSION URL : " + stubDim.getUrl() + "\n" +
-						"\n\tVALUE IN API- : DIMENSION URL: " + realDim.getUrl() + "\n" +
-						"\n---------********---------  END OF FAILURE   --------********----------------\n\n\n");
+	}
 
+	public void assertDimensions(HashMap apiDimValues, HashMap stubDimValues, Set <String> keyList) {
+		for (String key : keyList) {
+			softAssert.assertTrue(apiDimValues.get(key) != null && stubDimValues.get(key) != null,
+					"\n---------********-------------------FAILURE--------********----------------\n " +
+							"\n\tMismatch in the field  :" + key.toUpperCase() + ". between stub and api.\n \n \n" +
+							"\n\t VALUE IN STUB - " + key.toUpperCase() + "  : " + apiDimValues.get(key) + "\n" +
+							"\n\t VALUE IN API-   " + key.toUpperCase() + "  : " + stubDimValues.get(key) + "\n" +
+							"\n---------********---------  END OF FAILURE   --------********----------------\n \n \n");
+		}
 	}
 
 	public void validateFieldsUnderAnItem(Set <String> setOfKeys, Items items, String stub, String api) {
 		for (String key : setOfKeys) {
 			softAssert.assertTrue(items.containsKey(key),
 					"\n---------********-------------------FAILURE--------********----------------\n " +
-							"\n\tThe field : " + key.toUpperCase() + " : NOT PRESENT in " + api + "\n" +
-							"\n\t BUT exists in STUB : " + stub + "\n" +
+							"\n\tMismatch in the field  :" + key.toUpperCase() + ". between stub and api.\n \n \n" +
+							"\n\tThe field : " + key.toUpperCase() + " : NOT present in " + api + "\n \n" +
+							"\n\t BUT exists in : " + stub + "\n" +
 							"\n---------********---------  END OF FAILURE   --------********----------------\n \n \n");
 		}
 	}
