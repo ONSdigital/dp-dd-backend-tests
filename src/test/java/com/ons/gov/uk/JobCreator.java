@@ -83,13 +83,13 @@ public class JobCreator {
 						break;
 					} else if (fileName == null) {
 						System.out.println("Filename is null");
-						waitForURL(jobID);
+						urlToDownloadFile = waitForURL(jobID);
 					}
 				}
 
 			} else {
 				System.out.println("status is not complete");
-				waitForURL(jobID);
+				urlToDownloadFile = waitForURL(jobID);
 			}
 		} catch (Exception ee) {
 			System.out.println(ee.getCause());
@@ -99,16 +99,17 @@ public class JobCreator {
 		return urlToDownloadFile;
 	}
 
-	public void waitForURL(String jobID) {
+	public String waitForURL(String jobID) {
 		try {
 			while (loopCounter != 0) {
 				loopCounter--;
 				Thread.sleep(100 * loopCounter);
-				returnCSVUrl(jobID);
+				return returnCSVUrl(jobID);
 
 			}
 		} catch (Exception ee) {
 		}
+		return null;
 	}
 	public void getFile(String url) throws Exception {
 		String dirname = "download/";
