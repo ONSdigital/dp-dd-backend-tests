@@ -120,26 +120,6 @@ public class ValidateAPIStubTest {
 		HashMap <String, Object> stubDimValues = stubDim.getObjectWithValues(stubDim);
 		Set <String> keyList = apiDimValues.keySet();
 		assertDimensions(apiDimValues, stubDimValues, keyList);
-		keyList = stubDimValues.keySet();
-		assertDimensions(apiDimValues, stubDimValues, keyList);
-
-//		softAssert.assertTrue(realDim.getId() != null && stubDim.getId() != null,
-//				"\n---------********-------------------FAILURE--------********----------------\n " +
-//						"\n\t VALUE IN STUB -DIMENSION ID : " + stubDim.getId() + "\n" +
-//						"\n\t VALUE IN API- DIMENSION ID: " + realDim.getId() + "\n" +
-//						"\n---------********---------  END OF FAILURE   --------********----------------\n \n \n");
-//
-//		softAssert.assertTrue(realDim.getName() != null && stubDim.getName() != null,
-//				"\n---------********-------------------FAILURE--------********----------------\n " +
-//						"\n\t VALUE IN STUB - DIMENSION NAME : " + stubDim.getName() + "\n" +
-//						"\n\t VALUE IN API- DIMENSION NAME: " + realDim.getName() + "\n" +
-//						"\n---------********---------  END OF FAILURE   --------********----------------\n\n\n");
-//
-//		softAssert.assertTrue(realDim.getUrl() != null && stubDim.getUrl() != null,
-//				"\n---------********-------------------FAILURE--------********----------------\n " +
-//						"\n\tVALUE IN STUB - DIMENSION URL : " + stubDim.getUrl() + "\n" +
-//						"\n\tVALUE IN API- : DIMENSION URL: " + realDim.getUrl() + "\n" +
-//						"\n---------********---------  END OF FAILURE   --------********----------------\n\n\n");
 
 	}
 

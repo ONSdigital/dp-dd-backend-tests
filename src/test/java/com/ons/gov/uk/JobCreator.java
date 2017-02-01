@@ -48,7 +48,7 @@ public class JobCreator {
 		return new ObjectMapper().writeValueAsString(request);
 	}
 
-	public String getJobID(String jsonStr) {
+	public String getJobID(String jsonStr) throws Exception {
 		RestAssured.baseURI = config.getJobCreator();
 		String dataSetId = null;
 		Response response = given().cookies("splash", "y")
@@ -56,7 +56,13 @@ public class JobCreator {
 		try {
 			dataSetId = ((JSONObject) new JSONParser().parse(response.asString())).get("id").toString();
 		} catch (Exception ee) {
+			while (loopCounter != 0) {
+				loopCounter--;
+				Thread.sleep(100 * loopCounter);
+				getJobID(jsonStr);
+			}
 		}
+		loopCounter = 5;
 		return dataSetId;
 	}
 
