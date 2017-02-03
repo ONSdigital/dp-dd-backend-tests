@@ -13,9 +13,9 @@ import java.util.Set;
 
 public class CSVOps {
 
+	public HashMap <String, ArrayList <String>> dimAndOptions = new HashMap <String, ArrayList <String>>();
 	int numberOfLines = 0;
 	CSVReader csvReader = null;
-	HashMap <String, ArrayList <String>> dimAndOptions = new HashMap <String, ArrayList <String>>();
 	ArrayList <String> dimension1 = new ArrayList <String>();
 	ArrayList <String> dimension2 = new ArrayList <String>();
 	ArrayList <String> dimension3 = new ArrayList <String>();

@@ -1,8 +1,10 @@
-package com.ons.gov.uk;
+package com.ons.gov.uk.test;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ons.gov.uk.DimensionalAPI;
 import com.ons.gov.uk.core.Config;
 import com.ons.gov.uk.core.model.DataSet;
 import com.ons.gov.uk.core.model.Dimension;
@@ -37,7 +39,7 @@ public class ValidateAPIStubTest {
 		JSONArray itemRespStub = dimensionalAPI.getItems(dataListStub, "items");
 		apiDimUrl = dimensionalAPI.getValueForField(itemRespApi.toJSONString(), "url");
 		stubDimUrl = dimensionalAPI.getValueForField(itemRespStub.toJSONString(), "url");
-
+		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		realDataset = mapper.readValue(dataListAPI, new TypeReference <DataSet>() {
 		});
 		itemsAPI = mapper.readValue(String.valueOf(itemRespApi), new TypeReference <List <Items>>() {
@@ -89,6 +91,7 @@ public class ValidateAPIStubTest {
 		apiDimOptions = dimensionalAPI.callTheLink(apiDimUrl);
 		stubDimOptions = dimensionalAPI.callTheLink(stubDimUrl);
 		DataSet realDataset = null, stubDataSet = null;
+
 		realDataset = mapper.readValue(apiDimOptions, new TypeReference <DataSet>() {
 		});
 		stubDataSet = mapper.readValue(stubDimOptions, new TypeReference <DataSet>() {

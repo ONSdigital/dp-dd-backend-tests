@@ -5,11 +5,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 @JsonInclude(JsonInclude.Include.ALWAYS)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Items extends LinkedHashMap {
+public class ItemsObj {
 	@JsonProperty("metadata")
 	public Metadata metadata = new Metadata();
 	public HashMap <String, Object> itemObject = new HashMap <>();
@@ -104,7 +103,7 @@ public class Items extends LinkedHashMap {
 		this.url = url;
 	}
 
-	public HashMap <String, Object> getObjectWithValues(Items item) {
+	public HashMap <String, Object> getObjectWithValues(ItemsObj item) {
 		HashMap <String, Object> objToRet = new HashMap <>();
 		objToRet.put("id", item.getId());
 		objToRet.put("url", item.getUrl());

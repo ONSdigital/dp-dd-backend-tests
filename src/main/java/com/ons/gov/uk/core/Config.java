@@ -13,6 +13,7 @@ public class Config {
 	private String datasetEndPointStub;
 	private String postgres;
 	private String jobCreator;
+	private String metadataEditor;
 	private boolean stub = true;
 
 	public Config(){
@@ -55,6 +56,9 @@ public class Config {
 		if (config.containsKey("jobcreator")) {
 			jobCreator = (String) config.get("jobcreator");
 		}
+		if (config.containsKey("metadata_editor")) {
+			metadataEditor = (String) config.get("metadata_editor");
+		}
 	}
 
 	public void overrideConfigFromEnvironmentVariables() {
@@ -69,6 +73,10 @@ public class Config {
 		String jobCreate = System.getProperty("jobcreator");
 		if (jobCreate != null) {
 			jobCreator = jobCreate;
+		}
+		String metadata_editor = System.getProperty("metadataEditor");
+		if (metadata_editor != null) {
+			metadataEditor = metadata_editor;
 		}
 
 	}
@@ -100,6 +108,10 @@ public class Config {
 	}
 	public String getEndPointStub() {
 		return datasetEndPointStub;
+	}
+
+	public String getMetadataEditor() {
+		return metadataEditor;
 	}
 	public void setDatasetEndPointReal(String datasetEndPoint) {
 		this.datasetEndPointReal = datasetEndPoint;

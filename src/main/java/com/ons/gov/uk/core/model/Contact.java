@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.util.HashMap;
 
 /**
  * Represents a point of contact for a dataset or data resource. There will always be exactly one of these, and we
@@ -19,7 +20,7 @@ public class Contact {
 	private String email;
 
 	@Column(name = "contact_phone")
-	private String phoneNumber;
+	private String phone;
 
 	public String getName() {
 		return name;
@@ -37,12 +38,12 @@ public class Contact {
 		this.email = email;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	@Override
@@ -50,7 +51,15 @@ public class Contact {
 		return "Contact{" +
 				"name='" + name + '\'' +
 				", email='" + email + '\'' +
-				", phoneNumber='" + phoneNumber + '\'' +
+				", phone='" + phone + '\'' +
 				'}';
+	}
+
+	public HashMap <String, Object> getObjectWithValues(Contact contact) {
+		HashMap <String, Object> objToRet = new HashMap <>();
+		objToRet.put("name", contact.getName());
+		objToRet.put("phone", contact.getPhone());
+		objToRet.put("email", contact.getEmail());
+		return objToRet;
 	}
 }

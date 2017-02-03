@@ -3,6 +3,7 @@ package com.ons.gov.uk.core.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -23,11 +24,6 @@ public class Metadata {
 	@Column(name = "next_release")
 	private String nextRelease;
 
-	/**
-	 * Whether this is an official National Statistics dataset or not.
-	 *
-	 * @see <a href="https://www.statisticsauthority.gov.uk/national-statistician/types-of-official-statistics/">Types of official statistics</a>
-	 */
 	@Column
 	private boolean nationalStatistics;
 
@@ -37,8 +33,8 @@ public class Metadata {
 	@Column(name = "associated_publication_url")
 	private List <String> associatedPublications;
 
-	@Column
-	private String methodology;
+//	@Column
+//	private String methodology;
 
 	@Column
 	private String termsAndConditions;
@@ -91,13 +87,13 @@ public class Metadata {
 		this.associatedPublications = associatedPublications;
 	}
 
-	public String getMethodology() {
-		return methodology;
-	}
+////	public String getMethodology() {
+//		return methodology;
+//	}
 
-	public void setMethodology(String methodology) {
-		this.methodology = methodology;
-	}
+//	public void setMethodology(String methodology) {
+//		this.methodology = methodology;
+//	}
 
 	public String getTermsAndConditions() {
 		return termsAndConditions;
@@ -116,8 +112,18 @@ public class Metadata {
 				", nextRelease='" + nextRelease + '\'' +
 				", nationalStatistics=" + nationalStatistics +
 				", associatedPublications=" + associatedPublications +
-				", methodology='" + methodology + '\'' +
+//				", methodology='" + methodology + '\'' +
 				", termsAndConditions='" + termsAndConditions + '\'' +
 				'}';
+	}
+
+	public HashMap <String, Object> getObjectWithValues(Metadata metadata) {
+		HashMap <String, Object> objToRet = new HashMap <>();
+		objToRet.put("contact", metadata.getContact());
+		objToRet.put("description", metadata.getDescription());
+		objToRet.put("releaseDate", metadata.getReleaseDate());
+		objToRet.put("nextrealeaseDate", metadata.getNextRelease());
+		objToRet.put("nationalStatistics", metadata.isNationalStatistics());
+		return objToRet;
 	}
 }

@@ -1,5 +1,8 @@
-package com.ons.gov.uk;
+package com.ons.gov.uk.test;
 
+import com.ons.gov.uk.CSVOps;
+import com.ons.gov.uk.DBLoader;
+import com.ons.gov.uk.DimensionalAPI;
 import com.ons.gov.uk.core.Config;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;

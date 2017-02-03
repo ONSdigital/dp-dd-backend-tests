@@ -1,6 +1,9 @@
-package com.ons.gov.uk;
+package com.ons.gov.uk.test;
 
 
+import com.ons.gov.uk.CSVOps;
+import com.ons.gov.uk.DimensionalAPI;
+import com.ons.gov.uk.FileUploader;
 import com.ons.gov.uk.core.Config;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

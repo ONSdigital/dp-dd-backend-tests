@@ -1,6 +1,7 @@
-package com.ons.gov.uk;
+package com.ons.gov.uk.test;
 
 
+import com.ons.gov.uk.DimensionalAPI;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
