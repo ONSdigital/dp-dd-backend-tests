@@ -2,6 +2,7 @@ package com.ons.gov.uk.test;
 
 
 import com.ons.gov.uk.CSVOps;
+import com.ons.gov.uk.DimensionValues;
 import com.ons.gov.uk.DimensionalAPI;
 import com.ons.gov.uk.FileUploader;
 import com.ons.gov.uk.core.Config;
@@ -24,7 +25,7 @@ public class APIIntegrityTest {
 	String dimUrl = null;
 	ArrayList <String> optionUrls = new ArrayList <String>();
 	CSVOps csvOps = new CSVOps();
-	HashMap <String, ArrayList <String>> dimOptionsCSV;
+	HashMap <String, ArrayList <DimensionValues>> dimOptionsCSV;
 	HashMap <String, ArrayList <String>> optionsFromAPI = new HashMap <String, ArrayList <String>>();
 	ArrayList <String> dimFromAPI = new ArrayList <String>();
 
@@ -129,12 +130,12 @@ public class APIIntegrityTest {
 	}
 
 
-	public ArrayList <String> getExpectedOptions(String dimension) {
+	public ArrayList <DimensionValues> getExpectedOptions(String dimension) {
 		Assert.assertTrue(dimOptionsCSV.keySet().contains(dimension));
 		return dimOptionsCSV.get(dimension);
 	}
 
-	public void assertOptionExists(ArrayList <String> actualOptions, ArrayList <String> expectedOptions) {
+	public void assertOptionExists(ArrayList <String> actualOptions, ArrayList <DimensionValues> expectedOptions) {
 		Assert.assertEquals(actualOptions.size(), expectedOptions.size(), "Actual Size from the API: " + actualOptions.size() + "\n" +
 				"Expected Size: " + expectedOptions.size());
 		for (int index = 0; index < expectedOptions.size(); index++) {
