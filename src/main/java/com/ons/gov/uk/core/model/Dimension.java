@@ -1,5 +1,6 @@
 package com.ons.gov.uk.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Collections;
@@ -10,13 +11,23 @@ import java.util.Set;
 /**
  * Represents metadata about a dimension of a dataset.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Dimension implements Comparable <Dimension> {
 	private String id;
 	private String name;
 	private String url;
 	private String type;
+	private boolean hierarchial;
 	private Set <DimensionOption> options = Collections.emptySet();
+
+	public boolean isHierarchial() {
+		return hierarchial;
+	}
+
+	public void setHierarchial(boolean hierarchial) {
+		this.hierarchial = hierarchial;
+	}
 
 	public String getType() {
 		return type;

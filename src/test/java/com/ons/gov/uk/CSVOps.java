@@ -75,7 +75,7 @@ public class CSVOps {
 					if (filter1 != "") {
 						hierarchy = true;
 					}
-					dimensionValues = new DimensionValues(hierarchy, filter1, nextLine[4]);
+					dimensionValues = new DimensionValues(hierarchy, filter1, nextLine[5]);
 					addDimension(dimensionValues, dimension1);
 
 					if (filter2 != "") {

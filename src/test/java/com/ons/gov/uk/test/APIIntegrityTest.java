@@ -8,7 +8,9 @@ import com.ons.gov.uk.DimensionValues;
 import com.ons.gov.uk.DimensionalAPI;
 import com.ons.gov.uk.FileUploader;
 import com.ons.gov.uk.core.Config;
+import com.ons.gov.uk.core.model.Dimension;
 import com.ons.gov.uk.core.model.DimensionOption;
+import com.ons.gov.uk.core.model.ItemsObj;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -27,12 +29,11 @@ public class APIIntegrityTest {
 	String responseFromAPI = null;
 	String csvFile = new Config().getFilepath();
 	String dimUrl = null;
-	ArrayList <String> optionUrls = new ArrayList <String>();
 	CSVOps csvOps = new CSVOps();
 	HashMap <String, ArrayList <DimensionValues>> dimOptionsCSV;
-	HashMap <String, ArrayList <DimensionValues>> optionsFromAPI = new HashMap <String, ArrayList <DimensionValues>>();
-	ArrayList <String> dimFromAPI = new ArrayList <String>();
+	HashMap <String, ArrayList <DimensionValues>> optionsFromAPI = new HashMap <>();
 	ObjectMapper mapper = new ObjectMapper();
+	ArrayList <Dimension> dimensions = new ArrayList <>();
 
 	@BeforeTest
 	public void init() throws Exception {
@@ -61,10 +62,12 @@ public class APIIntegrityTest {
 		try {
 			Assert.assertTrue(dimAPI.titleExists(csvFile));
 			JSONArray itemsArray = dimAPI.getItems("items");
-			for (int i = 0; i < itemsArray.size(); i++) {
-				JSONObject jo = (JSONObject) itemsArray.get(i);
-				if (jo.get("title").equals(csvFile)) {
-					dimUrl = jo.get("dimensionsUrl").toString();
+			ArrayList <ItemsObj> itemsList = (ArrayList) mapper.readValue(String.valueOf(itemsArray),
+					new TypeReference <List <ItemsObj>>() {
+					});
+			for (ItemsObj item : itemsList) {
+				if (item.getTitle().equals(csvFile)) {
+					dimUrl = item.getDimensionsUrl();
 					break;
 				}
 			}
@@ -76,28 +79,21 @@ public class APIIntegrityTest {
 	public void getDimensions() {
 		String jsonString = dimAPI.callTheLink(dimUrl);
 		try {
-			JSONArray dimArray = dimAPI.getValue(jsonString);
-			for (int index = 0; index < dimArray.size(); index++) {
-				try {
-					dimFromAPI.add(((JSONObject) dimArray.get(index)).get("name").toString());
-				} catch (NullPointerException ee) {
-				}
-				optionUrls.add(((JSONObject) dimArray.get(index)).get("url").toString());
-			}
+			dimensions = (ArrayList) mapper.readValue(String.valueOf(jsonString), new TypeReference <List <Dimension>>() {
+			});
+			Assert.assertTrue(dimensions.size() > 0, "****** No Dimensions obtained from API *****");
 		} catch (Exception ee) {
 		}
 	}
 
 	@Test(groups = {"options"}, dependsOnGroups = {"dimension"})
 	public void testOptions() throws Exception {
-		for (int index = 0; index < optionUrls.size(); index++) {
-			JSONArray dimArray = returnDimOptions(optionUrls.get(index));
-			JSONArray option = getName(optionUrls.get(index), "options");
-			List <DimensionOption> dimOptions = mapper.readValue(String.valueOf(option), new TypeReference <List <DimensionOption>>() {
+		for (Dimension dim : dimensions) {
+			JSONArray option = getName(dim.getUrl(), "options");
+			ArrayList <DimensionOption> dimOptions = (ArrayList) mapper.readValue(String.valueOf(option),
+					new TypeReference <List <DimensionOption>>() {
 			});
-			String dimension = ((JSONObject) (new JSONParser().parse(dimAPI.callTheLink(optionUrls.get(index)).toString()))).
-					get("name").toString();
-			optionsFromAPI.put(dimension, populateOptionsFromAPI(option));
+			optionsFromAPI.put(dim.getName(), populateOptionsFromAPI(dimOptions, dim.isHierarchial()));
 		}
 		for (String key : dimOptionsCSV.keySet()) {
 			assertOptionExists(optionsFromAPI.get(key), dimOptionsCSV.get(key), key);
@@ -105,12 +101,11 @@ public class APIIntegrityTest {
 	}
 
 
-	public ArrayList <DimensionValues> populateOptionsFromAPI(JSONArray dimArray) {
-
-		ArrayList <DimensionValues> options = new ArrayList <DimensionValues>();
-		for (int index = 0; index < dimArray.size(); index++) {
-			options.add(new DimensionValues(true, ((JSONObject) dimArray.get(index)).get("name").toString(),
-					((JSONObject) dimArray.get(index)).get("code").toString()));
+	public ArrayList <DimensionValues> populateOptionsFromAPI(ArrayList <DimensionOption> dimensionOptions, boolean hierarchical) {
+		ArrayList <DimensionValues> options = new ArrayList <>();
+		for (DimensionOption dimOpt : dimensionOptions) {
+			options.add(new DimensionValues(hierarchical, dimOpt.getName(),
+					dimOpt.getCode()));
 		}
 		return options;
 	}
@@ -125,36 +120,21 @@ public class APIIntegrityTest {
 		return value;
 	}
 
-	public JSONArray returnDimOptions(String url) throws Exception {
-		String jsonString = dimAPI.callTheLink(url);
-		JSONArray optionArray = null;
-		try {
-			if (!dimFromAPI.contains(((JSONObject) new JSONParser().parse(jsonString)).get("name").toString())) {
-				dimFromAPI.add(((JSONObject) new JSONParser().parse(jsonString)).get("id").toString());
-			}
-			optionArray = dimAPI.getItems(jsonString, "options");
-		} catch (Exception ee) {
-
-		}
-		return optionArray;
-	}
-
-
-	public ArrayList <DimensionValues> getExpectedOptions(String dimension) {
-		Assert.assertTrue(dimOptionsCSV.keySet().contains(dimension));
-		return dimOptionsCSV.get(dimension);
-	}
-
 	public void assertOptionExists(ArrayList <DimensionValues> actualOptions, ArrayList <DimensionValues> expectedOptions, String key) {
 		Assert.assertEquals(actualOptions.size(), expectedOptions.size(), "Actual Size from the API: " + actualOptions.size() + "\n" +
 				"Expected Size: " + expectedOptions.size());
-		ArrayList <String> actualCodes = new ArrayList <>();
-		ArrayList <String> expectedCodes = new ArrayList <>();
+		ArrayList <String> actualCodes = getDimOptions(actualOptions);
+		ArrayList <String> expectedCodes = getDimOptions(expectedOptions);
+		for (int index = 0; index < expectedOptions.size(); index++) {
+			Assert.assertTrue(expectedCodes.contains(actualCodes.get(index)),
+					"Option " + actualCodes.get(index) + " is not present in the CSV");
+		}
 		actualCodes.removeAll(getDimOptions(expectedOptions));
 		expectedCodes.removeAll(getDimOptions(actualOptions));
+
 		Assert.assertTrue(expectedCodes.size() == actualCodes.size(),
 				"Actual options in the API and CSV do not match. \n" +
-						"Size of actual options and expected options for the " + key +
+						"\nSize of actual options and expected options for the Dimension " + key +
 						"did not cancel out\n");
 
 		}
