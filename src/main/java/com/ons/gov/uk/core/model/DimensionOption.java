@@ -1,5 +1,6 @@
 package com.ons.gov.uk.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Ordering;
@@ -12,15 +13,23 @@ import java.util.TreeSet;
 /**
  * A possible option for a dimension, such as <em>Male</em> or <em>Female</em> for the dimension <em>Sex</em>.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class DimensionOption implements Comparable <DimensionOption> {
-	private final String id;
-	private final String name;
 	private final SortedSet <DimensionOption> options = new TreeSet <>();
+	private String id = null;
+	private String name = null;
+	private String code = null;
 
-	public DimensionOption(String id, String name) {
+	public DimensionOption() {
+
+	}
+
+	public DimensionOption(String code, String name, String id) {
 		this.id = id;
 		this.name = name;
+		this.code = code;
 	}
+
 
 	public String getId() {
 		return id;
@@ -28,6 +37,10 @@ public class DimensionOption implements Comparable <DimensionOption> {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getCode() {
+		return code;
 	}
 
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
