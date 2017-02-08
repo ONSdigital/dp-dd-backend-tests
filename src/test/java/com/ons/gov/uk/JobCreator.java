@@ -58,7 +58,7 @@ public class JobCreator {
 		} catch (Exception ee) {
 			while (loopCounter != 0) {
 				loopCounter--;
-				Thread.sleep(100 * loopCounter);
+				Thread.sleep(1000 * loopCounter);
 				dataSetId = getJobID(jsonStr);
 			}
 		}
