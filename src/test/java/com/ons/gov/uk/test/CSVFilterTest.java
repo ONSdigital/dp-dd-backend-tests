@@ -30,12 +30,6 @@ public class CSVFilterTest {
 	ArrayList <String> dimensionNames;
 	ArrayList <DimensionValues> dimSelect = new ArrayList <>();
 
-	public static void main(String[] args) throws Exception {
-		CSVFilterTest cc = new CSVFilterTest();
-		cc.init();
-		cc.createAJob();
-		cc.validateFilteredCSV();
-	}
 
 	@BeforeTest
 	public void init() throws Exception {
@@ -71,7 +65,6 @@ public class CSVFilterTest {
 
 		for (String key : dimOptions.keySet()) {
 			int randomKey = new Random().nextInt(dimOptions.size() - 1);
-			System.out.println("randomkey" + randomKey);
 			if (randomKey != 0) {
 				int randindex = 0;
 				if (dimOptions.get(key).size() > 1) {
@@ -116,7 +109,6 @@ public class CSVFilterTest {
 							line = line + "," + lineVal;
 						}
 						line = line.replace("repl,", "");
-						System.out.println(line);
 						if (slicedFile && numberOfLines > 0) {
 							Assert.assertTrue(line.contains(searchTerm), "****The filter is not present in the file.****\n" +
 									"Expected search term " + searchTerm +

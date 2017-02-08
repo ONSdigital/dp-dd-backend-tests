@@ -18,15 +18,15 @@ public class Dimension implements Comparable <Dimension> {
 	private String name;
 	private String url;
 	private String type;
-	private boolean hierarchial;
+	private boolean hierarchical;
 	private Set <DimensionOption> options = Collections.emptySet();
 
-	public boolean isHierarchial() {
-		return hierarchial;
+	public boolean getHierarchical() {
+		return hierarchical;
 	}
 
-	public void setHierarchial(boolean hierarchial) {
-		this.hierarchial = hierarchial;
+	public void setHierarchical(boolean hierarchical) {
+		this.hierarchical = hierarchical;
 	}
 
 	public String getType() {

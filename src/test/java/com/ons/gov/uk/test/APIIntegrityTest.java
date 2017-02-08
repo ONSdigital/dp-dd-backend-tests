@@ -93,13 +93,23 @@ public class APIIntegrityTest {
 			ArrayList <DimensionOption> dimOptions = (ArrayList) mapper.readValue(String.valueOf(option),
 					new TypeReference <List <DimensionOption>>() {
 			});
-			optionsFromAPI.put(dim.getName(), populateOptionsFromAPI(dimOptions, dim.isHierarchial()));
+			optionsFromAPI.put(dim.getName(), populateOptionsFromAPI(dimOptions, dim.getHierarchical()));
 		}
 		for (String key : dimOptionsCSV.keySet()) {
 			assertOptionExists(optionsFromAPI.get(key), dimOptionsCSV.get(key), key);
 		}
 	}
 
+	@Test(groups = {"hierarchyView"}, dependsOnGroups = {"options"})
+	public void hierarchyView() {
+		for (Dimension dimTemp : dimensions) {
+			if (dimTemp.getHierarchical()) {
+				String response = dimAPI.callTheLink(dimTemp.getUrl());
+				Assert.assertFalse(response.contains("error"), "Hierarchy view for the key " + dimTemp.getName());
+
+			}
+		}
+	}
 
 	public ArrayList <DimensionValues> populateOptionsFromAPI(ArrayList <DimensionOption> dimensionOptions, boolean hierarchical) {
 		ArrayList <DimensionValues> options = new ArrayList <>();
