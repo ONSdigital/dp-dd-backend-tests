@@ -59,10 +59,10 @@ public class JobCreator {
 			while (loopCounter != 0) {
 				loopCounter--;
 				Thread.sleep(100 * loopCounter);
-				getJobID(jsonStr);
+				dataSetId = getJobID(jsonStr);
 			}
 		}
-		loopCounter = 5;
+		loopCounter = 10;
 		return dataSetId;
 	}
 

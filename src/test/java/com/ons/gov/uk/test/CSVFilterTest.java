@@ -27,6 +27,8 @@ public class CSVFilterTest {
 	CSVOps csvOps = new CSVOps();
 	HashMap <String, ArrayList <DimensionValues>> dimOptionOriginal;
 	HashMap <String, ArrayList <String>> filterForJob = new HashMap <>();
+	ArrayList <String> dimensionNames;
+	ArrayList <DimensionValues> dimSelect = new ArrayList <>();
 
 	public static void main(String[] args) throws Exception {
 		CSVFilterTest cc = new CSVFilterTest();
@@ -58,21 +60,28 @@ public class CSVFilterTest {
 
 	@Test(groups = {"validate"}, dependsOnGroups = {"jobcreator"})
 	public void validateFilteredCSV() throws Exception {
+
 		for (String key : filterForJob.keySet()) {
-			checkForFilter(filterForJob.get(key), key, "download/" + filteredFileName);
+			checkForFilter(filterForJob.get(key), key, "download/" + filteredFileName, true);
 		}
 	}
 
+
 	public HashMap <String, ArrayList <String>> setUpFilters(HashMap <String, ArrayList <DimensionValues>> dimOptions) {
+
 		for (String key : dimOptions.keySet()) {
-			int randindex = 0;
-			if (dimOptions.get(key).size() > 1) {
-				randindex = new Random().nextInt(dimOptions.get(key).size() - 1);
+			int randomKey = new Random().nextInt(dimOptions.size() - 1);
+			System.out.println("randomkey" + randomKey);
+			if (randomKey != 0) {
+				int randindex = 0;
+				if (dimOptions.get(key).size() > 1) {
+					randindex = new Random().nextInt(dimOptions.get(key).size() - 1);
+				}
+				DimensionValues valueFilter = dimOptions.get(key).get(randindex);
+				ArrayList <String> tempFilter = new ArrayList <>();
+				tempFilter.add(valueFilter.getCodeId());
+				filterForJob.put(key, tempFilter);
 			}
-			DimensionValues valueFilter = dimOptions.get(key).get(randindex);
-			ArrayList <String> tempFilter = new ArrayList <>();
-			tempFilter.add(valueFilter.getCodeId());
-			filterForJob.put(key, tempFilter);
 		}
 		return filterForJob;
 	}
@@ -89,7 +98,8 @@ public class CSVFilterTest {
 		}
 	}
 
-	public void checkForFilter(ArrayList <String> dimFiler, String key, String fileName) throws Exception {
+	public int checkForFilter(ArrayList <String> dimFiler, String key, String fileName, boolean slicedFile) throws Exception {
+		int numberOfLines = 0;
 		CSVReader csvReader = null;
 		for (String filter : dimFiler) {
 			String searchTerm = key + "," + filter;
@@ -100,18 +110,23 @@ public class CSVFilterTest {
 					if (nextLine[0].contains("****")) {
 						System.out.println("******Last line of the CSV***");
 					} else {
+						numberOfLines++;
 						String line = "repl";
 						for (String lineVal : nextLine) {
 							line = line + "," + lineVal;
 						}
 						line = line.replace("repl,", "");
-						Assert.assertTrue(line.contains(searchTerm), "****The filter is not present in the file.****\n" +
-								"Expected search term " + searchTerm +
-								"\n Actual Line in the csv " + line);
+						System.out.println(line);
+						if (slicedFile && numberOfLines > 0) {
+							Assert.assertTrue(line.contains(searchTerm), "****The filter is not present in the file.****\n" +
+									"Expected search term " + searchTerm +
+									"\n Actual Line in the csv " + line);
+						}
 					}
 				}
 			}
 		}
 		csvReader.close();
+		return numberOfLines;
 	}
 }
