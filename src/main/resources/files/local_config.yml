@@ -6,13 +6,13 @@ config:
   endPoint_stub: http://localhost:20099/datasets
   metadata_editor: http://localhost:23000
   fileUploader: https://upload.publishing.discovery.onsdigital.co.uk
-  jobcreator: https://discovery.onsdigital.co.uk/dd/api/datasets/jobs
+  jobcreator: https://discovery.onsdigital.co.uk/dd/api/jobs
   endPoint_discovery: https://discovery.onsdigital.co.uk/dd/api/datasets
   backend: real
 #   or real
 #  fileUpload: http://localhost:20019
 #  file_path: Open-Data-new-format.csv
-  file_path: Open-Data-v3.csv
+  file_path: Open-Data-v3_E2E_Tests.csv
 #  file_path: Open-Data-small.csv
 #  file_path: small-example.csv
 #  file_path: AF001EW.ArmedForces_in_Databaker_format.csv
