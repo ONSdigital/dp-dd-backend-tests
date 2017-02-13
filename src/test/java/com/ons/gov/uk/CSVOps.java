@@ -71,26 +71,29 @@ public class CSVOps {
 					filter4 = nextLine[12];
 				} catch (Exception ee) {
 				}
+				resetHierarchy();
 				if (!nextLine[4].contains("Dimension_Name_1")) {
-					if (filter1 != "") {
+					if (!filter1.equals("")) {
 						hierarchy = true;
 					}
 					dimensionValues = new DimensionValues(hierarchy, filter1, nextLine[5]);
 					addDimension(dimensionValues, dimension1);
-
-					if (filter2 != "") {
+					resetHierarchy();
+					if (!filter2.equals("")) {
 						hierarchy = true;
 					}
 					dimensionValues = new DimensionValues(hierarchy, filter2, nextLine[8]);
 					addDimension(dimensionValues, dimension2);
 					try {
-						if (filter3 != "") {
+						resetHierarchy();
+						if (!filter3.equals("")) {
 							hierarchy = true;
 						}
 						dimName3 = nextLine[10];
 						dimensionValues = new DimensionValues(hierarchy, filter3, nextLine[11]);
 						addDimension(dimensionValues, dimension3);
-						if (filter4 != "") {
+						resetHierarchy();
+						if (!filter4.equals("")) {
 							hierarchy = true;
 						}
 						dimName4 = nextLine[13];
@@ -118,6 +121,10 @@ public class CSVOps {
 		}
 
 		cleanUpHashMap();
+	}
+
+	public void resetHierarchy() {
+		hierarchy = false;
 	}
 
 	public void addDimension(DimensionValues dimensionValues, ArrayList <DimensionValues> dimensions) {

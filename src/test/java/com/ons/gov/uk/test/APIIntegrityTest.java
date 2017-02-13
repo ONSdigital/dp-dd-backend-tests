@@ -47,6 +47,11 @@ public class APIIntegrityTest {
 			new FileUploader();
 			try {
 				Thread.sleep(20000);
+				if (csvFile.contains("AF001")) {
+					// waiting for the api to load.
+					//TODO: wait until the file upload completes.
+					Thread.sleep(60000);
+				}
 			} catch (InterruptedException ee) {
 			}
 		}
@@ -86,15 +91,19 @@ public class APIIntegrityTest {
 		}
 	}
 
-	@Test(groups = {"options"}, dependsOnGroups = {"dimension"})
-	public void testOptions() throws Exception {
+	public void getDimAPIMap() throws Exception {
 		for (Dimension dim : dimensions) {
 			JSONArray option = getName(dim.getUrl(), "options");
 			ArrayList <DimensionOption> dimOptions = (ArrayList) mapper.readValue(String.valueOf(option),
 					new TypeReference <List <DimensionOption>>() {
-			});
+					});
 			optionsFromAPI.put(dim.getName(), populateOptionsFromAPI(dimOptions, dim.getHierarchical()));
 		}
+	}
+
+	@Test(groups = {"options"}, dependsOnGroups = {"dimension"})
+	public void testOptions() throws Exception {
+		getDimAPIMap();
 		for (String key : dimOptionsCSV.keySet()) {
 			assertOptionExists(optionsFromAPI.get(key), dimOptionsCSV.get(key), key);
 		}
@@ -114,8 +123,14 @@ public class APIIntegrityTest {
 	public ArrayList <DimensionValues> populateOptionsFromAPI(ArrayList <DimensionOption> dimensionOptions, boolean hierarchical) {
 		ArrayList <DimensionValues> options = new ArrayList <>();
 		for (DimensionOption dimOpt : dimensionOptions) {
+			String codeOrName;
+			if (dimOpt.getCode() == null && dimOpt.getName() != null) {
+				codeOrName = dimOpt.getName();
+			} else {
+				codeOrName = dimOpt.getCode();
+			}
 			options.add(new DimensionValues(hierarchical, dimOpt.getName(),
-					dimOpt.getCode()));
+					codeOrName));
 		}
 		return options;
 	}
@@ -132,7 +147,7 @@ public class APIIntegrityTest {
 
 	public void assertOptionExists(ArrayList <DimensionValues> actualOptions, ArrayList <DimensionValues> expectedOptions, String key) {
 		Assert.assertEquals(actualOptions.size(), expectedOptions.size(), "Actual Size from the API: " + actualOptions.size() + "\n" +
-				"Expected Size: " + expectedOptions.size());
+				"Expected Size: " + expectedOptions.size() + " for the key does not match " + key);
 		ArrayList <String> actualCodes = getDimOptions(actualOptions);
 		ArrayList <String> expectedCodes = getDimOptions(expectedOptions);
 		for (int index = 0; index < expectedOptions.size(); index++) {
