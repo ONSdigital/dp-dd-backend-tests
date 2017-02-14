@@ -102,8 +102,9 @@ public class MetaDataEditorTest {
 					if (itemsList.get(index).getId().equals(metadata.getDatasetId())) {
 						counter++;
 					}
+
 					if (itemsList.get(index).getTitle().equals(config.getFilepath())) {
-						datasetId = metadata.getDatasetId();
+						datasetId = itemsList.get(index).getId();
 						minorVersion = Integer.toString(Integer.parseInt(metadata.getMinorVersion()) + 1);
 						majorVersion = Integer.toString(Integer.parseInt(metadata.getMajorVersion()) + 1);
 					}

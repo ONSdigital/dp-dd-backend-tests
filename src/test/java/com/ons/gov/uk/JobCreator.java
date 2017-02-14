@@ -26,7 +26,7 @@ public class JobCreator {
 	public String fileName = null;
 	Config config = new Config();
 	RestAssured restAssured = new RestAssured();
-	int loopCounter = 5;
+	int loopCounter = 20;
 
 	public String request(String dataSetId, HashMap <String, ArrayList <String>> filters) throws JsonProcessingException {
 		CreateJob request = new CreateJob();
