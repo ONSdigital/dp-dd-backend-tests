@@ -25,6 +25,9 @@ public class MetaDataEditorTest {
 	public Config config = new Config();
 	DimensionalAPI dimensionalAPI = new DimensionalAPI();
 	ObjectMapper mapper = new ObjectMapper();
+	DataResource dataResource = new DataResource();
+	MetaDataEditorModel datasetMetadata = new MetaDataEditorModel();
+
 	String majorVersion = "1";
 	String minorVersion = "1";
 	String datasetId = null;
@@ -37,15 +40,13 @@ public class MetaDataEditorTest {
 			"        }}";
 	String desc, contactName, email, phone;
 
-	DataResource dataResource = new DataResource();
-	MetaDataEditorModel datasetMetadata = new MetaDataEditorModel();
 
 
 	@Test(groups = {"createDR"})
 	public void createDataResource() throws Exception {
 		RestAssured.baseURI = config.getMetadataEditor();
-		dataResource.setDataResourceID(RandomStringGen.getRandomString(10));
-		dataResource.setTitle(RandomStringGen.getRandomString(8));
+		dataResource.setDataResourceID("TEST_" + RandomStringGen.getRandomString(10));
+		dataResource.setTitle("TEST_" + RandomStringGen.getRandomString(8));
 		dataResource.setMetadata(jsonMetaData);
 		ResponseBody responseBody = given().cookies("splash", "y").contentType("application/json").accept("application/json")
 				.body(mapper.writeValueAsString(dataResource)).post("/dataResource");
@@ -120,7 +121,7 @@ public class MetaDataEditorTest {
 
 	@Test(groups = {"setUpMetadata"}, dependsOnGroups = {"findDataset"})
 	public void setUpFormParams() throws Exception {
-		desc = RandomStringGen.getRandomString(25);
+		desc = "Metadata_Test_" + RandomStringGen.getRandomString(25);
 		contactName = "Metadata_Test_" + RandomStringGen.getRandomString(10);
 		email = RandomStringGen.getRandomString(8);
 		phone = RandomStringGen.getRandomLongNumber(8);
