@@ -57,12 +57,12 @@ public class JobCreator {
 			dataSetId = ((JSONObject) new JSONParser().parse(response.asString())).get("id").toString();
 		} catch (Exception ee) {
 			while (loopCounter != 0) {
-				loopCounter--;
+
 				Thread.sleep(1000 * loopCounter);
+				loopCounter--;
 				dataSetId = getJobID(jsonStr);
 			}
 		}
-		loopCounter = 10;
 		return dataSetId;
 	}
 
