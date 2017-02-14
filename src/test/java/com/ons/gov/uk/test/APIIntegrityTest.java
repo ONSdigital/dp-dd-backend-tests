@@ -76,6 +76,19 @@ public class APIIntegrityTest {
 					break;
 				}
 			}
+			if (csvFile.contains("AF001")) {
+				int sleepCount = 0;
+				Dimension dimension = new Dimension();
+				String urlToCheck = dimUrl + "/Geographic_Hierarchy";
+				while (dimension.getOptions().size() != dimOptionsCSV.get("Geographic_Hierarchy").size()
+						&& sleepCount < 20) {
+					String jsonString = dimAPI.callTheLink(urlToCheck);
+					dimension = (Dimension) mapper.readValue(String.valueOf(jsonString), new TypeReference <Dimension>() {
+					});
+					Thread.sleep(2000);
+					sleepCount++;
+				}
+			}
 		} catch (Exception ee) {
 		}
 	}
@@ -123,14 +136,8 @@ public class APIIntegrityTest {
 	public ArrayList <DimensionValues> populateOptionsFromAPI(ArrayList <DimensionOption> dimensionOptions, boolean hierarchical) {
 		ArrayList <DimensionValues> options = new ArrayList <>();
 		for (DimensionOption dimOpt : dimensionOptions) {
-			String codeOrName;
-			if (dimOpt.getCode() == null && dimOpt.getName() != null) {
-				codeOrName = dimOpt.getName();
-			} else {
-				codeOrName = dimOpt.getCode();
-			}
 			options.add(new DimensionValues(hierarchical, dimOpt.getName(),
-					codeOrName));
+					dimOpt.getCode()));
 		}
 		return options;
 	}

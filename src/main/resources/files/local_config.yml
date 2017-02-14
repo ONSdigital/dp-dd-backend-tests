@@ -2,7 +2,7 @@ config:
 #  splitter: http://localhost:21000/splitter
   dbloader: http://localhost:20097
   postgres: jdbc:postgresql://localhost:5432/data_discovery
-  endPoint_real:  https://develop.discovery.onsdigital.co.uk/dd/api/datasets
+  endPoint_real:  https://develop.discovery.onsdigital.co.uk/dd/api/versions
   endPoint_stub: http://localhost:20099/datasets
   metadata_editor: http://localhost:23000
   fileUploader: https://upload.publishing.develop.discovery.onsdigital.co.uk
