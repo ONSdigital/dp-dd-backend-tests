@@ -134,7 +134,7 @@ public class MetaDataEditorTest {
 
 	@Test(groups = "updatemetadata", dependsOnGroups = {"setUpMetadata"})
 	public void updateMetaData() {
-		datasetMetadata(datasetId, majorVersion, dataResource, minorVersion, jsonMetaData, RandomStringGen.getRandomString(6));
+		datasetMetadata(datasetId, majorVersion, dataResource, minorVersion, jsonMetaData, "20" + RandomStringGen.getRandomString(17));
 		try {
 			String service = config.getMetadataEditor() + "/metadata/" + datasetId;
 			ResponseBody responseBody = given().cookies("splash", "y").accept("application/json")
