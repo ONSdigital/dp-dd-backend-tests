@@ -45,16 +45,12 @@ public class APIIntegrityTest {
 	public void getCSVDimensions() {
 		if (!dimAPI.waitForApiToLoad(csvFile).contains(csvFile)) {
 			new FileUploader();
+		}
 			try {
 				Thread.sleep(20000);
-				if (csvFile.contains("AF001")) {
-					// waiting for the api to load.
-					//TODO: wait until the file upload completes.
-					Thread.sleep(60000);
-				}
-			} catch (InterruptedException ee) {
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-		}
 		try {
 			csvOps.populateDimensionFilters(csvFile);
 		} catch (IOException ee) {
@@ -86,7 +82,7 @@ public class APIIntegrityTest {
 					dimension = (Dimension) mapper.readValue(String.valueOf(jsonString), new TypeReference <Dimension>() {
 					});
 					Thread.sleep(200 * sleepCount);
-					sleepCount--;
+					sleepCount++;
 				}
 			}
 		} catch (Exception ee) {
