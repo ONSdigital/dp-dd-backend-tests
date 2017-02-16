@@ -81,11 +81,11 @@ public class APIIntegrityTest {
 				Dimension dimension = new Dimension();
 				String urlToCheck = dimUrl + "/Geographic_Hierarchy";
 				while (dimension.getOptions().size() != dimOptionsCSV.get("Geographic_Hierarchy").size()
-						&& sleepCount < 20) {
+						&& sleepCount < 10) {
 					String jsonString = dimAPI.callTheLink(urlToCheck);
 					dimension = (Dimension) mapper.readValue(String.valueOf(jsonString), new TypeReference <Dimension>() {
 					});
-					Thread.sleep(2000);
+					Thread.sleep(200 * sleepCount);
 					sleepCount--;
 				}
 			}
