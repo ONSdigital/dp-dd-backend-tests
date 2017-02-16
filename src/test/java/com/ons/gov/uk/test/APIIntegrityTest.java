@@ -86,7 +86,7 @@ public class APIIntegrityTest {
 					dimension = (Dimension) mapper.readValue(String.valueOf(jsonString), new TypeReference <Dimension>() {
 					});
 					Thread.sleep(2000);
-					sleepCount++;
+					sleepCount--;
 				}
 			}
 		} catch (Exception ee) {
