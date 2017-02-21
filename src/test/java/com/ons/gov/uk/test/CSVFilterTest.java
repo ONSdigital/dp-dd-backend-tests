@@ -94,7 +94,13 @@ public class CSVFilterTest {
 		int numberOfLines = 0;
 		CSVReader csvReader = null;
 		for (DimensionValues filter : dimFiler) {
-			String searchTerm = key + "," + filter.getHierarchyValue() + "," + filter.getCodeId();
+			String searchTerm = null;
+			if (!filter.getHierarchyValue().equals("")) {
+				searchTerm = key + "," + filter.getHierarchyValue() + "," + filter.getCodeId();
+			} else {
+				searchTerm = key + "," + filter.getCodeId();
+			}
+
 			csvReader = new CSVReader(new FileReader(fileName));
 			String[] nextLine;
 			while ((nextLine = csvReader.readNext()) != null) {
