@@ -72,16 +72,16 @@ public class APIIntegrityTest {
 					break;
 				}
 			}
-			if (csvFile.contains("AF001")) {
+			if (csvFile.contains("AnnualBusinessSurvey_NumberOfEnterprises_v3")) {
 				int sleepCount = 0;
 				Dimension dimension = new Dimension();
 				String urlToCheck = dimUrl + "/Geographic_Hierarchy";
 				while (dimension.getOptions().size() != dimOptionsCSV.get("Geographic_Hierarchy").size()
-						&& sleepCount < 10) {
+						&& sleepCount < 20) {
 					String jsonString = dimAPI.callTheLink(urlToCheck);
 					dimension = (Dimension) mapper.readValue(String.valueOf(jsonString), new TypeReference <Dimension>() {
 					});
-					Thread.sleep(200 * sleepCount);
+					Thread.sleep(2000 * sleepCount);
 					sleepCount++;
 				}
 			}

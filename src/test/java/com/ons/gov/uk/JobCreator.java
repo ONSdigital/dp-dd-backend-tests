@@ -28,12 +28,17 @@ public class JobCreator {
 	RestAssured restAssured = new RestAssured();
 	int loopCounter = 20;
 
-	public String request(String dataSetId, HashMap <String, ArrayList <String>> filters) throws JsonProcessingException {
+	public String request(String dataSetId, HashMap <String, ArrayList <DimensionValues>> filters) throws JsonProcessingException {
 		CreateJob request = new CreateJob();
 		List <DimensionFilter> dimensions = new ArrayList <>();
 		request.setDataSetId(dataSetId);
 		for (String key : filters.keySet()) {
-			dimensions.add(new DimensionFilter(key, filters.get(key)));
+			List <DimensionValues> dimensionValues = filters.get(key);
+			ArrayList <String> codes = new ArrayList <>();
+			for (DimensionValues dim : dimensionValues) {
+				codes.add(dim.getCodeId());
+			}
+			dimensions.add(new DimensionFilter(key, codes));
 		}
 
 		Set <FileFormat> formats = singleton(FileFormat.CSV);

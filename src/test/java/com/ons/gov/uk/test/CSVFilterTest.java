@@ -26,9 +26,7 @@ public class CSVFilterTest {
 	JobCreator jobCreator = new JobCreator();
 	CSVOps csvOps = new CSVOps();
 	HashMap <String, ArrayList <DimensionValues>> dimOptionOriginal;
-	HashMap <String, ArrayList <String>> filterForJob = new HashMap <>();
-	ArrayList <String> dimensionNames;
-	ArrayList <DimensionValues> dimSelect = new ArrayList <>();
+	HashMap <String, ArrayList <DimensionValues>> filterForJob = new HashMap <>();
 
 
 	@BeforeTest
@@ -61,7 +59,7 @@ public class CSVFilterTest {
 	}
 
 
-	public HashMap <String, ArrayList <String>> setUpFilters(HashMap <String, ArrayList <DimensionValues>> dimOptions) {
+	public HashMap <String, ArrayList <DimensionValues>> setUpFilters(HashMap <String, ArrayList <DimensionValues>> dimOptions) {
 
 		for (String key : dimOptions.keySet()) {
 			int randomKey = new Random().nextInt(dimOptions.size() - 1);
@@ -71,8 +69,8 @@ public class CSVFilterTest {
 					randindex = new Random().nextInt(dimOptions.get(key).size() - 1);
 				}
 				DimensionValues valueFilter = dimOptions.get(key).get(randindex);
-				ArrayList <String> tempFilter = new ArrayList <>();
-				tempFilter.add(valueFilter.getCodeId());
+				ArrayList <DimensionValues> tempFilter = new ArrayList <>();
+				tempFilter.add(valueFilter);
 				filterForJob.put(key, tempFilter);
 			}
 		}
@@ -91,11 +89,12 @@ public class CSVFilterTest {
 		}
 	}
 
-	public int checkForFilter(ArrayList <String> dimFiler, String key, String fileName, boolean slicedFile) throws Exception {
+	public int checkForFilter(ArrayList <DimensionValues> dimFiler, String key, String fileName, boolean slicedFile)
+			throws Exception {
 		int numberOfLines = 0;
 		CSVReader csvReader = null;
-		for (String filter : dimFiler) {
-			String searchTerm = key + "," + filter;
+		for (DimensionValues filter : dimFiler) {
+			String searchTerm = key + "," + filter.getHierarchyValue() + "," + filter.getCodeId();
 			csvReader = new CSVReader(new FileReader(fileName));
 			String[] nextLine;
 			while ((nextLine = csvReader.readNext()) != null) {

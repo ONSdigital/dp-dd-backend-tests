@@ -4,11 +4,20 @@ public class DimensionValues {
 	private boolean hierarchy;
 	private String codeId;
 	private String hierarchyValue;
+	private String name;
 
 	public DimensionValues(boolean hierarchy, String hierarchyValue, String codeId) {
 		setHierarchy(hierarchy);
 		setCodeId(codeId);
 		setHierarchyValue(hierarchyValue);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getHierarchyValue() {
@@ -34,5 +43,6 @@ public class DimensionValues {
 	public void setCodeId(String codeId) {
 		this.codeId = codeId;
 	}
+
 
 }
