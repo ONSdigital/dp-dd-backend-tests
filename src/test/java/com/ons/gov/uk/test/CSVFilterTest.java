@@ -94,13 +94,10 @@ public class CSVFilterTest {
 		int numberOfLines = 0;
 		CSVReader csvReader = null;
 		for (DimensionValues filter : dimFiler) {
-			String searchTerm = null;
-			if (!filter.getHierarchyValue().equals("")) {
-				searchTerm = key + "," + filter.getHierarchyValue() + "," + filter.getCodeId();
-			} else {
-				searchTerm = key + "," + filter.getCodeId();
-			}
-
+			String searchTerm = (!filter.getHierarchyValue().equals("")) ?
+					key + "," + filter.getHierarchyValue() + "," + filter.getCodeId() :
+					key + "," + filter.getCodeId();
+			System.out.println("SEARCH TERM : " + searchTerm);
 			csvReader = new CSVReader(new FileReader(fileName));
 			String[] nextLine;
 			while ((nextLine = csvReader.readNext()) != null) {
@@ -114,6 +111,7 @@ public class CSVFilterTest {
 							line = line + "," + lineVal;
 						}
 						line = line.replace("repl,", "");
+						System.out.println(line);
 						if (slicedFile && numberOfLines > 0) {
 							Assert.assertTrue(line.contains(searchTerm), "****The filter is not present in the file.****\n" +
 									"Expected search term " + searchTerm +
