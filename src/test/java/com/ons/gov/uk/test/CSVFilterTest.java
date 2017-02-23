@@ -66,7 +66,7 @@ public class CSVFilterTest {
 					for (int index = 0; index < strArr.length; index++) {
 						System.out.print(strArr[index] + ",");
 					}
-					System.out.println("----");
+					System.out.println();
 				}
 
 			}
