@@ -6,7 +6,6 @@ import com.ons.gov.uk.DimensionalAPI;
 import com.ons.gov.uk.JobCreator;
 import com.ons.gov.uk.core.Config;
 import com.opencsv.CSVReader;
-import com.opencsv.CSVWriter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -14,7 +13,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.FileReader;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -30,7 +28,6 @@ public class CSVFilterTest {
 	HashMap <String, ArrayList <DimensionValues>> dimOptionOriginal;
 	HashMap <String, ArrayList <DimensionValues>> filterForJob = new HashMap <>();
 	ArrayList <String[]> linesToRemove = new ArrayList <>();
-	ArrayList <String[]> allLines = new ArrayList <>();
 	ArrayList <String> searchRegex = new ArrayList <>();
 
 	@BeforeTest
@@ -56,22 +53,25 @@ public class CSVFilterTest {
 
 	@Test(groups = {"validate"}, dependsOnGroups = {"jobcreator"})
 	public void validateFilteredCSV() throws Exception {
-		CSVReader csvReader = new CSVReader(new FileReader("download/" + filteredFileName));
-		allLines = (ArrayList <String[]>) csvReader.readAll();
-		allLines.remove(0);
 		for (String key : filterForJob.keySet()) {
-			checkForFilter(filterForJob.get(key), key, "download/" + filteredFileName, true);
-		}
-		if (allLines.size() != linesToRemove.size()) {
-			for (String[] strArr : allLines) {
-				for (int index = 0; index < strArr.length; index++) {
-					System.out.print(strArr[index] + ",");
-				}
-				System.out.println("----");
+			ArrayList <String[]> allLines = (ArrayList <String[]>) new CSVReader(new FileReader("download/" + filteredFileName)).readAll();
+			allLines.remove(0);
+			if (linesToRemove.size() > 0) {
+				linesToRemove.removeAll(allLines);
 			}
+			linesToRemove.clear();
+			checkForFilter(filterForJob.get(key), key, "download/" + filteredFileName, allLines);
+			if (allLines.size() != linesToRemove.size()) {
+				for (String[] strArr : allLines) {
+					for (int index = 0; index < strArr.length; index++) {
+						System.out.print(strArr[index] + ",");
+					}
+					System.out.println("----");
+				}
 
+			}
+			Assert.assertTrue(allLines.size() == linesToRemove.size(), "Mismatch between the filter and the downloaded CSV");
 		}
-		Assert.assertTrue(allLines.size() == 0, "Mismatch between the filter and the downloaded CSV");
 	}
 
 	public HashMap <String, ArrayList <DimensionValues>> setUpFilters(HashMap <String, ArrayList <DimensionValues>> dimOptions) {
@@ -109,8 +109,6 @@ public class CSVFilterTest {
 	}
 
 	public ArrayList <String> searchTerms(String hierarchy, String code, String key) {
-
-
 		String searchTerm = (!hierarchy.equals("")) ?
 				"(.*)" + key + "," + hierarchy + "," + code + "(.*)" : "(.*)" + key + "," + code + "(.*)";
 		searchRegex.add(searchTerm);
@@ -118,7 +116,7 @@ public class CSVFilterTest {
 
 	}
 
-	public boolean checkForFilter(ArrayList <DimensionValues> dimFiler, String key, String fileName, boolean slicedFile) throws Exception {
+	public boolean checkForFilter(ArrayList <DimensionValues> dimFiler, String key, String fileName, ArrayList <String[]> allLines) throws Exception {
 		boolean exists = false;
 		for (DimensionValues filter : dimFiler) {
 			searchTerms(filter.getHierarchyValue(), filter.getCodeId(), key);
@@ -132,17 +130,15 @@ public class CSVFilterTest {
 
 				for (String search : searchRegex) {
 					if (temp.matches(search)) {
-						linesToRemove.add(strArr);
-						exists = true;
+						if (!linesToRemove.contains(strArr)) {
+							linesToRemove.add(strArr);
+							exists = true;
+						}
 					}
 
 				}
 			}
 		}
-		allLines.removeAll(linesToRemove);
-		StringWriter sw = new StringWriter();
-		CSVWriter writer = new CSVWriter(sw);
-		writer.writeAll(allLines);
 		return exists;
 
 	}
