@@ -11,13 +11,14 @@ import io.restassured.response.Response;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.junit.Assert;
 
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static io.restassured.RestAssured.given;
 import static java.util.Collections.singleton;
@@ -28,7 +29,7 @@ public class JobCreator {
 	RestAssured restAssured = new RestAssured();
 	int loopCounter = 30;
 
-	public String request(String dataSetId, HashMap <String, ArrayList <DimensionValues>> filters) throws JsonProcessingException {
+	public String request(String dataSetId, ConcurrentHashMap <String, ArrayList <DimensionValues>> filters) throws JsonProcessingException {
 		CreateJob request = new CreateJob();
 		List <DimensionFilter> dimensions = new ArrayList <>();
 		request.setDataSetId(dataSetId);
@@ -53,19 +54,24 @@ public class JobCreator {
 		return new ObjectMapper().writeValueAsString(request);
 	}
 
-	public String getJobID(String jsonStr) throws Exception {
+	public String getJobID(String jsonStr, boolean failFast) throws Exception {
 		RestAssured.baseURI = config.getJobCreator();
 		String dataSetId = null;
 		Response response = given().cookies("splash", "y")
 				.contentType("application/json").body(jsonStr).post("/job");
+		if (failFast) {
+			Assert.assertTrue("Response should fail with an error " + response.getStatusCode(), response.getStatusCode() >= 400);
+		}
 		try {
 			dataSetId = ((JSONObject) new JSONParser().parse(response.asString())).get("id").toString();
 		} catch (Exception ee) {
-			while (loopCounter != 0) {
+			if (!failFast) {
+				while (loopCounter != 0) {
 
-				Thread.sleep(1000 * loopCounter);
-				loopCounter--;
-				dataSetId = getJobID(jsonStr);
+					Thread.sleep(1000 * loopCounter);
+					loopCounter--;
+					dataSetId = getJobID(jsonStr, false);
+				}
 			}
 		}
 		return dataSetId;

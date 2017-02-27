@@ -16,6 +16,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CSVFilterTest {
 
@@ -26,7 +27,7 @@ public class CSVFilterTest {
 	JobCreator jobCreator = new JobCreator();
 	CSVOps csvOps = new CSVOps();
 	HashMap <String, ArrayList <DimensionValues>> dimOptionOriginal;
-	HashMap <String, ArrayList <DimensionValues>> filterForJob = new HashMap <>();
+	ConcurrentHashMap <String, ArrayList <DimensionValues>> filterForJob = new ConcurrentHashMap <>();
 	ArrayList <String[]> linesToRemove = new ArrayList <>();
 	ArrayList <String> searchRegex = new ArrayList <>();
 
@@ -35,14 +36,14 @@ public class CSVFilterTest {
 		setDatasetid();
 		csvOps.populateDimensionFilters(originalFile);
 		dimOptionOriginal = csvOps.dimAndOptions;
-		setUpFilters(dimOptionOriginal);
+		setUpFilters(dimOptionOriginal, false);
 	}
 
 	@Test(groups = {"jobcreator"})
 	public void createAJob() throws Exception {
 		//Request a job
 		String requestJson = jobCreator.request(datasetid, filterForJob);
-		String jobID = jobCreator.getJobID(requestJson);
+		String jobID = jobCreator.getJobID(requestJson, false);
 		Assert.assertNotNull(jobID, "*********Job ID is not created. Job creator might be down.*******");
 		String getURL = jobCreator.returnCSVUrl(jobID);
 		Assert.assertNotNull(getURL, "********* URL to download filtered CSV file is null. *******");
@@ -74,7 +75,37 @@ public class CSVFilterTest {
 		}
 	}
 
-	public HashMap <String, ArrayList <DimensionValues>> setUpFilters(HashMap <String, ArrayList <DimensionValues>> dimOptions) {
+	@Test(groups = {"downloadFail"}, dependsOnGroups = {"validate"})
+	public void sendEmptyFilterWithDimensions() throws Exception {
+		setUpFilters(dimOptionOriginal, true);
+		String requestJson = jobCreator.request(datasetid, filterForJob);
+		String jobID = jobCreator.getJobID(requestJson, true);
+		Assert.assertNull(jobID, "*********Job ID is not created. Job creator might be down.*******");
+	}
+
+
+	@Test(groups = {"downloadAll"}, dependsOnGroups = {"downloadFail"})
+	public void sendEmptyFilterWithoutDimensions() throws Exception {
+		setUpFilters(dimOptionOriginal, true);
+		for (String key : filterForJob.keySet()) {
+			filterForJob.remove(key);
+		}
+		String requestJson = jobCreator.request(datasetid, filterForJob);
+		String jobID = jobCreator.getJobID(requestJson, false);
+		Assert.assertNotNull(jobID, "*********Job ID is not created. Job creator might be down.*******");
+		String getURL = jobCreator.returnCSVUrl(jobID);
+		Assert.assertNotNull(getURL, "********* URL to download filtered CSV file is null. *******");
+		filteredFileName = jobCreator.fileName;
+		jobCreator.getFile(getURL);
+		ArrayList <String[]> allLines = (ArrayList <String[]>) new CSVReader(new FileReader("download/" + filteredFileName)).readAll();
+		Assert.assertTrue(allLines.size() > 276, "Could not download the entire dataset. \n" +
+				"Number of lines in the dataset is not greater than " + allLines.size());
+
+
+	}
+
+
+	public ConcurrentHashMap <String, ArrayList <DimensionValues>> setUpFilters(HashMap <String, ArrayList <DimensionValues>> dimOptions, boolean noFilter) {
 
 		for (String key : dimOptions.keySet()) {
 			int randomKey = 0;
@@ -89,7 +120,9 @@ public class CSVFilterTest {
 			}
 			for (int rnd = 0; rnd <= randindex; rnd++) {
 				DimensionValues valueFilter = dimOptions.get(key).get(rnd);
-				tempFilter.add(valueFilter);
+				if (!noFilter) {
+					tempFilter.add(valueFilter);
+				}
 			}
 				filterForJob.put(key, tempFilter);
 		}
