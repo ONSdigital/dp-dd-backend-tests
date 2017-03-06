@@ -24,6 +24,7 @@ import static io.restassured.RestAssured.given;
 import static java.util.Collections.singleton;
 
 public class JobCreator {
+	private final int SLEEP_TIMER = 1000;
 	public String fileName = null;
 	Config config = new Config();
 	RestAssured restAssured = new RestAssured();
@@ -68,7 +69,7 @@ public class JobCreator {
 			if (!failFast) {
 				while (loopCounter != 0) {
 
-					Thread.sleep(1000 * loopCounter);
+					Thread.sleep(SLEEP_TIMER);
 					loopCounter--;
 					dataSetId = getJobID(jsonStr, false);
 				}
@@ -114,7 +115,7 @@ public class JobCreator {
 		try {
 			while (loopCounter != 0) {
 				loopCounter--;
-				Thread.sleep(100 * loopCounter);
+				Thread.sleep(SLEEP_TIMER);
 				return returnCSVUrl(jobID);
 
 			}
