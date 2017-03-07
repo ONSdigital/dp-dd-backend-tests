@@ -28,7 +28,7 @@ git clone https://github.com/ONSdigital/dp-dd-backend-test
 
 To run the tests
 ````
-mvn clean test
+./run.sh
 ````
 
 
