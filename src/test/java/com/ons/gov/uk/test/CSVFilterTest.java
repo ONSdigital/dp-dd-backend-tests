@@ -98,8 +98,6 @@ public class CSVFilterTest {
 		filteredFileName = jobCreator.fileName;
 		jobCreator.getFile(getURL);
 		ArrayList <String[]> allLines = (ArrayList <String[]>) new CSVReader(new FileReader("download/" + filteredFileName)).readAll();
-//		Assert.assertTrue(allLines.size() > 276, "Could not download the entire dataset. \n" +
-//				"Number of lines in the dataset is not greater than " + allLines.size());
 		int lines_orig_file = csvOps.returnRows(originalFile) + 1;
 		int lines_downloaded_file = allLines.size();
 		Assert.assertTrue(lines_orig_file == lines_downloaded_file, "number of lines in the original file : " + lines_orig_file
