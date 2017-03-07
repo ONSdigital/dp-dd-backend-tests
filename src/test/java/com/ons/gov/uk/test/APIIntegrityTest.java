@@ -81,7 +81,7 @@ public class APIIntegrityTest {
 					String jsonString = dimAPI.callTheLink(urlToCheck);
 					dimension = (Dimension) mapper.readValue(String.valueOf(jsonString), new TypeReference <Dimension>() {
 					});
-					Thread.sleep(2000 * sleepCount);
+					Thread.sleep(10000);
 					sleepCount++;
 				}
 			}
