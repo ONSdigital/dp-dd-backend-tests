@@ -1,4 +1,4 @@
-package com.ons.gov.uk.old_tests_do_not_run;
+package com.ons.gov.uk.test;
 
 
 import com.ons.gov.uk.DimensionalAPI;

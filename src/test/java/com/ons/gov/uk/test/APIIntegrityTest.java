@@ -15,7 +15,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -34,16 +33,29 @@ public class APIIntegrityTest {
 	HashMap <String, ArrayList <DimensionValues>> optionsFromAPI = new HashMap <>();
 	ObjectMapper mapper = new ObjectMapper();
 	ArrayList <Dimension> dimensions = new ArrayList <>();
+	FileUploader fileUploader = new FileUploader();
 
-	@BeforeTest
-	public void init() throws Exception {
-		getCSVDimensions();
+	@Test(groups = {"verifyDataSetExists"})
+	public void checkDataSetExists() throws Exception {
+		// If Dataset does not exist, upload it
 		responseFromAPI = dimAPI.waitForApiToLoad(csvFile);
-		getDimensionUrl();
+		if (!dimAPI.waitForApiToLoad(csvFile).contains(csvFile)) {
+			fileUploader.uploadFile();
+		}
+		if (csvFile.contains("AF")) {
+			Thread.sleep(20000);
+		}
 	}
 
-	@Test(groups = {"dimension"})
+
+	@Test(groups = {"getCSVDimensions"}, dependsOnGroups = {"verifyDataSetExists"})
+	public void getDimensionFromCSV() throws Exception {
+		getCSVDimensions();
+	}
+
+	@Test(groups = {"dimension"}, dependsOnGroups = {"getCSVDimensions"})
 	public void getDimensionsFromAPI() {
+		getDimensionUrl();
 		String jsonString = dimAPI.callTheLink(dimUrl);
 		try {
 			dimensions = (ArrayList) mapper.readValue(String.valueOf(jsonString), new TypeReference <List <Dimension>>() {
@@ -73,10 +85,8 @@ public class APIIntegrityTest {
 	}
 
 	public void getCSVDimensions() {
-		if (!dimAPI.waitForApiToLoad(csvFile).contains(csvFile)) {
-			new FileUploader();
-		}
-			try {
+
+		try {
 				Thread.sleep(20000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

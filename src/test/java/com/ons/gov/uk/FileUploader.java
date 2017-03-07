@@ -17,10 +17,6 @@ public class FileUploader {
 	private By fileUpload = By.id("file");
 	private By upload = By.name("submit");
 
-	public FileUploader() {
-		setDriver();
-		openFileUploader();
-	}
 
 	public static String getChromeDriverFileLocation() {
 		if (OS_NAME.toLowerCase().contains("mac os x")) {
@@ -56,7 +52,8 @@ public class FileUploader {
 		driver.manage().window().maximize();
 	}
 
-	public void openFileUploader() {
+	public void uploadFile() {
+		setDriver();
 		File fileToUpload = new File("src/main/resources/csvs/" + new Config().getFilepath());
 		String filePath = fileToUpload.getAbsolutePath();
 		System.out.println("File to be uploaded ***  " + filePath);

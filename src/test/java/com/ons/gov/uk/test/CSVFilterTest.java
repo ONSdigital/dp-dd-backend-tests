@@ -75,7 +75,13 @@ public class CSVFilterTest {
 		}
 	}
 
-	@Test(groups = {"downloadFail"}, dependsOnGroups = {"validate"})
+	@Test(groups = {"makeSameFilterCall"}, dependsOnGroups = {"validate"})
+	public void useSameFilterAgain() throws Exception {
+		createAJob();
+		validateFilteredCSV();
+	}
+
+	@Test(groups = {"downloadFail"}, dependsOnGroups = {"makeSameFilterCall"})
 	public void sendEmptyFilterWithDimensions() throws Exception {
 		setUpFilters(dimOptionOriginal, true);
 		String requestJson = jobCreator.request(datasetid, filterForJob);
