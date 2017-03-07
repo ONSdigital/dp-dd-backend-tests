@@ -1,14 +1,11 @@
 config:
+  fileUploader: http://localhost:20019
   dbloader: http://localhost:20097
   postgres: jdbc:postgresql://localhost:5432/data_discovery
-  endPoint_real: https://develop.discovery.onsdigital.co.uk/dd/api/versions
-  endPoint_stub: http://localhost:20099/datasets
-  metadata_editor: https://metadata.publishing.develop.discovery.onsdigital.co.uk
-  fileUploader: https://upload.publishing.develop.discovery.onsdigital.co.uk
-  jobcreator: http://develop.discovery.onsdigital.co.uk/dd/api/jobs
-  backend: real
-  file_path: Open-Data-v3_E2E_Tests.csv
-#  file_path: AF001EW_v3_E2E_Tests.csv
-
+  metadata_editor: http://localhost:23000
+  endPoint_real: http://localhost:20099/versions
+  jobcreator: http://localhost:20100
+  dbloader: http://localhost:20097
+  env: local
 
 

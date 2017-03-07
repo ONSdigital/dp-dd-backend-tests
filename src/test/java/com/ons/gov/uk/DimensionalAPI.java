@@ -27,7 +27,7 @@ public class DimensionalAPI {
 
 	public String checkEndPoint() {
 		RestAssured.urlEncodingEnabled = true;
-		String endPoint = config.isBackendStub() ? config.getEndPointStub() : config.getEndPointReal();
+		String endPoint = config.getEndPointReal();
 		RestAssured.baseURI = endPoint;
 		responseBody = given().cookies("splash", "y").expect().statusCode(200).when().get().body();
 		responseString = responseBody.asString();

@@ -26,9 +26,14 @@ To clone the project
 git clone https://github.com/ONSdigital/dp-dd-backend-test 
 ````
 
-To run the tests
+To run the tests against develop env
 ````
-./run.sh
+./run_develop.sh
+````
+
+To run the tests against local env
+````
+./run_local.sh
 ````
 
 

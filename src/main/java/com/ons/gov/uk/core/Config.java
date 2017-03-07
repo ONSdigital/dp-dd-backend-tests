@@ -17,7 +17,15 @@ public class Config {
 	private boolean stub = true;
 
 	public Config(){
-		loadConfig("/files/local_config.yml");
+		try {
+			if (System.getProperty("env").equalsIgnoreCase("local")) {
+				loadConfig("/files/local_config.yml");
+			}
+		} catch (Exception ee) {
+			System.out.println("SET env Variable to run tests. Tests will be run against the DEVELOP env.");
+			System.out.println("*******  Run : run_local.sh : to run tests locally                   ************");
+			loadConfig("/files/default_config.yml");
+		}
 		overrideConfigFromEnvironmentVariables();
 	}
 
@@ -49,9 +57,6 @@ public class Config {
 		}
 		if (config.containsKey("postgres")) {
 			postgres = (String) config.get("postgres");
-		}
-		if (config.containsKey("backend")) {
-			stub = ((String) config.get("backend")).equalsIgnoreCase("stub");
 		}
 		if (config.containsKey("jobcreator")) {
 			jobCreator = (String) config.get("jobcreator");
