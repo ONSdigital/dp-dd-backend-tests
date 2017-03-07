@@ -42,6 +42,36 @@ public class APIIntegrityTest {
 		getDimensionUrl();
 	}
 
+	@Test(groups = {"dimension"})
+	public void getDimensionsFromAPI() {
+		String jsonString = dimAPI.callTheLink(dimUrl);
+		try {
+			dimensions = (ArrayList) mapper.readValue(String.valueOf(jsonString), new TypeReference <List <Dimension>>() {
+			});
+			Assert.assertTrue(dimensions.size() > 0, "****** No Dimensions obtained from API *****");
+		} catch (Exception ee) {
+		}
+	}
+
+	@Test(groups = {"options"}, dependsOnGroups = {"dimension"})
+	public void testOptions() throws Exception {
+		getDimAPIMap();
+		for (String key : dimOptionsCSV.keySet()) {
+			assertOptionExists(optionsFromAPI.get(key), dimOptionsCSV.get(key), key);
+		}
+	}
+
+	@Test(groups = {"hierarchyView"}, dependsOnGroups = {"options"})
+	public void hierarchyView() {
+		for (Dimension dimTemp : dimensions) {
+			if (dimTemp.getHierarchical()) {
+				String response = dimAPI.callTheLink(dimTemp.getUrl());
+				Assert.assertFalse(response.contains("error"), "Hierarchy view for the key " + dimTemp.getName());
+
+			}
+		}
+	}
+
 	public void getCSVDimensions() {
 		if (!dimAPI.waitForApiToLoad(csvFile).contains(csvFile)) {
 			new FileUploader();
@@ -89,16 +119,6 @@ public class APIIntegrityTest {
 		}
 	}
 
-	@Test(groups = {"dimension"})
-	public void getDimensions() {
-		String jsonString = dimAPI.callTheLink(dimUrl);
-		try {
-			dimensions = (ArrayList) mapper.readValue(String.valueOf(jsonString), new TypeReference <List <Dimension>>() {
-			});
-			Assert.assertTrue(dimensions.size() > 0, "****** No Dimensions obtained from API *****");
-		} catch (Exception ee) {
-		}
-	}
 
 	public void getDimAPIMap() throws Exception {
 		for (Dimension dim : dimensions) {
@@ -110,24 +130,8 @@ public class APIIntegrityTest {
 		}
 	}
 
-	@Test(groups = {"options"}, dependsOnGroups = {"dimension"})
-	public void testOptions() throws Exception {
-		getDimAPIMap();
-		for (String key : dimOptionsCSV.keySet()) {
-			assertOptionExists(optionsFromAPI.get(key), dimOptionsCSV.get(key), key);
-		}
-	}
 
-	@Test(groups = {"hierarchyView"}, dependsOnGroups = {"options"})
-	public void hierarchyView() {
-		for (Dimension dimTemp : dimensions) {
-			if (dimTemp.getHierarchical()) {
-				String response = dimAPI.callTheLink(dimTemp.getUrl());
-				Assert.assertFalse(response.contains("error"), "Hierarchy view for the key " + dimTemp.getName());
 
-			}
-		}
-	}
 
 	public ArrayList <DimensionValues> populateOptionsFromAPI(ArrayList <DimensionOption> dimensionOptions, boolean hierarchical) {
 		ArrayList <DimensionValues> options = new ArrayList <>();
