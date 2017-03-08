@@ -1,59 +1,34 @@
 dp-dd-backend-test
 ====================
-Integration tests for backend components - CSV Chopper, DB Uploader and API.
 
-Pre-requisites
-==============
-Edit the values in the local_config.yml to point to the following apps
-````
-1. CSV Splitter
-2. DB-Postgres
-3. API Endpoint
-````
-Ensure that the above apps are running.
-
-Kafka and zookeeper are set up.
-
-The CSV file is uploaded to the S3 bucket.
-
-Include the CSV file under /resources/csvs
-
-<p>
-
-To clone the project
+To clone the tests:
 
 ````
 git clone https://github.com/ONSdigital/dp-dd-backend-test 
 ````
 
-To run the tests against develop env
-````
-./run_develop.sh
-````
+End to End tests that tests the following:
+1. Upload the dataset from the csvs folder if the Dataset is not in the API
+2. Compares the 'Dimensions' and 'Filter Options' from the CSV with those in the API
+3. Creates a JSON for filtering the dataset by using the values from the CSV
+4. Sends the request to the job creator
+5. Validates the filtered file that it contains only the filter options
 
-To run the tests against local env
+On Local: runs with 'Open-data-v3_Local.csv'
+On Develop: runs with 'Open-data-v3_E2E_Tests.csv' & AF001EW_E2E_Tests.csv
+
+Pre-requisites
+==============
+Running it local:
+
+Have all the micro services running locally
+
 ````
 ./run_local.sh
 ````
 
-
-Runs the backendTest
-
-Init Setup
-==========
-The test deletes the data from the following tables:
+Running it pointing to the develop env
 
 ````
-dimensional_data_point
-dimensional_data_set
-dimensional_data_set_concept_system
+./run_develop.sh
 ````
-
-What it does
-============
-
-Gets the number of rows from the CSV file
-Chops the CSV file and populates the Kafka queue
-DBLoader reads the Kafka queue and uploads the database
-Asserts the database rows and the rows in the CSV file
-Calls the dataset api and confirms the title of the dataset 

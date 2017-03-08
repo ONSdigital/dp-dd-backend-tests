@@ -41,8 +41,6 @@ public class APIIntegrityTest {
 		responseFromAPI = dimAPI.waitForApiToLoad(csvFile);
 		if (!dimAPI.waitForApiToLoad(csvFile).contains(csvFile)) {
 			fileUploader.uploadFile();
-		}
-		if (csvFile.contains("AF")) {
 			Thread.sleep(20000);
 		}
 	}
