@@ -1,5 +1,5 @@
 config:
-    endPoint_real: https://develop.discovery.onsdigital.co.uk/dd/api/versions
+    endPoint_real: https://develop.discovery.onsdigital.co.uk/dd/api
     metadata_editor: https://metadata.publishing.develop.discovery.onsdigital.co.uk
     fileUploader: https://upload.publishing.develop.discovery.onsdigital.co.uk
     jobcreator: http://develop.discovery.onsdigital.co.uk/dd/api/jobs

@@ -3,7 +3,7 @@ config:
   dbloader: http://localhost:20097
   postgres: jdbc:postgresql://localhost:5432/data_discovery
   metadata_editor: http://localhost:23000
-  endPoint_real: http://localhost:20099/versions
+  endPoint_real: http://localhost:20099
   jobcreator: http://localhost:20100
   dbloader: http://localhost:20097
   env: local

@@ -29,7 +29,7 @@ public class DimensionalAPI {
 		RestAssured.urlEncodingEnabled = true;
 		String endPoint = config.getEndPointReal();
 		RestAssured.baseURI = endPoint;
-		responseBody = given().cookies("splash", "y").expect().statusCode(200).when().get().body();
+		responseBody = given().cookies("splash", "y").expect().statusCode(200).when().get("/versions").body();
 		responseString = responseBody.asString();
 		return responseString;
 	}
@@ -37,7 +37,7 @@ public class DimensionalAPI {
 	public String checkEndPoint(String endPoint) {
 		RestAssured.urlEncodingEnabled = true;
 		RestAssured.baseURI = endPoint;
-		responseBody = given().cookies("splash", "y").expect().statusCode(200).when().get().body();
+		responseBody = given().cookies("splash", "y").expect().statusCode(200).when().get("/versions").body();
 		responseString = responseBody.asString();
 		return responseString;
 	}
