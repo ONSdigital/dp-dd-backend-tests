@@ -41,7 +41,7 @@ public class APIIntegrityTest {
 		responseFromAPI = dimAPI.waitForApiToLoad(csvFile);
 		if (!dimAPI.waitForApiToLoad(csvFile).contains(csvFile)) {
 			fileUploader.uploadFile();
-			Thread.sleep(20000);
+			Thread.sleep(30000);
 		}
 	}
 
@@ -83,9 +83,8 @@ public class APIIntegrityTest {
 	}
 
 	public void getCSVDimensions() {
-
 		try {
-				Thread.sleep(20000);
+			Thread.sleep(30000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
