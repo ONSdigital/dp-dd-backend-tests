@@ -38,10 +38,11 @@ public class APIIntegrityTest {
 	@Test(groups = {"verifyDataSetExists"})
 	public void checkDataSetExists() throws Exception {
 		// If Dataset does not exist, upload it
-		responseFromAPI = dimAPI.waitForApiToLoad(csvFile);
-		if (!dimAPI.waitForApiToLoad(csvFile).contains(csvFile)) {
+		responseFromAPI = dimAPI.checkEndPoint();
+		if (!responseFromAPI.contains(csvFile)) {
 			fileUploader.uploadFile();
 			Thread.sleep(30000);
+			responseFromAPI = dimAPI.waitForApiToLoad(csvFile);
 		}
 	}
 
@@ -50,6 +51,7 @@ public class APIIntegrityTest {
 	public void getDimensionFromCSV() throws Exception {
 		getCSVDimensions();
 	}
+
 
 	@Test(groups = {"dimension"}, dependsOnGroups = {"getCSVDimensions"})
 	public void getDimensionsFromAPI() {
@@ -109,11 +111,12 @@ public class APIIntegrityTest {
 					break;
 				}
 			}
-			if (csvFile.contains("AnnualBusinessSurvey_NumberOfEnterprises_v3")) {
-				int sleepCount = 0;
-				Dimension dimension = new Dimension();
-				String urlToCheck = dimUrl + "/Geographic_Hierarchy";
-				while (dimension.getOptions().size() != dimOptionsCSV.get("Geographic_Hierarchy").size()
+			int sleepCount = 0;
+			Dimension dimension = new Dimension();
+			String keyToChk = getDimWithMoreOptions();
+			String urlToCheck = dimUrl + "/" + keyToChk;
+			System.out.println(urlToCheck);
+			while (dimension.getOptions().size() != dimOptionsCSV.get(keyToChk).size()
 						&& sleepCount < 20) {
 					String jsonString = dimAPI.callTheLink(urlToCheck);
 					dimension = (Dimension) mapper.readValue(String.valueOf(jsonString), new TypeReference <Dimension>() {
@@ -121,8 +124,7 @@ public class APIIntegrityTest {
 					Thread.sleep(10000);
 					sleepCount++;
 				}
-			}
-		} catch (Exception ee) {
+			} catch (Exception ee) {
 		}
 	}
 
@@ -184,6 +186,23 @@ public class APIIntegrityTest {
 			toReturn.add(dimensionValues.getCodeId());
 		}
 		return toReturn;
+	}
+
+	public String getDimWithMoreOptions() {
+		String dimKey = null;
+		for (int index = 0; index < dimensions.size() - 2; index++) {
+			if (dimOptionsCSV.get(dimensions.get(index)).size() > dimOptionsCSV.get(dimensions.get(index + 1)).size()) {
+				dimKey = dimensions.get(index).getName();
+			} else {
+				dimKey = dimensions.get(index + 1).getName();
+			}
+
+		}
+		return dimKey;
+	}
+
+	public void isUploadComplete(String key) {
+
 	}
 
 }

@@ -1,0 +1,377 @@
+Observation,Data_Marking,Observation_Type_Value,Dimension_Hierarchy_1,Dimension_Name_1,Dimension_Value_1,Dimension_Hierarchy_2,Dimension_Name_2,Dimension_Value_2,Dimension_Hierarchy_3,Dimension_Name_3,Dimension_Value_3,Dimension_Hierarchy_4,Dimension_Name_4,Dimension_Value_4
+153223,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+118177,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+35046,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+47799,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+28618,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a household
+19181,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+53848,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+41233,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a household
+12615,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+42680,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+39788,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a household
+2892,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+8896,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+8538,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a household
+358,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+138392,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+106435,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+31957,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+43269,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Males,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+25639,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a household
+17630,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+47784,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Males,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+36389,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a household
+11395,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+39219,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Males,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+36540,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a household
+2679,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+8120,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Males,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+7867,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a household
+253,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+14831,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+11742,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+3089,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+4530,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Females,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+2979,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a household
+1551,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+6064,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Females,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+4844,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a household
+1220,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+3461,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Females,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+3248,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a household
+213,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+776,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Females,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+671,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a household
+105,,,2011STATH,Geographic_Hierarchy,K04000001,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+146348,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+112447,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+33901,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+45149,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+26614,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a household
+18535,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+51604,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+39425,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a household
+12179,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+41105,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+38264,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a household
+2841,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+8490,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+8144,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a household
+346,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+132026,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+101145,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+30881,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+40844,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Males,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+23830,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a household
+17014,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+45720,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Males,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+34724,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a household
+10996,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+37724,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Males,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+35095,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a household
+2629,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+7738,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Males,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+7496,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a household
+242,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+14322,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+11302,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+3020,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+4305,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Females,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+2784,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a household
+1521,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+5884,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Females,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+4701,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a household
+1183,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+3381,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Females,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+3169,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a household
+212,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+752,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Females,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+648,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a household
+104,,,2011STATH,Geographic_Hierarchy,E92000001,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+6875,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+5730,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+1145,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+2650,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+2004,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a household
+646,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+2244,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+1808,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a household
+436,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+1575,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+1524,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a household
+51,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+406,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+394,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a household
+12,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+6366,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+5290,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+1076,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+2425,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Males,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+1809,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a household
+616,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+2064,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Males,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+1665,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a household
+399,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+1495,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Males,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+1445,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a household
+50,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+382,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Males,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+371,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a household
+11,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+509,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+440,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+69,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+225,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Females,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+195,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a household
+30,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+180,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Females,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+143,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a household
+37,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+80,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Females,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+79,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a household
+1,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+24,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Females,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+23,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a household
+1,,,2011STATH,Geographic_Hierarchy,W92000004,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+5675,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+5327,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+348,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+2227,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+2009,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a household
+218,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+1907,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+1806,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a household
+101,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+1315,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+1289,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a household
+26,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+226,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+223,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a household
+3,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+5123,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+4816,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+307,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+1992,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Males,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+1810,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a household
+182,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+1696,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Males,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+1599,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a household
+97,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+1234,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Males,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+1208,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a household
+26,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+201,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Males,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+199,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a household
+2,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+552,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+511,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+41,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+235,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Females,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+199,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a household
+36,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+211,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Females,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+207,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a household
+4,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+81,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Females,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+81,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+25,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Females,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+24,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a household
+1,,,2011STATH,Geographic_Hierarchy,E12000001,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+8918,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+8703,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+215,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+4175,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+4028,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a household
+147,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+2737,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+2690,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a household
+47,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+1581,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+1571,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a household
+10,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+425,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+414,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a household
+11,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+8144,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+7985,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+159,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+3762,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Males,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+3661,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a household
+101,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+2515,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Males,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+2473,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a household
+42,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+1483,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Males,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+1474,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a household
+9,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+384,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Males,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+377,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a household
+7,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+774,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+718,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+56,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+413,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Females,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+367,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a household
+46,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+222,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Females,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+217,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a household
+5,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+98,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Females,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+97,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a household
+1,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+41,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Females,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+37,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a household
+4,,,2011STATH,Geographic_Hierarchy,E12000002,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+15827,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+10759,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+5068,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+6660,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+3407,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a household
+3253,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+5337,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+3788,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a household
+1549,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+3230,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+2979,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a household
+251,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+600,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+585,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a household
+15,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+14547,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+9722,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+4825,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+6180,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Males,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+3053,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a household
+3127,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+4842,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Males,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+3393,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a household
+1449,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+2989,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Males,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+2752,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a household
+237,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+536,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Males,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+524,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a household
+12,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+1280,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+1037,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+243,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+480,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Females,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+354,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a household
+126,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+495,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Females,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+395,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a household
+100,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+241,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Females,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+227,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a household
+14,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+64,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Females,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+61,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a household
+3,,,2011STATH,Geographic_Hierarchy,E12000003,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+11686,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+10275,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+1411,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+3261,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+2634,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a household
+627,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+3829,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+3289,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a household
+540,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+3803,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+3594,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a household
+209,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+793,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+758,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a household
+35,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+10386,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+9141,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+1245,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+2918,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,Males,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+2386,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a household
+532,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+3276,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,Males,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+2797,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a household
+479,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+3450,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,Males,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+3250,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a household
+200,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+742,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,Males,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+708,,,2011STATH,Geographic_Hierarchy,E12000004,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a household
+24,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+201,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+196,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+5,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+65,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Males,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+64,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a household
+1,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+52,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Males,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+51,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a household
+1,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+60,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Males,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+57,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a household
+3,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+24,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Males,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+24,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+18,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+18,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+5,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Females,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+5,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+8,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Females,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+8,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+5,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Females,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+5,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+0,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Females,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+0,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000021,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+196,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+195,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+1,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,All categories: Sex,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+81,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+80,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a household
+1,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,All categories: Sex,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+60,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+60,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,All categories: Sex,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+44,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+44,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,All categories: Sex,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+11,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+11,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,All categories: Sex,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+184,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+184,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Males,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+71,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Males,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+71,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Males,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+59,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Males,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+59,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Males,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+43,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Males,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+43,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Males,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+11,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Males,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+11,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Males,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
+12,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,All categories: Residence Type
+11,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a household
+1,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Females,,Age,All categories: Age 16 and over,,Residence Type,Lives in a communal establishment
+10,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Females,,Age,Age 16 to 24,,Residence Type,All categories: Residence Type
+9,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a household
+1,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Females,,Age,Age 16 to 24,,Residence Type,Lives in a communal establishment
+1,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Females,,Age,Age 25 to 34,,Residence Type,All categories: Residence Type
+1,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Females,,Age,Age 25 to 34,,Residence Type,Lives in a communal establishment
+1,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Females,,Age,Age 35 to 49,,Residence Type,All categories: Residence Type
+1,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Females,,Age,Age 35 to 49,,Residence Type,Lives in a communal establishment
+0,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Females,,Age,Age 50 and over,,Residence Type,All categories: Residence Type
+0,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a household
+0,,,2011STATH,Geographic_Hierarchy,W06000022,,Sex,Females,,Age,Age 50 and over,,Residence Type,Lives in a communal establishment
