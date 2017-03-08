@@ -7,5 +7,3 @@ config:
   jobcreator: http://localhost:20100
   dbloader: http://localhost:20097
   env: local
-
-
