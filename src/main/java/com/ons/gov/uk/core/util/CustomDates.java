@@ -4,9 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by admin on 14/12/2016.
- */
+
 public class CustomDates {
 
 	public static String getTomorrowsDate() {

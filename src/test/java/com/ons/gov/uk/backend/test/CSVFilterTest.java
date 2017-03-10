@@ -1,4 +1,4 @@
-package com.ons.gov.uk.test;
+package com.ons.gov.uk.backend.test;
 
 import com.ons.gov.uk.CSVOps;
 import com.ons.gov.uk.DimensionValues;

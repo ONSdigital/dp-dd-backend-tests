@@ -1,12 +1,14 @@
 package com.ons.gov.uk.core;
 
 
+import com.ons.gov.uk.core.util.Helper;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
 import java.util.Map;
 
 public class Config {
+	public static final int DEFAULT_TIMEOUT_VALUE = 10;
 	private String filepath;
 	private String dbLoader, fileuploader;
 	private String datasetEndPointReal;
@@ -14,6 +16,8 @@ public class Config {
 	private String postgres;
 	private String jobCreator;
 	private String metadataEditor;
+	private String browser;
+	private String baseURL;
 	private boolean stub = true;
 
 	public Config(){
@@ -46,6 +50,13 @@ public class Config {
 		if (config.containsKey("fileUploader")) {
 			fileuploader = (String) config.get("fileUploader");
 		}
+		if (config.containsKey("base_url")) {
+			baseURL = (String) config.get("base_url");
+		}
+
+		if (config.containsKey("browser")) {
+			browser = (String) config.get("browser");
+		}
 		if (config.containsKey("file_path")) {
 			filepath = (String) config.get("file_path");
 		}
@@ -67,21 +78,29 @@ public class Config {
 	}
 
 	public void overrideConfigFromEnvironmentVariables() {
-		String fileupload_value = System.getProperty("fileupload");
+		String fileupload_value = Helper.getSetting("fileupload");
 		if (fileupload_value != null) {
 			fileuploader = fileupload_value;
 		}
-		String fileName = System.getProperty("filename");
+		String fileName = Helper.getSetting("filename");
 		if (fileName != null) {
 			filepath = fileName;
 		}
-		String jobCreate = System.getProperty("jobcreator");
+		String jobCreate = Helper.getSetting("jobcreator");
 		if (jobCreate != null) {
 			jobCreator = jobCreate;
 		}
-		String metadata_editor = System.getProperty("metadataEditor");
+		String metadata_editor = Helper.getSetting("metadataEditor");
 		if (metadata_editor != null) {
 			metadataEditor = metadata_editor;
+		}
+		String ons_url_value = Helper.getSetting("base_url");
+		if (ons_url_value != null) {
+			baseURL = ons_url_value;
+		}
+		String browser_value = Helper.getSetting("browser");
+		if (browser_value != null) {
+			browser = browser_value;
 		}
 
 	}
@@ -127,6 +146,14 @@ public class Config {
 
 	public boolean isBackendStub() {
 		return stub;
+	}
+
+	public String getBaseURL() {
+		return baseURL;
+	}
+
+	public String getBrowser() {
+		return browser;
 	}
 
 

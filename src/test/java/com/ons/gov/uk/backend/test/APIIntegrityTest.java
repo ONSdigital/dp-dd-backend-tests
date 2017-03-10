@@ -1,4 +1,4 @@
-package com.ons.gov.uk.test;
+package com.ons.gov.uk.backend.test;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
