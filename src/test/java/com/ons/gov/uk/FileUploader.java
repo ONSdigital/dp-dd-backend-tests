@@ -8,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
-import java.io.IOException;
 
 public class FileUploader {
 	public static final String OS_NAME = System.getProperty("os.name");
@@ -33,17 +32,12 @@ public class FileUploader {
 		}
 	}
 
-	public void setDriver() {
+	public void setDriver() throws Exception {
 		File file = new File(getChromeDriverFileLocation());
 		if (file.exists()) {
 			file.setExecutable(true);
 		}
-
-		try {
-			System.setProperty("webdriver.chrome.driver", file.getCanonicalPath());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		System.setProperty("webdriver.chrome.driver", file.getCanonicalPath());
 		DesiredCapabilities desiredCapabilitiesChrome = DesiredCapabilities.chrome();
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized", "--silent");
@@ -52,9 +46,9 @@ public class FileUploader {
 		driver.manage().window().maximize();
 	}
 
-	public void uploadFile() {
+	public void uploadFile() throws Exception {
 		setDriver();
-		File fileToUpload = new File("src/main/resources/csvs/" + new Config().getFilepath());
+		File fileToUpload = new File("src/test/resources/csvs/" + new Config().getFilepath());
 		String filePath = fileToUpload.getAbsolutePath();
 		System.out.println("File to be uploaded ***  " + filePath);
 		driver.get(new Config().getFileuploader());

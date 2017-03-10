@@ -5,11 +5,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ons.gov.uk.DimensionalAPI;
 import com.ons.gov.uk.core.Config;
-import com.ons.gov.uk.core.model.DataResource;
-import com.ons.gov.uk.core.model.ItemsObj;
-import com.ons.gov.uk.core.model.MetaDataEditorModel;
-import com.ons.gov.uk.core.model.Metadata;
-import com.ons.gov.uk.core.util.RandomStringGen;
+import com.ons.gov.uk.model.DataResource;
+import com.ons.gov.uk.model.ItemsObj;
+import com.ons.gov.uk.model.MetaDataEditorModel;
+import com.ons.gov.uk.model.Metadata;
+import com.ons.gov.uk.util.RandomStringGen;
 import io.restassured.RestAssured;
 import io.restassured.response.ResponseBody;
 import org.json.simple.JSONArray;
@@ -22,10 +22,10 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 
 public class MetaDataEditorTest {
-	public Config config = new Config();
+	Config config = new Config();
 	DimensionalAPI dimensionalAPI = new DimensionalAPI();
 	ObjectMapper mapper = new ObjectMapper();
-	DataResource dataResource = new DataResource();
+	com.ons.gov.uk.model.DataResource dataResource = new DataResource();
 	MetaDataEditorModel datasetMetadata = new MetaDataEditorModel();
 	String dataResourceName = "TEST_Resource_E2E_Open_data";
 

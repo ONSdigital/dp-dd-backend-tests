@@ -29,7 +29,7 @@ public class CSVOps {
 
 	public void readCSV(String file) {
 
-		String localFile = "src/main/resources/csvs/" + file;
+		String localFile = "src/test/resources/csvs/" + file;
 
 		try {
 			csvReader = new CSVReader(new FileReader(localFile));
@@ -54,7 +54,7 @@ public class CSVOps {
 	}
 
 	public void populateDimensionFilters(String file) throws IOException {
-		String localFile = "src/main/resources/csvs/" + file;
+		String localFile = "src/test/resources/csvs/" + file;
 		String[] nextLine;
 		String filter1 = null, filter2 = null, filter3 = null, filter4 = null;
 		String dimName1 = null, dimName2 = null, dimName3 = null, dimName4 = null;

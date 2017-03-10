@@ -111,7 +111,7 @@ public class CSVFilterTest {
 	}
 
 
-	public ConcurrentHashMap <String, ArrayList <DimensionValues>> setUpFilters(HashMap <String, ArrayList <DimensionValues>> dimOptions, boolean noFilter) {
+	public ConcurrentHashMap <String, ArrayList <DimensionValues>> setUpFilters(HashMap <String, ArrayList <DimensionValues>> dimOptions, boolean noFilter) throws Exception {
 
 		for (String key : dimOptions.keySet()) {
 			int randomKey = 0;
@@ -120,6 +120,7 @@ public class CSVFilterTest {
 			try {
 				randomKey = new Random().nextInt(dimOptions.get(key).size() - 1);
 			} catch (IllegalArgumentException ee) {
+				System.out.println("Size of the dimension option for key " + key + "  is " + dimOptions.size());
 			}
 			if (randomKey > 0) {
 				randindex = new Random().nextInt(randomKey);

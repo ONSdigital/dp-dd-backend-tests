@@ -1,4 +1,4 @@
-package com.ons.gov.uk.core.model;
+package com.ons.gov.uk.model;
 
 import lombok.NonNull;
 

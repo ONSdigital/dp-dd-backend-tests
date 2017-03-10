@@ -1,11 +1,10 @@
 package com.ons.gov.uk;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ons.gov.uk.core.Config;
-import com.ons.gov.uk.core.model.CreateJob;
-import com.ons.gov.uk.core.model.DimensionFilter;
-import com.ons.gov.uk.core.model.FileFormat;
+import com.ons.gov.uk.model.CreateJob;
+import com.ons.gov.uk.model.DimensionFilter;
+import com.ons.gov.uk.model.FileFormat;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.json.simple.JSONArray;
@@ -30,7 +29,7 @@ public class JobCreator {
 	RestAssured restAssured = new RestAssured();
 	int loopCounter = 60;
 
-	public String request(String dataSetId, ConcurrentHashMap <String, ArrayList <DimensionValues>> filters) throws JsonProcessingException {
+	public String request(String dataSetId, ConcurrentHashMap <String, ArrayList <DimensionValues>> filters) throws Exception {
 		CreateJob request = new CreateJob();
 		List <DimensionFilter> dimensions = new ArrayList <>();
 		request.setDataSetId(dataSetId);
@@ -46,12 +45,7 @@ public class JobCreator {
 		Set <FileFormat> formats = singleton(FileFormat.CSV);
 		request.setDimensions(dimensions);
 		request.setFileFormats(formats);
-
-		try {
-			System.out.println(new ObjectMapper().writeValueAsString(request));
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
+		System.out.println(new ObjectMapper().writeValueAsString(request));
 		return new ObjectMapper().writeValueAsString(request);
 	}
 
@@ -84,7 +78,6 @@ public class JobCreator {
 		Response response = given().cookies("splash", "y").contentType("application/json").get("/job/" + jobID);
 		System.out.println("from returncsv " + response.asString());
 		String status = ((JSONObject) new JSONParser().parse(response.asString())).get("status").toString();
-		try {
 			if (status.equalsIgnoreCase("Complete")) {
 				JSONArray getFiles = (JSONArray) ((JSONObject) new JSONParser().parse(response.asString())).get("files");
 				for (int i = 0; i < getFiles.size(); i++) {
@@ -103,24 +96,15 @@ public class JobCreator {
 				System.out.println("status is not complete");
 				urlToDownloadFile = waitForURL(jobID);
 			}
-		} catch (Exception ee) {
-			System.out.println(ee.getCause());
-			ee.printStackTrace();
-		}
-
 		return urlToDownloadFile;
 	}
 
-	public String waitForURL(String jobID) {
-		try {
+	public String waitForURL(String jobID) throws Exception {
 			while (loopCounter != 0) {
 				loopCounter--;
 				Thread.sleep(SLEEP_TIMER);
 				return returnCSVUrl(jobID);
-
 			}
-		} catch (Exception ee) {
-		}
 		return null;
 	}
 	public void getFile(String url) throws Exception {
@@ -141,7 +125,7 @@ public class JobCreator {
 			try {
 				fout = new FileOutputStream(csvFile, true);
 			} catch (FileNotFoundException ee) {
-
+				ee.printStackTrace();
 			}
 			byte data[] = new byte[1024];
 			int count;

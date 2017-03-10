@@ -6,7 +6,6 @@ import io.restassured.response.ResponseBody;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.net.URLDecoder;
 
@@ -69,7 +68,6 @@ public class DimensionalAPI {
 
 	public boolean titleExists(String title) throws Exception {
 		boolean exists = false;
-		try {
 			JSONArray jsonObject1 = getItems("items");
 			for (int i = 0; i < jsonObject1.size(); i++) {
 				JSONObject jo = (JSONObject) jsonObject1.get(i);
@@ -78,11 +76,6 @@ public class DimensionalAPI {
 					break;
 				}
 			}
-
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 		return exists;
 	}
 
@@ -94,28 +87,20 @@ public class DimensionalAPI {
 		}
 	}
 
-	public int dataSetTotal() {
+	public int dataSetTotal() throws Exception {
 		int totalDataSets = 0;
-		try {
-			JSONObject jsonObject = (JSONObject) parser.parse(responseString);
-			totalDataSets = Integer.parseInt(jsonObject.get("total").toString());
-		} catch (ParseException ee) {
-			ee.printStackTrace();
-		}
+		JSONObject jsonObject = (JSONObject) parser.parse(responseString);
+		totalDataSets = Integer.parseInt(jsonObject.get("total").toString());
 		return totalDataSets;
 	}
 
-	public String waitForApiToLoad(String title) {
+	public String waitForApiToLoad(String title) throws Exception {
 		int counter = 0;
-		try {
 			while (!titleExists(title) && counter < 10) {
 				Thread.sleep(2000);
 				checkEndPoint();
 				counter++;
 			}
-		} catch (Exception ee) {
-			ee.printStackTrace();
-		}
 		return responseString;
 	}
 

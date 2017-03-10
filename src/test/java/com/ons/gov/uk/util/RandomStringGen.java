@@ -1,4 +1,4 @@
-package com.ons.gov.uk.core.util;
+package com.ons.gov.uk.util;
 
 
 import java.util.Random;
@@ -17,7 +17,9 @@ public class RandomStringGen {
 	}
 
 	public static int getRandomInt(int lengthToBuild) {
-		return random.nextInt(lengthToBuild);
+		int value = 0;
+		value = random.nextInt(lengthToBuild);
+		return value;
 	}
 
 	public static String getRandomLongNumber(int lengthToBuild) {
