@@ -1,10 +1,12 @@
 config:
-    endPoint_real: https://develop.discovery.onsdigital.co.uk/dd/api
-    metadata_editor: https://metadata.publishing.develop.discovery.onsdigital.co.uk
-    fileUploader: https://upload.publishing.develop.discovery.onsdigital.co.uk
-    jobcreator: http://develop.discovery.onsdigital.co.uk/dd/api/jobs
-    file_path: Open-Data-v3_E2E_Tests.csv
-    env: develop
+      base_url: https://develop.discovery.onsdigital.co.uk/dd
+      endPoint_real: https://develop.discovery.onsdigital.co.uk/dd/api
+      metadata_editor: https://metadata.publishing.develop.discovery.onsdigital.co.uk
+      fileUploader: https://upload.publishing.develop.discovery.onsdigital.co.uk
+      jobcreator: http://develop.discovery.onsdigital.co.uk/dd/api/jobs
+      file_path: Open-Data-v3_E2E_Tests.csv
+      env: develop
+      browser: CHROME
   #  file_path: AF001EW_v3_E2E_Tests.csv
 
 

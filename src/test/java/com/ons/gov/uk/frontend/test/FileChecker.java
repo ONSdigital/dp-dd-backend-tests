@@ -1,8 +1,8 @@
 package com.ons.gov.uk.frontend.test;
 
 
+import com.ons.gov.uk.DimensionValues;
 import com.ons.gov.uk.frontend.pages.BasePage;
-import com.ons.gov.uk.util.DimensionValues;
 import org.testng.Assert;
 
 import java.io.*;
@@ -13,18 +13,15 @@ public class FileChecker {
 
 	ArrayList <String[]> linesToRemove = new ArrayList <>();
 	ArrayList <String> searchRegex = new ArrayList <>();
-	boolean exists = false;
 
 	public static void main(String[] args) {
 		BasePage bp = new BasePage();
-		ArrayList <String> selec = new ArrayList <>();
-
-		selec.add("1103 - Manufacture of cider and other fruit wines");
-		selec.add("1200 - Manufacture of tobacco products");
 		ArrayList <String> prod = new ArrayList <>();
-		prod.add("All other income");
-		FileChecker fileChecker = new FileChecker();
-		bp.checkFile(selec, "NACE", true);
+		ArrayList <String> test = new ArrayList <>();
+		prod.add("1103 - Manufacture of cider and other fruit wines");
+		prod.add("1200 - Manufacture of tobacco products");
+		FileChecker ff = new FileChecker();
+		bp.checkFile(prod, "NACE", true);
 	}
 
 	public void getFile(String url, String fileName) throws Exception {
@@ -68,21 +65,6 @@ public class FileChecker {
 
 	}
 
-	public boolean checkForFilter(ArrayList <String> dimFiler, String key, String fileName, boolean hierarchy, ArrayList <String[]> allLines)
-			throws Exception {
-		if (linesToRemove.size() > 0) {
-			linesToRemove.removeAll(allLines);
-		}
-		linesToRemove.clear();
-		boolean exists = false;
-		for (String filter : dimFiler) {
-			searchTerms(hierarchy, filter, key);
-		}
-		Assert.assertTrue(validateFile(allLines), "All the search options do not exist in the filtered file");
-		printMismatch(allLines);
-		return exists;
-	}
-
 	public void printMismatch(ArrayList <String[]> allLines) {
 		if (allLines.size() != linesToRemove.size()) {
 			for (String[] strArr : allLines) {
@@ -94,7 +76,6 @@ public class FileChecker {
 
 		}
 	}
-
 
 	public ArrayList <String> searchTerms(String hierarchy, String code, String key) {
 		String searchTerm = (!hierarchy.equals("")) ?
@@ -111,6 +92,22 @@ public class FileChecker {
 		}
 		boolean exists = validateFile(allLines);
 		Assert.assertTrue(allLines.size() == linesToRemove.size(), "Mismatch between the filter and the downloaded CSV");
+		return exists;
+
+	}
+
+	public boolean checkForFilter(ArrayList <String> dimFiler, String key, String fileName, boolean hierarchy, ArrayList <String[]> allLines)
+			throws Exception {
+		if (linesToRemove.size() > 0) {
+			linesToRemove.removeAll(allLines);
+		}
+		linesToRemove.clear();
+		boolean exists = false;
+		for (String filter : dimFiler) {
+			searchTerms(hierarchy, filter, key);
+		}
+		Assert.assertTrue(validateFile(allLines), "All the search options do not exist in the filtered file");
+		printMismatch(allLines);
 		return exists;
 
 	}

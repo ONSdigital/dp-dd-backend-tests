@@ -13,8 +13,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
 
-import java.io.*;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -122,38 +120,6 @@ public class JobCreator {
 		} catch (Exception ee) {
 		}
 		return null;
-	}
-	public void getFile(String url) throws Exception {
-		String dirname = "download/";
-		File dir = new File(dirname);
-		dir.mkdir();
-		for (File file : dir.listFiles()) {
-			if (file.getName().contains(".csv")) {
-				file.delete();
-			}
-		}
-		File csvFile = new File(dirname + fileName);
-		csvFile.createNewFile();
-		BufferedInputStream in = null;
-		OutputStream fout = null;
-		try {
-			in = new BufferedInputStream(new URL(url).openStream());
-			try {
-				fout = new FileOutputStream(csvFile, true);
-			} catch (FileNotFoundException ee) {
-
-			}
-			byte data[] = new byte[1024];
-			int count;
-			while ((count = in.read(data, 0, 1024)) != -1) {
-				fout.write(data, 0, count);
-			}
-		} finally {
-			if (in != null)
-				in.close();
-			if (fout != null)
-				fout.close();
-		}
 	}
 
 

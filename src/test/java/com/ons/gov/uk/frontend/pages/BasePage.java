@@ -606,9 +606,9 @@ public class BasePage {
 
 	public void checkFile(ArrayList <String> selections, String filter, boolean hierarchy) {
 		try {
-			//		fileChecker.getFile(url, fileName);
-			//		String file = "download/" + fileName;
-			String file = "download/testfile.csv";
+			//	fileChecker.getFile(url, fileName);
+			//	String file = "download/" + fileName;
+			String file = "download/test.csv";
 			CSVReader csvReader = new CSVReader(new FileReader(file));
 			ArrayList <String[]> allLines = (ArrayList <String[]>) csvReader.readAll();
 			if (allLines.size() < 2) {
@@ -665,6 +665,7 @@ public class BasePage {
 			fileName = urlSplit[urlSplit.length - 1];
 		}
 		checkFile(values, filter, hierarchy);
+
 	}
 
 

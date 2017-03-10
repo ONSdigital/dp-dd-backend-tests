@@ -5,6 +5,7 @@ import com.ons.gov.uk.DimensionValues;
 import com.ons.gov.uk.DimensionalAPI;
 import com.ons.gov.uk.JobCreator;
 import com.ons.gov.uk.core.Config;
+import com.ons.gov.uk.frontend.test.FileChecker;
 import com.opencsv.CSVReader;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -25,11 +26,11 @@ public class CSVFilterTest {
 	Config config = new Config();
 	public String originalFile = config.getFilepath();
 	JobCreator jobCreator = new JobCreator();
+	FileChecker fileChecker = new FileChecker();
 	CSVOps csvOps = new CSVOps();
 	HashMap <String, ArrayList <DimensionValues>> dimOptionOriginal;
 	ConcurrentHashMap <String, ArrayList <DimensionValues>> filterForJob = new ConcurrentHashMap <>();
-	ArrayList <String[]> linesToRemove = new ArrayList <>();
-	ArrayList <String> searchRegex = new ArrayList <>();
+
 
 	@BeforeTest
 	public void init() throws Exception {
@@ -48,7 +49,7 @@ public class CSVFilterTest {
 		String getURL = jobCreator.returnCSVUrl(jobID);
 		Assert.assertNotNull(getURL, "********* URL to download filtered CSV file is null. *******");
 		filteredFileName = jobCreator.fileName;
-		jobCreator.getFile(getURL);
+		fileChecker.getFile(getURL, filteredFileName);
 
 	}
 
@@ -57,21 +58,13 @@ public class CSVFilterTest {
 		for (String key : filterForJob.keySet()) {
 			ArrayList <String[]> allLines = (ArrayList <String[]>) new CSVReader(new FileReader("download/" + filteredFileName)).readAll();
 			allLines.remove(0);
-			if (linesToRemove.size() > 0) {
-				linesToRemove.removeAll(allLines);
+			if (fileChecker.getLinesToRemove().size() > 0) {
+				fileChecker.getLinesToRemove().removeAll(allLines);
 			}
-			linesToRemove.clear();
-			checkForFilter(filterForJob.get(key), key, "download/" + filteredFileName, allLines);
-			if (allLines.size() != linesToRemove.size()) {
-				for (String[] strArr : allLines) {
-					for (int index = 0; index < strArr.length; index++) {
-						System.out.print(strArr[index] + ",");
-					}
-					System.out.println();
-				}
+			fileChecker.getLinesToRemove().clear();
+			fileChecker.checkForFilter(filterForJob.get(key), key, "download/" + filteredFileName, allLines);
+			fileChecker.printMismatch(allLines);
 
-			}
-			Assert.assertTrue(allLines.size() == linesToRemove.size(), "Mismatch between the filter and the downloaded CSV");
 		}
 	}
 
@@ -102,7 +95,7 @@ public class CSVFilterTest {
 		String getURL = jobCreator.returnCSVUrl(jobID);
 		Assert.assertNotNull(getURL, "********* URL to download filtered CSV file is null. *******");
 		filteredFileName = jobCreator.fileName;
-		jobCreator.getFile(getURL);
+		fileChecker.getFile(getURL, filteredFileName);
 		ArrayList <String[]> allLines = (ArrayList <String[]>) new CSVReader(new FileReader("download/" + filteredFileName)).readAll();
 		int lines_orig_file = csvOps.returnRows(originalFile) + 1;
 		int lines_downloaded_file = allLines.size();
@@ -130,7 +123,7 @@ public class CSVFilterTest {
 					tempFilter.add(valueFilter);
 				}
 			}
-				filterForJob.put(key, tempFilter);
+			filterForJob.put(key, tempFilter);
 		}
 		return filterForJob;
 	}
@@ -147,39 +140,8 @@ public class CSVFilterTest {
 		}
 	}
 
-	public ArrayList <String> searchTerms(String hierarchy, String code, String key) {
-		String searchTerm = (!hierarchy.equals("")) ?
-				"(.*)" + key + "," + hierarchy + "," + code + "(.*)" : "(.*)" + key + "," + code + "(.*)";
-		searchRegex.add(searchTerm);
-		return searchRegex;
 
-	}
 
-	public boolean checkForFilter(ArrayList <DimensionValues> dimFiler, String key, String fileName, ArrayList <String[]> allLines) throws Exception {
-		boolean exists = false;
-		for (DimensionValues filter : dimFiler) {
-			searchTerms(filter.getHierarchyValue(), filter.getCodeId(), key);
-		}
-		if (allLines.size() > 0) {
-			for (String[] strArr : allLines) {
-				String temp = "";
-				for (int index = 0; index < strArr.length; index++) {
-					temp += strArr[index] + ",";
-				}
 
-				for (String search : searchRegex) {
-					if (temp.matches(search)) {
-						if (!linesToRemove.contains(strArr)) {
-							linesToRemove.add(strArr);
-							exists = true;
-						}
-					}
-
-				}
-			}
-		}
-		return exists;
-
-	}
 
 }

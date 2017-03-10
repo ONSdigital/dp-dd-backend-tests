@@ -201,8 +201,5 @@ public class APIIntegrityTest {
 		return dimKey;
 	}
 
-	public void isUploadComplete(String key) {
-
-	}
 
 }

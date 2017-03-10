@@ -1,4 +1,5 @@
 config:
+  base_url: http://localhost:20000/dd
   fileUploader: http://localhost:20019
   dbloader: http://localhost:20097
   postgres: jdbc:postgresql://localhost:5432/data_discovery
@@ -7,3 +8,4 @@ config:
   jobcreator: http://localhost:20100
   dbloader: http://localhost:20097
   env: local
+  browser: CHROME
