@@ -17,7 +17,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,13 +37,12 @@ public class APIIntegrityTest {
 
 	@BeforeTest
 	public void checkDataSetExists() throws Exception {
-		// If Dataset does not exist, upload it
 		responseFromAPI = dimAPI.checkEndPoint();
 		if (!responseFromAPI.contains(csvFile)) {
 			fileUploader.uploadFile();
-			Thread.sleep(30000);
 			responseFromAPI = dimAPI.waitForApiToLoad(csvFile);
 		}
+
 	}
 
 
@@ -55,15 +53,13 @@ public class APIIntegrityTest {
 
 
 	@Test(groups = {"dimension"}, dependsOnGroups = {"getCSVDimensions"})
-	public void getDimensionsFromAPI() {
+	public void getDimensionsFromAPI() throws Exception {
 		getDimensionUrl();
 		String jsonString = dimAPI.callTheLink(dimUrl);
-		try {
-			dimensions = (ArrayList) mapper.readValue(String.valueOf(jsonString), new TypeReference <List <Dimension>>() {
-			});
-			Assert.assertTrue(dimensions.size() > 0, "****** No Dimensions obtained from API *****");
-		} catch (Exception ee) {
-		}
+		dimensions = (ArrayList) mapper.readValue(String.valueOf(jsonString), new TypeReference <List <Dimension>>() {
+		});
+		checkUploadComplete();
+		Assert.assertTrue(dimensions.size() > 0, "****** No Dimensions obtained from API *****");
 	}
 
 	@Test(groups = {"options"}, dependsOnGroups = {"dimension"})
@@ -85,47 +81,22 @@ public class APIIntegrityTest {
 		}
 	}
 
-	public void getCSVDimensions() {
-		try {
-			Thread.sleep(30000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		try {
-			csvOps.populateDimensionFilters(csvFile);
-		} catch (IOException ee) {
-			ee.printStackTrace();
-		}
+	public void getCSVDimensions() throws Exception {
+		csvOps.populateDimensionFilters(csvFile);
 		dimOptionsCSV = csvOps.getDimOptionsFromCSV();
 	}
 
-	public void getDimensionUrl() {
-		try {
-			Assert.assertTrue(dimAPI.titleExists(csvFile));
-			JSONArray itemsArray = dimAPI.getItems("items");
-			ArrayList <ItemsObj> itemsList = (ArrayList) mapper.readValue(String.valueOf(itemsArray),
-					new TypeReference <List <ItemsObj>>() {
-					});
-			for (ItemsObj item : itemsList) {
-				if (item.getTitle().equals(csvFile)) {
-					dimUrl = item.getDimensionsUrl();
-					break;
-				}
+	public void getDimensionUrl() throws Exception {
+		Assert.assertTrue(dimAPI.titleExists(csvFile));
+		JSONArray itemsArray = dimAPI.getItems("items");
+		ArrayList <ItemsObj> itemsList = (ArrayList) mapper.readValue(String.valueOf(itemsArray),
+				new TypeReference <List <ItemsObj>>() {
+				});
+		for (ItemsObj item : itemsList) {
+			if (item.getTitle().equals(csvFile)) {
+				dimUrl = item.getDimensionsUrl();
+				break;
 			}
-			int sleepCount = 0;
-			Dimension dimension = new Dimension();
-			String keyToChk = getDimWithMoreOptions();
-			String urlToCheck = dimUrl + "/" + keyToChk;
-			System.out.println(urlToCheck);
-			while (dimension.getOptions().size() != dimOptionsCSV.get(keyToChk).size()
-						&& sleepCount < 20) {
-					String jsonString = dimAPI.callTheLink(urlToCheck);
-					dimension = (Dimension) mapper.readValue(String.valueOf(jsonString), new TypeReference <Dimension>() {
-					});
-					Thread.sleep(10000);
-					sleepCount++;
-				}
-			} catch (Exception ee) {
 		}
 	}
 
@@ -188,16 +159,35 @@ public class APIIntegrityTest {
 
 	public String getDimWithMoreOptions() {
 		String dimKey = null;
-		for (int index = 0; index < dimensions.size() - 2; index++) {
-			if (dimOptionsCSV.get(dimensions.get(index)).size() > dimOptionsCSV.get(dimensions.get(index + 1)).size()) {
-				dimKey = dimensions.get(index).getName();
-			} else {
-				dimKey = dimensions.get(index + 1).getName();
+		int size = 0;
+		for (String key : dimOptionsCSV.keySet()) {
+			if (dimOptionsCSV.get(key).size() > size) {
+				size = dimOptionsCSV.get(key).size();
+				dimKey = key;
 			}
-
 		}
+
 		return dimKey;
 	}
 
+	public void checkUploadComplete() throws Exception {
+		int sleepCount = 0;
+		String keyToChk = getDimWithMoreOptions();
+		String urlToCheck = dimUrl + "/" + keyToChk;
+		JSONArray option = getName(urlToCheck, "options");
+		ArrayList <DimensionOption> dimOptions = (ArrayList) mapper.readValue(String.valueOf(option),
+				new TypeReference <List <DimensionOption>>() {
+				});
+		System.out.println(urlToCheck);
+		while (dimOptions.size() != dimOptionsCSV.get(keyToChk).size()
+				&& sleepCount < 20) {
+			String jsonString = dimAPI.callTheLink(urlToCheck);
+			dimOptions = (ArrayList) mapper.readValue(String.valueOf(jsonString),
+					new TypeReference <List <DimensionOption>>() {
+					});
+			Thread.sleep(10000);
+			sleepCount++;
+		}
+	}
 
 }
