@@ -158,7 +158,7 @@ public class MetaDataEditorTest {
 	}
 
 	@Test(groups = "verifymetadata", dependsOnGroups = "updatemetadata", enabled = false)
-	public void verifyMetaDatainAPI() throws Exception {
+	public void verifyMetaDatainAPI(String title) throws Exception {
 		Metadata metaDataValues = null;
 		JSONArray allItems = dimensionalAPI.getItems(dimensionalAPI.checkEndPoint(), "items");
 		List <ItemsObj> itemsList = mapper.readValue(String.valueOf(allItems), new TypeReference <List <ItemsObj>>() {
