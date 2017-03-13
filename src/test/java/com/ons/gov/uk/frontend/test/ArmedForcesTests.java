@@ -81,26 +81,14 @@ public class ArmedForcesTests extends BaseTest {
 	@Test(groups = "age", dependsOnGroups = {"residence"})
 	public void customiseAge() throws Exception {
 		System.out.println("Starting... age");
-		try {
-			optionSelector.optionJourney(armedForces.age_filter);
-		} catch (Exception ee) {
-			ee.printStackTrace();
-			org.testng.Assert.fail();
-		}
+		optionSelector.optionJourney(armedForces.age_filter);
 		System.out.println("customised Age Filter");
 	}
 
 	@Test(groups = "geographyAF", dependsOnGroups = {"age"})
 	public void customiseGeo() throws Exception {
 		System.out.println("Starting... geographyAF");
-		try {
-
-			hierarchySelector.simpleGeoJourney(armedForces.geo_filter, armedForces.geo_search_text, true);
-		} catch (Exception ee) {
-			ee.printStackTrace();
-			org.testng.Assert.fail();
-		}
-
+		hierarchySelector.simpleGeoJourney(armedForces.geo_filter, armedForces.geo_search_text, true);
 		System.out.println("customised Geo");
 	}
 
