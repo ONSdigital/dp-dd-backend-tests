@@ -1,7 +1,7 @@
 package com.ons.gov.uk.frontend.filters;
 
-import com.ons.gov.uk.core.util.RandomStringGen;
 import com.ons.gov.uk.frontend.pages.BasePage;
+import com.ons.gov.uk.util.RandomStringGen;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -104,8 +104,13 @@ public class HierarchySelector extends BasePage {
 		String defaultSelection = getoptionsText(filterText);
 		getCustomiseLink(filterText).click();
 		searchHierarchy(searchStr);
-		ArrayList <String> values_selected = selectRandomChkBox(RandomStringGen.getRandomInt(
-				getAllCheckBoxes().size() - 1));
+		ArrayList <String> values_selected;
+		if (getAllCheckBoxes().size() == 1) {
+			values_selected = selectRandomChkBox(0);
+		} else {
+			values_selected = selectRandomChkBox(RandomStringGen.getRandomInt(
+					getAllCheckBoxes().size() - 1));
+		}
 		click(summarySelector.addMore);
 		browseHierarchy(hier);
 		values_selected.addAll(selectRandomChkBox(RandomStringGen.getRandomInt(

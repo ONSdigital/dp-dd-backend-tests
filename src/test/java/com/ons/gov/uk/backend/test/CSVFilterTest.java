@@ -1,11 +1,11 @@
 package com.ons.gov.uk.backend.test;
 
-import com.ons.gov.uk.CSVOps;
 import com.ons.gov.uk.DimensionValues;
 import com.ons.gov.uk.DimensionalAPI;
-import com.ons.gov.uk.JobCreator;
 import com.ons.gov.uk.core.Config;
 import com.ons.gov.uk.frontend.test.FileChecker;
+import com.ons.gov.uk.util.CSVOps;
+import com.ons.gov.uk.util.RandomStringGen;
 import com.opencsv.CSVReader;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,7 +16,6 @@ import org.testng.annotations.Test;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class CSVFilterTest {
@@ -25,7 +24,7 @@ public class CSVFilterTest {
 	public String filteredFileName = null;
 	Config config = new Config();
 	public String originalFile = config.getFilepath();
-	JobCreator jobCreator = new JobCreator();
+	MetaDataEditorTest.JobCreator jobCreator = new MetaDataEditorTest.JobCreator();
 	FileChecker fileChecker = new FileChecker();
 	CSVOps csvOps = new CSVOps();
 	HashMap <String, ArrayList <DimensionValues>> dimOptionOriginal;
@@ -104,18 +103,16 @@ public class CSVFilterTest {
 	}
 
 
-	public ConcurrentHashMap <String, ArrayList <DimensionValues>> setUpFilters(HashMap <String, ArrayList <DimensionValues>> dimOptions, boolean noFilter) {
+	public ConcurrentHashMap <String, ArrayList <DimensionValues>> setUpFilters(HashMap <String, ArrayList <DimensionValues>> dimOptions, boolean noFilter)
+			throws Exception {
 
 		for (String key : dimOptions.keySet()) {
 			int randomKey = 0;
 			int randindex = 0;
 			ArrayList <DimensionValues> tempFilter = new ArrayList <>();
-			try {
-				randomKey = new Random().nextInt(dimOptions.get(key).size() - 1);
-			} catch (IllegalArgumentException ee) {
-			}
+			randomKey = RandomStringGen.getRandomInt(dimOptions.get(key).size() - 1);
 			if (randomKey > 0) {
-				randindex = new Random().nextInt(randomKey);
+				randindex = RandomStringGen.getRandomInt(randomKey);
 			}
 			for (int rnd = 0; rnd <= randindex; rnd++) {
 				DimensionValues valueFilter = dimOptions.get(key).get(rnd);

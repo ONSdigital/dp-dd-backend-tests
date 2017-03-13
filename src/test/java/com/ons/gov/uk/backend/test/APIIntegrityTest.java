@@ -3,18 +3,18 @@ package com.ons.gov.uk.backend.test;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ons.gov.uk.CSVOps;
 import com.ons.gov.uk.DimensionValues;
 import com.ons.gov.uk.DimensionalAPI;
-import com.ons.gov.uk.FileUploader;
 import com.ons.gov.uk.core.Config;
-import com.ons.gov.uk.core.model.Dimension;
-import com.ons.gov.uk.core.model.DimensionOption;
-import com.ons.gov.uk.core.model.ItemsObj;
+import com.ons.gov.uk.model.Dimension;
+import com.ons.gov.uk.model.DimensionOption;
+import com.ons.gov.uk.model.ItemsObj;
+import com.ons.gov.uk.util.CSVOps;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -33,9 +33,10 @@ public class APIIntegrityTest {
 	HashMap <String, ArrayList <DimensionValues>> optionsFromAPI = new HashMap <>();
 	ObjectMapper mapper = new ObjectMapper();
 	ArrayList <Dimension> dimensions = new ArrayList <>();
-	FileUploader fileUploader = new FileUploader();
+	MetaDataEditorTest.FileUploader fileUploader = new MetaDataEditorTest.FileUploader();
 
-	@Test(groups = {"verifyDataSetExists"})
+
+	@BeforeTest
 	public void checkDataSetExists() throws Exception {
 		// If Dataset does not exist, upload it
 		responseFromAPI = dimAPI.checkEndPoint();
@@ -47,7 +48,7 @@ public class APIIntegrityTest {
 	}
 
 
-	@Test(groups = {"getCSVDimensions"}, dependsOnGroups = {"verifyDataSetExists"})
+	@Test(groups = {"getCSVDimensions"})
 	public void getDimensionFromCSV() throws Exception {
 		getCSVDimensions();
 	}
@@ -151,13 +152,10 @@ public class APIIntegrityTest {
 		return options;
 	}
 
-	public JSONArray getName(String url, String name) {
+	public JSONArray getName(String url, String name) throws Exception {
 		JSONArray value = null;
-		try {
 			String jsonString = dimAPI.callTheLink(url);
-			value = (JSONArray) ((JSONObject) new JSONParser().parse(jsonString)).get(name);
-		} catch (Exception ee) {
-		}
+		value = (JSONArray) ((JSONObject) new JSONParser().parse(jsonString)).get(name);
 		return value;
 	}
 

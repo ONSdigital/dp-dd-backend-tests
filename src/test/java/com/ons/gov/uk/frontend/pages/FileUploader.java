@@ -10,7 +10,7 @@ public class FileUploader extends BasePage {
 	private By upload = By.name("submit");
 
 	public void uploadFile(String title) {
-		File fileToUpload = new File("src/main/resources/csvs/" + title);
+		File fileToUpload = new File("src/test/resources/csvs/" + title);
 		String filePath = fileToUpload.getAbsolutePath();
 		System.out.println("File to be uploaded ***  " + filePath);
 		navigateToUrl(getConfig().getFileuploader());

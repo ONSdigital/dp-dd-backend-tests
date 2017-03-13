@@ -18,8 +18,7 @@ public class APITest {
 	}
 
 	@Test
-	public void assertNotNullFields() {
-		try {
+	public void assertNotNullFields() throws Exception {
 			JSONObject jsonObject = (JSONObject) parser.parse(responseFromAPI);
 			String first = jsonObject.get("first").toString();
 			String last = jsonObject.get("last").toString();
@@ -40,14 +39,10 @@ public class APITest {
 			Assert.assertNotNull(startIndex, message("startIndex", startIndex));
 
 			//		System.out.println(first +"****"+last+"****"+  page+"****"+count+"****"+total+"****"+totalPages+"****"+itemsPerPage+"****"+startIndex);
-		} catch (Exception ee) {
-			ee.printStackTrace();
-		}
 	}
 
 	@Test
-	public void assertDataSetCount() {
-		try {
+	public void assertDataSetCount() throws Exception {
 			JSONObject jsonObject = (JSONObject) parser.parse(responseFromAPI);
 			JSONArray jsonObject1 = (JSONArray) jsonObject.get("items");
 			String count = jsonObject.get("count").toString();
@@ -57,9 +52,7 @@ public class APITest {
 					numberOfItems + "\n" + "Value of Count :" + count);
 			Assert.assertEquals(numberOfItems, Integer.parseInt(total), "Number of datasets :" +
 					numberOfItems + "\n" + "Value of Total :" + total);
-		} catch (Exception ee) {
-			ee.printStackTrace();
-		}
+
 	}
 
 

@@ -3,9 +3,9 @@ package com.ons.gov.uk.frontend.pages;
 
 import com.ons.gov.uk.core.Config;
 import com.ons.gov.uk.core.TestContext;
-import com.ons.gov.uk.core.util.Do;
-import com.ons.gov.uk.core.util.Helper;
 import com.ons.gov.uk.frontend.test.FileChecker;
+import com.ons.gov.uk.util.Do;
+import com.ons.gov.uk.util.Helper;
 import com.ons.gov.uk.util.PropertyReader;
 import com.opencsv.CSVReader;
 import org.apache.commons.lang3.StringUtils;

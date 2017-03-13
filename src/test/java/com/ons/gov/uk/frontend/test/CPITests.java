@@ -1,11 +1,11 @@
 package com.ons.gov.uk.frontend.test;
 
 
-import com.ons.gov.uk.core.util.Helper;
 import com.ons.gov.uk.frontend.filters.HierarchySelector;
 import com.ons.gov.uk.frontend.filters.OptionSelector;
 import com.ons.gov.uk.frontend.filters.SummarySelector;
 import com.ons.gov.uk.frontend.pages.CPI;
+import com.ons.gov.uk.util.Helper;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
