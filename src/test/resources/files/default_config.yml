@@ -7,7 +7,7 @@ config:
   file_path: Open-Data-v3_E2E_Tests.csv
   env: develop
   browser: CHROME
-  #  file_path: AF001EW_v3_E2E_Tests.csv
+  #
 
 
 

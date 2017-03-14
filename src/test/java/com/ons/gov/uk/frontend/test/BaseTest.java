@@ -1,16 +1,17 @@
 package com.ons.gov.uk.frontend.test;
 
+import com.ons.gov.uk.DimensionalAPI;
 import com.ons.gov.uk.MetaDataSetUp;
 import com.ons.gov.uk.core.Config;
 import com.ons.gov.uk.frontend.pages.BasePage;
 import org.openqa.selenium.By;
-import org.testng.annotations.BeforeTest;
 
 
 public class BaseTest {
 	BasePage basePage = new BasePage();
 	Config config = new Config();
 	MetaDataSetUp metaDataSetUp = new MetaDataSetUp();
+	DimensionalAPI dimensionalAPI = new DimensionalAPI();
 
 	public void openPage(By dataSet) {
 		basePage.navigateToUrl(config.getBaseURL());
@@ -27,9 +28,28 @@ public class BaseTest {
 		basePage.switchToLatestWindow();
 	}
 
-	@BeforeTest
+//	public boolean checkDSExists(String title, String csvFileName){
+//		responseFromAPI = dimensionalAPI.checkEndPoint();
+//
+//	}
+//
+//	public void checkDataSetExists() throws Exception {
+//
+//		if (!responseFromAPI.contains(csvFile)) {
+//			fileUploader.uploadFile();
+//			responseFromAPI = dimAPI.waitForApiToLoad(csvFile);
+//		}
+//
+//	}
+
+
 	public void setMetaDataSetUp() {
 
 	}
+
+	public void upLoadFile() {
+
+	}
+
 
 }

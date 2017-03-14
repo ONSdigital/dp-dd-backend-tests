@@ -18,6 +18,7 @@ public class AnnualBusinessSurvey extends BaseTest {
 	public String uk_Business_value = basePage.getTextFromProperty("uk_business_value_filter_text");
 	public String year = basePage.getTextFromProperty("year_filter_text");
 	public String searchKey1 = basePage.getTextFromProperty("abs_searchkey_text");
+	public String annual_biz_dataresource = basePage.getTextFromProperty("annual_biz_survey_dataresource");
 
 	ArrayList <WebElement> selectedChkBox = new ArrayList <>();
 	HierarchySelector hierarchySelector = new HierarchySelector();

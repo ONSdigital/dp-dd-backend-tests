@@ -9,3 +9,4 @@ config:
   dbloader: http://localhost:20097
   env: local
   browser: CHROME
+  file_path: AF001EW_v3_E2E_Tests.csv

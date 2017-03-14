@@ -18,6 +18,7 @@ public class CPITests extends BaseTest {
 	public String prodcom = basePage.getTextFromProperty("prodcom_filter_text");
 	public String searchKey1 = basePage.getTextFromProperty("spl_agg_searchkey_text");
 	public By cpi_link = basePage.getElementLocator("cpi_linkText");
+	public String cpi_dataresource = basePage.getTextFromProperty("open_data_dataresource");
 
 	CPI cpi = new CPI();
 	String selectedOption = null;
