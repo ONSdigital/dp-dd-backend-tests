@@ -13,11 +13,13 @@ import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
 
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.zip.GZIPInputStream;
 
 import static io.restassured.RestAssured.given;
 import static java.util.Collections.singleton;
@@ -121,7 +123,12 @@ public class JobCreator {
 		BufferedInputStream in = null;
 		OutputStream fout = null;
 		try {
-			in = new BufferedInputStream(new URL(url).openStream());
+			HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+			InputStream inputStream = connection.getInputStream();
+			if ("gzip".equalsIgnoreCase(connection.getContentEncoding())) {
+				inputStream = new GZIPInputStream(inputStream);
+			}
+			in = new BufferedInputStream(inputStream);
 			try {
 				fout = new FileOutputStream(csvFile, true);
 			} catch (FileNotFoundException ee) {
