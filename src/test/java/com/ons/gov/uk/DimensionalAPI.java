@@ -34,10 +34,10 @@ public class DimensionalAPI {
 		return responseString;
 	}
 
-	public String checkEndPoint(String endPoint) {
+	public String checkEndPoint(String param) {
 		RestAssured.urlEncodingEnabled = true;
-		RestAssured.baseURI = endPoint;
-		responseBody = given().cookies("splash", "y").expect().statusCode(200).when().get("/versions").body();
+		RestAssured.baseURI = config.getEndPointReal();
+		responseBody = given().cookies("splash", "y").expect().statusCode(200).when().get("/versions?" + param).body();
 		responseString = responseBody.asString();
 		return responseString;
 	}

@@ -14,7 +14,7 @@ public class APITest {
 	String responseFromAPI = null;
 
 	public APITest() throws Exception {
-		responseFromAPI = dimensionalAPI.checkEndPoint();
+		responseFromAPI = dimensionalAPI.checkEndPoint("size=100");
 	}
 
 	@Test
