@@ -6,8 +6,10 @@ import com.ons.gov.uk.frontend.pages.BasePage;
 import org.testng.Assert;
 
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.zip.GZIPInputStream;
 
 public class FileChecker {
 
@@ -38,11 +40,16 @@ public class FileChecker {
 		BufferedInputStream in = null;
 		OutputStream fout = null;
 		try {
-			in = new BufferedInputStream(new URL(url).openStream());
+			HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+			InputStream inputStream = connection.getInputStream();
+			if ("gzip".equalsIgnoreCase(connection.getContentEncoding())) {
+				inputStream = new GZIPInputStream(inputStream);
+			}
+			in = new BufferedInputStream(inputStream);
 			try {
 				fout = new FileOutputStream(csvFile, true);
 			} catch (FileNotFoundException ee) {
-
+				ee.printStackTrace();
 			}
 			byte data[] = new byte[1024];
 			int count;
