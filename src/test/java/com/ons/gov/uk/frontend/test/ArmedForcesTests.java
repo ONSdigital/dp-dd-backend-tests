@@ -4,6 +4,7 @@ import com.ons.gov.uk.frontend.filters.HierarchySelector;
 import com.ons.gov.uk.frontend.filters.OptionSelector;
 import com.ons.gov.uk.frontend.filters.SummarySelector;
 import com.ons.gov.uk.frontend.pages.ArmedForces;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -34,6 +35,18 @@ public class ArmedForcesTests extends BaseTest {
 	ArrayList <String> sex = new ArrayList <>();
 	String armedForcesDS = null;
 
+	@BeforeTest
+	public void init() throws Exception {
+		try {
+			if (!config.getEnv().equals("develop")) {
+				checkAndUploadFile(armedForces.armedForces_dataresource);
+				checkAndCreateDataResource(armedForces.armedForces_dataresource);
+			}
+		} catch (Exception ee) {
+			System.out.println("Armed Forces file not uploaded. As this is running on develop.");
+		}
+
+	}
 
 	@Test(groups = {"downloadCompleteAF"})
 	public void downloadCompleteDS() throws Exception {

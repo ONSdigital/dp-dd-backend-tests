@@ -19,6 +19,7 @@ public class Config {
 	private String browser;
 	private String baseURL;
 	private boolean stub = true;
+	private String env;
 
 	public Config(){
 		try {
@@ -75,6 +76,9 @@ public class Config {
 		if (config.containsKey("metadata_editor")) {
 			metadataEditor = (String) config.get("metadata_editor");
 		}
+		if (config.containsKey("env")) {
+			env = (String) config.get("env");
+		}
 	}
 
 	public void overrideConfigFromEnvironmentVariables() {
@@ -101,6 +105,10 @@ public class Config {
 		String browser_value = Helper.getSetting("browser");
 		if (browser_value != null) {
 			browser = browser_value;
+		}
+		String env_value = Helper.getSetting("env");
+		if (env_value != null) {
+			env = env_value;
 		}
 
 	}
@@ -154,6 +162,10 @@ public class Config {
 
 	public String getBrowser() {
 		return browser;
+	}
+
+	public String getEnv() {
+		return env;
 	}
 
 

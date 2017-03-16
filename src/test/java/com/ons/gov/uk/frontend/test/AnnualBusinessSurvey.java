@@ -6,6 +6,7 @@ import com.ons.gov.uk.frontend.filters.SummarySelector;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class AnnualBusinessSurvey extends BaseTest {
 	public String uk_Business_value = basePage.getTextFromProperty("uk_business_value_filter_text");
 	public String year = basePage.getTextFromProperty("year_filter_text");
 	public String searchKey1 = basePage.getTextFromProperty("abs_searchkey_text");
-	public String annual_biz_dataresource = basePage.getTextFromProperty("annual_biz_survey_dataresource");
+	public String annual_biz_dataresource = basePage.getTextFromProperty("annual_biz_survey_file");
 
 	ArrayList <WebElement> selectedChkBox = new ArrayList <>();
 	HierarchySelector hierarchySelector = new HierarchySelector();
@@ -28,6 +29,18 @@ public class AnnualBusinessSurvey extends BaseTest {
 	ArrayList <String> ukBizVal = new ArrayList <>();
 	ArrayList <String> selectedSicCodes = new ArrayList <>();
 	ArrayList <String> selectedBizValues = new ArrayList <>();
+
+	@BeforeTest
+	public void init() throws Exception {
+		try {
+			if (!config.getEnv().equals("develop")) {
+				checkAndUploadFile(annual_biz_dataresource);
+				checkAndCreateDataResource(annual_biz_dataresource);
+			}
+		} catch (Exception ee) {
+			System.out.println("Annual Biz Survey file not uploaded. As this is running on develop.");
+		}
+	}
 
 	@Test(groups = {"downloadCompleteabs"})
 	public void downloadCompleteDS() throws Exception {

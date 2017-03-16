@@ -185,9 +185,9 @@ public class MetaDataEditorTest {
 		private By upload = By.name("submit");
 
 
-		public void uploadFile() {
+		public void uploadFile(String originalFile) {
 
-			File fileToUpload = new File("src/test/resources/csvs/" + new Config().getFilepath());
+			File fileToUpload = new File("src/test/resources/csvs/" + originalFile);
 			String filePath = fileToUpload.getAbsolutePath();
 			System.out.println("File to be uploaded ***  " + filePath);
 			getDriver().get(new Config().getFileuploader());

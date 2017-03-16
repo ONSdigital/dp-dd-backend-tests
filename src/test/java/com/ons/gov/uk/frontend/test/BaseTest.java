@@ -2,8 +2,10 @@ package com.ons.gov.uk.frontend.test;
 
 import com.ons.gov.uk.DimensionalAPI;
 import com.ons.gov.uk.MetaDataSetUp;
+import com.ons.gov.uk.backend.test.APIIntegrityTest;
 import com.ons.gov.uk.core.Config;
 import com.ons.gov.uk.frontend.pages.BasePage;
+import com.ons.gov.uk.frontend.pages.FileUploader;
 import org.openqa.selenium.By;
 
 
@@ -12,6 +14,8 @@ public class BaseTest {
 	Config config = new Config();
 	MetaDataSetUp metaDataSetUp = new MetaDataSetUp();
 	DimensionalAPI dimensionalAPI = new DimensionalAPI();
+	FileUploader fileUploader = new FileUploader();
+	APIIntegrityTest apiIntegrityTest = new APIIntegrityTest();
 
 	public void openPage(By dataSet) {
 		basePage.navigateToUrl(config.getBaseURL());
@@ -28,27 +32,25 @@ public class BaseTest {
 		basePage.switchToLatestWindow();
 	}
 
-//	public boolean checkDSExists(String title, String csvFileName){
-//		responseFromAPI = dimensionalAPI.checkEndPoint();
-//
-//	}
-//
-//	public void checkDataSetExists() throws Exception {
-//
-//		if (!responseFromAPI.contains(csvFile)) {
-//			fileUploader.uploadFile();
-//			responseFromAPI = dimAPI.waitForApiToLoad(csvFile);
-//		}
-//
-//	}
-
-
-	public void setMetaDataSetUp() {
-
+	public void checkAndCreateDataResource(String filename) throws Exception {
+		if (!config.getEnv().equals("develop")) {
+			String dataResName = "Test_" + filename;
+			boolean dataResMapped = false;
+			boolean exists = metaDataSetUp.doesDataResourceExist(dataResName);
+			if (!exists) {
+				metaDataSetUp.createDataResource(dataResName, filename);
+			}
+			dataResMapped = metaDataSetUp.isTheMetaDataMapped(filename);
+			if (!dataResMapped) {
+				metaDataSetUp.updateMetaData(filename, dataResName);
+			}
+		}
 	}
 
-	public void upLoadFile() {
-
+	public void checkAndUploadFile(String filename) throws Exception {
+		if (!config.getEnv().equals("develop")) {
+			apiIntegrityTest.checkDataSetExists();
+		}
 	}
 
 

@@ -39,15 +39,15 @@ public class MetaDataSetUp {
 
 	public boolean doesDataResourceExist(String dataResName) throws Exception {
 		boolean dataResourceExists = false;
-		String service = config.getMetadataEditor() + "/metadatas";
+		String service = config.getMetadataEditor() + "/dataResources";
 		ResponseBody responseBody = given().cookies("splash", "y").contentType("application/json")
 				.expect().statusCode(200).when().get(service).body();
-		ArrayList <MetaDataEditorModel> metaDataEditorModels = (ArrayList) mapper.readValue(String.valueOf(responseBody.asString()),
-				new TypeReference <List <MetaDataEditorModel>>() {
+		ArrayList <DataResource> dataResourceArrayList = (ArrayList) mapper.readValue(String.valueOf(responseBody.asString()),
+				new TypeReference <List <DataResource>>() {
 				});
 
-		for (MetaDataEditorModel metadata : metaDataEditorModels) {
-			if (metadata.getDataResource().equalsIgnoreCase(dataResName)) {
+		for (DataResource dataResource : dataResourceArrayList) {
+			if (dataResource.getDataResourceID().equalsIgnoreCase(dataResName)) {
 				dataResourceExists = true;
 				break;
 			}
@@ -60,7 +60,7 @@ public class MetaDataSetUp {
 		RestAssured.baseURI = config.getMetadataEditor();
 		dataResource.setDataResourceID(dataResName);
 		dataResource.setTitle(title);
-		getJsonMetaData(desc);
+		getJsonMetaData("Data Resource :" + dataResName + " Title " + title);
 		dataResource.setMetadata(jsonMetaData);
 		ResponseBody responseBody = given().cookies("splash", "y").contentType("application/json").accept("application/json")
 				.body(mapper.writeValueAsString(dataResource)).post("/dataResource");
@@ -80,30 +80,36 @@ public class MetaDataSetUp {
 		List <ItemsObj> itemsList = mapper.readValue(String.valueOf(allItems), new TypeReference <List <ItemsObj>>() {
 		});
 		for (ItemsObj item : itemsList) {
-			if (item.getTitle().equalsIgnoreCase(title)) {
-				metadataMapped = true;
-				break;
+			Metadata metadata = item.getMetadata();
+			try {
+				if (metadata.getDescription().contains(title)) {
+					metadataMapped = true;
+					break;
+				}
+			} catch (Exception ee) {
+				System.out.println("Metadata is blank. Not mapped");
 			}
 		}
 		return metadataMapped;
 	}
 
-	public void updateMetaData(String title, String csvFileName) throws Exception {
+	public void updateMetaData(String csvFileName, String dataResName) throws Exception {
 		DimensionalAPI dimensionalAPI = new DimensionalAPI();
 		String datasetId = null;
 		JSONArray allItems = dimensionalAPI.getItems(dimensionalAPI.checkEndPoint(), "items");
 		List <ItemsObj> itemsList = mapper.readValue(String.valueOf(allItems), new TypeReference <List <ItemsObj>>() {
 		});
 		for (ItemsObj item : itemsList) {
-			if (item.getTitle().equalsIgnoreCase(csvFileName)) {
+			if (item.getTitle().contains(csvFileName)) {
 				datasetId = item.getId();
 				break;
 			}
 		}
 		DataResource dataResource = new DataResource();
-		dataResource.setTitle(title);
-		getJsonMetaData(title);
-		MetaDataEditorModel datasetMetadata = datasetMetadata(datasetId, "1", dataResource, "1", jsonMetaData, "2017");
+		dataResource.setTitle(csvFileName);
+		dataResource.setDataResourceID(dataResName);
+		getJsonMetaData(csvFileName);
+		MetaDataEditorModel datasetMetadata = datasetMetadata(datasetId, csvFileName, "1", dataResource, "1", jsonMetaData, "2017");
 		String service = config.getMetadataEditor() + "/metadata/" + datasetId;
 		ResponseBody responseBody = given().cookies("splash", "y").accept("application/json")
 				.contentType("application/json").body(mapper.writeValueAsString(datasetMetadata))
@@ -115,7 +121,7 @@ public class MetaDataSetUp {
 				+ responseBody.asString());
 	}
 
-	public MetaDataEditorModel datasetMetadata(String datasetId, String majorVersion, DataResource dataResource, String minorVersion, String jsonMetaData,
+	public MetaDataEditorModel datasetMetadata(String datasetId, String title, String majorVersion, DataResource dataResource, String minorVersion, String jsonMetaData,
 	                                           String majorLabel) {
 		MetaDataEditorModel datasetMetadata = new MetaDataEditorModel();
 		datasetMetadata.setDatasetId(datasetId);
@@ -124,6 +130,7 @@ public class MetaDataSetUp {
 		datasetMetadata.setJsonMetadata(jsonMetaData);
 		datasetMetadata.setDataResource(dataResource.getDataResourceID());
 		datasetMetadata.setMajorLabel(majorLabel);
+		datasetMetadata.setTitle(title);
 		return datasetMetadata;
 	}
 

@@ -2,10 +2,7 @@ package com.ons.gov.uk.backend.test;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ons.gov.uk.DimensionValues;
-import com.ons.gov.uk.DimensionalAPI;
-import com.ons.gov.uk.core.Config;
 import com.ons.gov.uk.model.Dimension;
 import com.ons.gov.uk.model.DimensionOption;
 import com.ons.gov.uk.model.ItemsObj;
@@ -21,25 +18,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class APIIntegrityTest {
-	DimensionalAPI dimAPI = new DimensionalAPI();
-	JSONParser parser = new JSONParser();
-	String responseFromAPI = null;
-	String csvFile = new Config().getFilepath();
+public class APIIntegrityTest extends TestSetup {
+
+	String csvFile = config.getFilepath();
+	String originalFile = config.getFilepath();
 	String dimUrl = null;
 	CSVOps csvOps = new CSVOps();
 	HashMap <String, ArrayList <DimensionValues>> dimOptionsCSV;
 	HashMap <String, ArrayList <DimensionValues>> optionsFromAPI = new HashMap <>();
-	ObjectMapper mapper = new ObjectMapper();
 	ArrayList <Dimension> dimensions = new ArrayList <>();
 	MetaDataEditorTest.FileUploader fileUploader = new MetaDataEditorTest.FileUploader();
 
 
 	@BeforeTest
 	public void checkDataSetExists() throws Exception {
+		csvFile = csvFile.split(".csv")[0];
 		responseFromAPI = dimAPI.checkEndPoint();
 		if (!responseFromAPI.contains(csvFile)) {
-			fileUploader.uploadFile();
+			fileUploader.uploadFile(originalFile);
 			responseFromAPI = dimAPI.waitForApiToLoad(csvFile);
 		}
 
@@ -82,7 +78,7 @@ public class APIIntegrityTest {
 	}
 
 	public void getCSVDimensions() throws Exception {
-		csvOps.populateDimensionFilters(csvFile);
+		csvOps.populateDimensionFilters(config.getFilepath());
 		dimOptionsCSV = csvOps.getDimOptionsFromCSV();
 	}
 
@@ -93,7 +89,7 @@ public class APIIntegrityTest {
 				new TypeReference <List <ItemsObj>>() {
 				});
 		for (ItemsObj item : itemsList) {
-			if (item.getTitle().equals(csvFile)) {
+			if (item.getTitle().contains(csvFile)) {
 				dimUrl = item.getDimensionsUrl();
 				break;
 			}

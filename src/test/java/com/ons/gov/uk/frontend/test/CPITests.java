@@ -8,6 +8,7 @@ import com.ons.gov.uk.frontend.pages.CPI;
 import com.ons.gov.uk.util.Helper;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class CPITests extends BaseTest {
 	public String prodcom = basePage.getTextFromProperty("prodcom_filter_text");
 	public String searchKey1 = basePage.getTextFromProperty("spl_agg_searchkey_text");
 	public By cpi_link = basePage.getElementLocator("cpi_linkText");
-	public String cpi_dataresource = basePage.getTextFromProperty("open_data_dataresource");
+	public String cpi_dataresource = basePage.getTextFromProperty("open_data_file");
 
 	CPI cpi = new CPI();
 	String selectedOption = null;
@@ -31,6 +32,17 @@ public class CPITests extends BaseTest {
 	ArrayList <String> selected_spl_agg = null;
 	ArrayList <String> selectedProdcom = null;
 
+	@BeforeTest
+	public void init() throws Exception {
+		try {
+			if (!config.getEnv().equals("develop")) {
+				checkAndUploadFile(cpi_dataresource);
+				checkAndCreateDataResource(cpi_dataresource);
+			}
+		} catch (Exception ee) {
+			System.out.println("CPI File not uploaded. As this is running on develop.");
+		}
+	}
 
 	@Test(groups = {"downloadCompletecpi"})
 	public void downloadCompDS() throws Exception {

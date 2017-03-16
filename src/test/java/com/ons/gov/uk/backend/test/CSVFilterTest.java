@@ -7,8 +7,6 @@ import com.ons.gov.uk.frontend.test.FileChecker;
 import com.ons.gov.uk.util.CSVOps;
 import com.ons.gov.uk.util.RandomStringGen;
 import com.opencsv.CSVReader;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -29,12 +27,13 @@ public class CSVFilterTest {
 	CSVOps csvOps = new CSVOps();
 	HashMap <String, ArrayList <DimensionValues>> dimOptionOriginal;
 	ConcurrentHashMap <String, ArrayList <DimensionValues>> filterForJob = new ConcurrentHashMap <>();
-
+	DimensionalAPI dimensionalAPI = new DimensionalAPI();
 
 	@BeforeTest
 	public void init() throws Exception {
-		setDatasetid();
-		csvOps.populateDimensionFilters(originalFile);
+		originalFile = originalFile.split(".csv")[0];
+		datasetid = dimensionalAPI.getDatasetid(originalFile);
+		csvOps.populateDimensionFilters(config.getFilepath());
 		dimOptionOriginal = csvOps.dimAndOptions;
 		setUpFilters(dimOptionOriginal, false);
 	}
@@ -96,7 +95,7 @@ public class CSVFilterTest {
 		filteredFileName = jobCreator.fileName;
 		fileChecker.getFile(getURL, filteredFileName);
 		ArrayList <String[]> allLines = (ArrayList <String[]>) new CSVReader(new FileReader("download/" + filteredFileName)).readAll();
-		int lines_orig_file = csvOps.returnRows(originalFile) + 1;
+		int lines_orig_file = csvOps.returnRows(config.getFilepath()) + 1;
 		int lines_downloaded_file = allLines.size();
 		Assert.assertTrue(lines_orig_file == lines_downloaded_file, "number of lines in the original file : " + lines_orig_file
 				+ "\nnumber of lines in the downloaded file : " + lines_downloaded_file);
@@ -123,18 +122,6 @@ public class CSVFilterTest {
 			filterForJob.put(key, tempFilter);
 		}
 		return filterForJob;
-	}
-
-	public void setDatasetid() throws Exception {
-		DimensionalAPI api = new DimensionalAPI();
-		JSONArray itemsArray = api.getItems("items");
-		for (int i = 0; i < itemsArray.size(); i++) {
-			JSONObject jo = (JSONObject) itemsArray.get(i);
-			if (jo.get("title").equals(config.getFilepath())) {
-				datasetid = jo.get("id").toString();
-				break;
-			}
-		}
 	}
 
 
