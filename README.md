@@ -6,29 +6,64 @@ To clone the tests:
 ````
 git clone https://github.com/ONSdigital/dp-dd-backend-test 
 ````
+Contains API Tests and End to End UI tests
 
-End to End tests that tests the following:
-1. Upload the dataset from the csvs folder if the Dataset is not in the API
-2. Compares the 'Dimensions' and 'Filter Options' from the CSV with those in the API
-3. Creates a JSON for filtering the dataset by using the values from the CSV
-4. Sends the request to the job creator
-5. Validates the filtered file that it contains only the filter options
+API Tests: <File Upload-> CSV Splitter -> Database Loader-> Metadata Api>
+1. Checks whether the dataset already exists
+2. If the dataset does not exist, uploads the dataset from the CSV folder in the project
+3. Reads the dimensions and options in the CSV
+4. Compares the dimension and options in the CSV with that in the API
 
-On Local: runs with 'Open-data-v3_Local.csv'
-On Develop: runs with 'Open-data-v3_E2E_Tests.csv' & AF001EW_E2E_Tests.csv
+Filter Tests: <Job Creator-> CSV Filter ->CSV Transformer [gzip file format]>
+1. Gets the Dimensions and options from the CSV
+2. Randomly picks up few filter options from the dimensions and options
+3. Creates a filter from those random filter options
+4. Sends the JSON request of the filter to the Job Creator
+5. Gets the Job ID
+6. Pings for the job status every 500 seconds for the next 60 seconds
+7. Fails if there is a timeout
+8. If the response is a success, downloads the file
+9. Validates the filtered file for all the filtered options
 
-Pre-requisites
-==============
-Running it local:
+The test runs for these files: 'Open-data-v3_E2E_Tests.csv' & AF001EW_E2E_Tests.csv
 
-Have all the micro services running locally
+To run on local
+Ensure that all the micro services, Kafka topics are registered and running
 
 ````
 ./run_local.sh
 ````
 
-Running it pointing to the develop env
-
+To run on develop environment
 ````
 ./run_develop.sh
 ````
+
+
+End to End UI Tests:
+
+On local & develop
+1. Checks for the dataset in the environment
+2. If the dataset does not exist, uploads the dataset
+3. Metadata Editor Tests:
+    a. Checks for the dataresource. If it is not available creates it
+    b. If the dataresource already exists, checks whether it is mapped to the dataset
+    c. Maps the dataresource to the dataset if not mapped
+4. Opens the base url and selects the title it has created while creating/mapping the dataresource
+5. Downloads the complete dataset and compares the number of lines with the original file in the CSV folder
+6. Filters using the customise options, downloads the file to a temp location
+7. Validates the filtered file for all the filtered options
+   
+
+To run on local
+Ensure that all the backend and frontend services are running
+Test the backend services are working by following the instructions for the API Tests
+
+````
+./run_e2etests_local.sh
+````
+
+To run on develop environment
+````
+./run_e2etests_develop.sh
+````   
