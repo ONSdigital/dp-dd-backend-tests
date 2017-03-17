@@ -61,12 +61,12 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.0.1</version>
+            <version>3.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-server</artifactId>
-            <version>3.0.1</version>
+            <version>3.3.1</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -85,52 +85,111 @@
             <version>2.6.2</version>
         </dependency>
     </dependencies>
-    <!--<profiles>-->
-    <!--<profile>-->
-    <!--<id>BackEnd-OpenData</id>-->
-    <!--<build>-->
-    <!--<plugins>-->
-    <!--<plugin>-->
-    <!--<groupId>org.apache.maven.plugins</groupId>-->
-    <!--<artifactId>maven-surefire-plugin</artifactId>-->
-    <!--<version>2.19.1</version>-->
-    <!--<configuration>-->
-    <!--<suiteXmlFiles>-->
-    <!--<suiteXmlFile>src/test/resources/backend/TestNG.xml</suiteXmlFile>-->
-    <!--</suiteXmlFiles>-->
-    <!--<properties>-->
-    <!--<property>-->
-    <!--<name>filename</name>-->
-    <!--<value>Open-Data-v3_E2E_Tests.csv</value>-->
-    <!--</property>-->
-    <!--</properties>-->
-    <!--</configuration>-->
-    <!--</plugin>-->
-    <!--</plugins>-->
-    <!--</build>-->
-    <!--</profile>-->
-    <!--<profile>-->
-    <!--<id>BackEnd-AF001</id>-->
-    <!--<build>-->
-    <!--<plugins>-->
-    <!--<plugin>-->
-    <!--<groupId>org.apache.maven.plugins</groupId>-->
-    <!--<artifactId>maven-surefire-plugin</artifactId>-->
-    <!--<version>2.19.1</version>-->
-    <!--<configuration>-->
-    <!--<suiteXmlFiles>-->
-    <!--<suiteXmlFile>src/test/resources/backend/TestNG.xml</suiteXmlFile>-->
-    <!--</suiteXmlFiles>-->
-    <!--<properties>-->
-    <!--<property>-->
-    <!--<name>filename</name>-->
-    <!--<value>AF001EW_v3_E2E_Tests.csv</value>-->
-    <!--</property>-->
-    <!--</properties>-->
-    <!--</configuration>-->
-    <!--</plugin>-->
-    <!--</plugins>-->
-    <!--</build>-->
-    <!--</profile>-->
-    <!--</profiles>-->
+    <profiles>
+        <profile>
+            <id>FrontEnd-Tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.19.1</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>src/test/resources/TestNGXML/frontend/frontend_testng.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>BackEnd-Tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.19.1</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>src/test/resources/TestNGXML/backend/backend_testng.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.8</version>
+                        <executions>
+                            <execution>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <tasks>
+                                        <copy todir="${project.basedir}/target/${filename}">
+                                            <fileset dir="${project.basedir}/target/surefire-reports" includes="**/*"/>
+                                        </copy>
+                                    </tasks>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>Smoke-Test</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.19.1</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>src/test/resources/TestNGXML/frontend/smoketest.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.8</version>
+                        <executions>
+                            <execution>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <tasks>
+                                        <copy todir="${project.basedir}/target/SmokeTest">
+                                            <fileset dir="${project.basedir}/target/surefire-reports" includes="**/*"/>
+                                        </copy>
+                                    </tasks>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

@@ -1,12 +1,14 @@
 package com.ons.gov.uk.core;
 
 
+import com.ons.gov.uk.util.Helper;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
 import java.util.Map;
 
 public class Config {
+	public static final int DEFAULT_TIMEOUT_VALUE = 10;
 	private String filepath;
 	private String dbLoader, fileuploader;
 	private String datasetEndPointReal;
@@ -14,17 +16,20 @@ public class Config {
 	private String postgres;
 	private String jobCreator;
 	private String metadataEditor;
+	private String browser;
+	private String baseURL;
 	private boolean stub = true;
+	private String env;
 
 	public Config(){
 		try {
 			if (System.getProperty("env").equalsIgnoreCase("local")) {
-				loadConfig("/files/local_config.yml");
+				loadConfig("/files/default_config.yml");
 			}
 		} catch (Exception ee) {
 			System.out.println("SET env Variable to run tests. Tests will be run against the DEVELOP env.");
 			System.out.println("*******  Run : run_local.sh : to run tests locally                   ************");
-			loadConfig("/files/default_config.yml");
+			loadConfig("/files/develop_config.yml");
 		}
 		overrideConfigFromEnvironmentVariables();
 	}
@@ -46,6 +51,13 @@ public class Config {
 		if (config.containsKey("fileUploader")) {
 			fileuploader = (String) config.get("fileUploader");
 		}
+		if (config.containsKey("base_url")) {
+			baseURL = (String) config.get("base_url");
+		}
+
+		if (config.containsKey("browser")) {
+			browser = (String) config.get("browser");
+		}
 		if (config.containsKey("file_path")) {
 			filepath = (String) config.get("file_path");
 		}
@@ -64,24 +76,39 @@ public class Config {
 		if (config.containsKey("metadata_editor")) {
 			metadataEditor = (String) config.get("metadata_editor");
 		}
+		if (config.containsKey("env")) {
+			env = (String) config.get("env");
+		}
 	}
 
 	public void overrideConfigFromEnvironmentVariables() {
-		String fileupload_value = System.getProperty("fileupload");
+		String fileupload_value = Helper.getSetting("fileupload");
 		if (fileupload_value != null) {
 			fileuploader = fileupload_value;
 		}
-		String fileName = System.getProperty("filename");
+		String fileName = Helper.getSetting("filename");
 		if (fileName != null) {
 			filepath = fileName;
 		}
-		String jobCreate = System.getProperty("jobcreator");
+		String jobCreate = Helper.getSetting("jobcreator");
 		if (jobCreate != null) {
 			jobCreator = jobCreate;
 		}
-		String metadata_editor = System.getProperty("metadataEditor");
+		String metadata_editor = Helper.getSetting("metadataEditor");
 		if (metadata_editor != null) {
 			metadataEditor = metadata_editor;
+		}
+		String ons_url_value = Helper.getSetting("base_url");
+		if (ons_url_value != null) {
+			baseURL = ons_url_value;
+		}
+		String browser_value = Helper.getSetting("browser");
+		if (browser_value != null) {
+			browser = browser_value;
+		}
+		String env_value = Helper.getSetting("env");
+		if (env_value != null) {
+			env = env_value;
 		}
 
 	}
@@ -127,6 +154,18 @@ public class Config {
 
 	public boolean isBackendStub() {
 		return stub;
+	}
+
+	public String getBaseURL() {
+		return baseURL;
+	}
+
+	public String getBrowser() {
+		return browser;
+	}
+
+	public String getEnv() {
+		return env;
 	}
 
 

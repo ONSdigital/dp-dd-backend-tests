@@ -6,6 +6,7 @@ import io.restassured.response.ResponseBody;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.net.URLDecoder;
 
@@ -33,10 +34,10 @@ public class DimensionalAPI {
 		return responseString;
 	}
 
-	public String checkEndPoint(String endPoint) {
+	public String checkEndPoint(String param) {
 		RestAssured.urlEncodingEnabled = true;
-		RestAssured.baseURI = endPoint;
-		responseBody = given().cookies("splash", "y").expect().statusCode(200).when().get("/versions").body();
+		RestAssured.baseURI = config.getEndPointReal();
+		responseBody = given().cookies("splash", "y").expect().statusCode(200).when().get("/versions?" + param).body();
 		responseString = responseBody.asString();
 		return responseString;
 	}
@@ -68,6 +69,7 @@ public class DimensionalAPI {
 
 	public boolean titleExists(String title) throws Exception {
 		boolean exists = false;
+		try {
 			JSONArray jsonObject1 = getItems("items");
 			for (int i = 0; i < jsonObject1.size(); i++) {
 				JSONObject jo = (JSONObject) jsonObject1.get(i);
@@ -76,6 +78,11 @@ public class DimensionalAPI {
 					break;
 				}
 			}
+
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		return exists;
 	}
 
@@ -87,20 +94,28 @@ public class DimensionalAPI {
 		}
 	}
 
-	public int dataSetTotal() throws Exception {
+	public int dataSetTotal() {
 		int totalDataSets = 0;
-		JSONObject jsonObject = (JSONObject) parser.parse(responseString);
-		totalDataSets = Integer.parseInt(jsonObject.get("total").toString());
+		try {
+			JSONObject jsonObject = (JSONObject) parser.parse(responseString);
+			totalDataSets = Integer.parseInt(jsonObject.get("total").toString());
+		} catch (ParseException ee) {
+			ee.printStackTrace();
+		}
 		return totalDataSets;
 	}
 
-	public String waitForApiToLoad(String title) throws Exception {
+	public String waitForApiToLoad(String csvFile, String title) {
 		int counter = 0;
-			while (!titleExists(title) && counter < 10) {
+		try {
+			while ((!titleExists(title) && (!titleExists(csvFile))) && counter < 100) {
 				Thread.sleep(2000);
 				checkEndPoint();
 				counter++;
 			}
+		} catch (Exception ee) {
+			ee.printStackTrace();
+		}
 		return responseString;
 	}
 
@@ -110,5 +125,18 @@ public class DimensionalAPI {
 
 	}
 
+	public String getDatasetid(String csvFileName, String title) throws Exception {
+		String datasetid = null;
+		JSONArray itemsArray = getItems("items");
+		for (int i = 0; i < itemsArray.size(); i++) {
+			JSONObject jo = (JSONObject) itemsArray.get(i);
+			if (jo.get("title").toString().contains(csvFileName) ||
+					jo.get("title").toString().contains(title)) {
+				datasetid = jo.get("id").toString();
+				break;
+			}
+		}
+		return datasetid;
+	}
 
 }

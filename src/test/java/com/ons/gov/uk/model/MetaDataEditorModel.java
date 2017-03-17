@@ -13,6 +13,15 @@ public class MetaDataEditorModel {
 	private String majorLabel;
 	private String revisionNotes;
 	private String revisionReason;
+	private String title;
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public String getJsonMetadata() {
 		return jsonMetadata;

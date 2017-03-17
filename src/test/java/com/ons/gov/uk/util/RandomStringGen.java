@@ -18,7 +18,11 @@ public class RandomStringGen {
 
 	public static int getRandomInt(int lengthToBuild) {
 		int value = 0;
-		value = random.nextInt(lengthToBuild);
+		try {
+			value = random.nextInt(lengthToBuild);
+		} catch (Exception ee) {
+			System.out.println("value set to " + value);
+		}
 		return value;
 	}
 

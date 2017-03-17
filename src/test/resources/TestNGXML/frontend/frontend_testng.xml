@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" verbose="1" name="Front End Tests" time-out="600000">
+    <suite-files>
+        <suite-file path="ArmedForces.xml"/>
+        <suite-file path="CPI.xml"/>
+        <suite-file path="Annual_Biz_Survey.xml"/>
+        <suite-file path="CloseBrowser.xml"/>
+    </suite-files>
+</suite>
