@@ -34,14 +34,7 @@ public class CPITests extends BaseTest {
 
 	@BeforeTest
 	public void init() throws Exception {
-		try {
-			if (!config.getEnv().equals("develop")) {
-				checkAndUploadFile(cpi_dataresource);
-				checkAndCreateDataResource(cpi_dataresource);
-			}
-		} catch (Exception ee) {
-			System.out.println("CPI File not uploaded. As this is running on develop.");
-		}
+		setUpbeforeRun(cpi_dataresource);
 	}
 
 	@Test(groups = {"downloadCompletecpi"})

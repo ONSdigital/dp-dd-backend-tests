@@ -105,10 +105,10 @@ public class DimensionalAPI {
 		return totalDataSets;
 	}
 
-	public String waitForApiToLoad(String title) {
+	public String waitForApiToLoad(String csvFile, String title) {
 		int counter = 0;
 		try {
-			while (!titleExists(title) && counter < 100) {
+			while ((!titleExists(title) && (!titleExists(csvFile))) && counter < 100) {
 				Thread.sleep(2000);
 				checkEndPoint();
 				counter++;
@@ -125,12 +125,13 @@ public class DimensionalAPI {
 
 	}
 
-	public String getDatasetid(String csvFileName) throws Exception {
+	public String getDatasetid(String csvFileName, String title) throws Exception {
 		String datasetid = null;
 		JSONArray itemsArray = getItems("items");
 		for (int i = 0; i < itemsArray.size(); i++) {
 			JSONObject jo = (JSONObject) itemsArray.get(i);
-			if (jo.get("title").toString().contains(csvFileName)) {
+			if (jo.get("title").toString().contains(csvFileName) ||
+					jo.get("title").toString().contains(title)) {
 				datasetid = jo.get("id").toString();
 				break;
 			}

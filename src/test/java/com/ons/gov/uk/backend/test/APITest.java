@@ -1,20 +1,16 @@
 package com.ons.gov.uk.backend.test;
 
 
-import com.ons.gov.uk.DimensionalAPI;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class APITest {
-	DimensionalAPI dimensionalAPI = new DimensionalAPI();
-	JSONParser parser = new JSONParser();
+public class APITest extends TestSetup {
 	String responseFromAPI = null;
 
 	public APITest() throws Exception {
-		responseFromAPI = dimensionalAPI.checkEndPoint("size=100");
+		responseFromAPI = dimAPI.checkEndPoint("size=100");
 	}
 
 	@Test

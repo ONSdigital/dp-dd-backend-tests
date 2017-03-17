@@ -33,19 +33,11 @@ public class ArmedForcesTests extends BaseTest {
 	ArrayList <String> age = new ArrayList <>();
 	ArrayList <String> residence = new ArrayList <>();
 	ArrayList <String> sex = new ArrayList <>();
-	String armedForcesDS = null;
+	String armedForcesDS = null, title = null;
 
 	@BeforeTest
 	public void init() throws Exception {
-		try {
-			if (!config.getEnv().equals("develop")) {
-				checkAndUploadFile(armedForces.armedForces_dataresource);
-				checkAndCreateDataResource(armedForces.armedForces_dataresource);
-			}
-		} catch (Exception ee) {
-			System.out.println("Armed Forces file not uploaded. As this is running on develop.");
-		}
-
+		setUpbeforeRun(armedForces.armedForces_dataresource);
 	}
 
 	@Test(groups = {"downloadCompleteAF"})

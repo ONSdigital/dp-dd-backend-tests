@@ -93,23 +93,23 @@ public class MetaDataSetUp {
 		return metadataMapped;
 	}
 
-	public void updateMetaData(String csvFileName, String dataResName) throws Exception {
+	public void updateMetaData(String filename, String title, String dataResName) throws Exception {
 		DimensionalAPI dimensionalAPI = new DimensionalAPI();
 		String datasetId = null;
 		JSONArray allItems = dimensionalAPI.getItems(dimensionalAPI.checkEndPoint(), "items");
 		List <ItemsObj> itemsList = mapper.readValue(String.valueOf(allItems), new TypeReference <List <ItemsObj>>() {
 		});
 		for (ItemsObj item : itemsList) {
-			if (item.getTitle().contains(csvFileName)) {
+			if (item.getTitle().contains(title) || item.getTitle().contains(filename)) {
 				datasetId = item.getId();
 				break;
 			}
 		}
 		DataResource dataResource = new DataResource();
-		dataResource.setTitle(csvFileName);
+		dataResource.setTitle(title);
 		dataResource.setDataResourceID(dataResName);
-		getJsonMetaData(csvFileName);
-		MetaDataEditorModel datasetMetadata = datasetMetadata(datasetId, csvFileName, "1", dataResource, "1", jsonMetaData, "2017");
+		getJsonMetaData(title);
+		MetaDataEditorModel datasetMetadata = datasetMetadata(datasetId, title, "1", dataResource, "1", jsonMetaData, "2017");
 		String service = config.getMetadataEditor() + "/metadata/" + datasetId;
 		ResponseBody responseBody = given().cookies("splash", "y").accept("application/json")
 				.contentType("application/json").body(mapper.writeValueAsString(datasetMetadata))

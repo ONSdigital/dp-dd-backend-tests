@@ -2,8 +2,7 @@ package com.ons.gov.uk.backend.test;
 
 import com.ons.gov.uk.DimensionValues;
 import com.ons.gov.uk.DimensionalAPI;
-import com.ons.gov.uk.core.Config;
-import com.ons.gov.uk.frontend.test.FileChecker;
+import com.ons.gov.uk.JobCreator;
 import com.ons.gov.uk.util.CSVOps;
 import com.ons.gov.uk.util.RandomStringGen;
 import com.opencsv.CSVReader;
@@ -16,24 +15,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class CSVFilterTest {
+public class CSVFilterTest extends TestSetup {
 
 	public String datasetid = null;
 	public String filteredFileName = null;
-	Config config = new Config();
-	public String originalFile = config.getFilepath();
-	MetaDataEditorTest.JobCreator jobCreator = new MetaDataEditorTest.JobCreator();
-	FileChecker fileChecker = new FileChecker();
+
+	JobCreator jobCreator = new JobCreator();
+
 	CSVOps csvOps = new CSVOps();
 	HashMap <String, ArrayList <DimensionValues>> dimOptionOriginal;
 	ConcurrentHashMap <String, ArrayList <DimensionValues>> filterForJob = new ConcurrentHashMap <>();
 	DimensionalAPI dimensionalAPI = new DimensionalAPI();
-
+	String csvFile = null, title = null;
 	@BeforeTest
 	public void init() throws Exception {
-		originalFile = originalFile.split(".csv")[0];
-		datasetid = dimensionalAPI.getDatasetid(originalFile);
-		csvOps.populateDimensionFilters(config.getFilepath());
+		csvFile = getCsvFile();
+		title = getTitle(csvFile);
+		datasetid = dimensionalAPI.getDatasetid(csvFile, title);
+		Assert.assertNotNull(datasetid, "Data set id is NULL. Could not pick up the dataset from the lists. Does it exist?");
+		csvOps.populateDimensionFilters(csvFile);
 		dimOptionOriginal = csvOps.dimAndOptions;
 		setUpFilters(dimOptionOriginal, false);
 	}

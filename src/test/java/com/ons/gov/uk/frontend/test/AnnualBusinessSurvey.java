@@ -29,17 +29,10 @@ public class AnnualBusinessSurvey extends BaseTest {
 	ArrayList <String> ukBizVal = new ArrayList <>();
 	ArrayList <String> selectedSicCodes = new ArrayList <>();
 	ArrayList <String> selectedBizValues = new ArrayList <>();
-
+	String title = null, csvFile = null;
 	@BeforeTest
 	public void init() throws Exception {
-		try {
-			if (!config.getEnv().equals("develop")) {
-				checkAndUploadFile(annual_biz_dataresource);
-				checkAndCreateDataResource(annual_biz_dataresource);
-			}
-		} catch (Exception ee) {
-			System.out.println("Annual Biz Survey file not uploaded. As this is running on develop.");
-		}
+		setUpbeforeRun(annual_biz_dataresource);
 	}
 
 	@Test(groups = {"downloadCompleteabs"})

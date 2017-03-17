@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="1" verbose="0" name="Armed Forces" parallel="false">
-    <test name="Armed Forces Test" parallel="none">
-        <classes>
-            <class name="com.ons.gov.uk.frontend.test.ArmedForcesTests"/>
-        </classes>
-    </test>
-</suite>

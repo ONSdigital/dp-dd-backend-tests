@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" verbose="0" name="Smoke Test" parallel="false">
+    <test name="Smoke Test on Discovery" parallel="none">
+        <classes>
+            <class name="com.ons.gov.uk.frontend.test.ArmedForcesTests"/>
+            <class name="com.ons.gov.uk.frontend.test.CloseBrowser">
+                <methods>
+                    <include name="closeBrowser"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

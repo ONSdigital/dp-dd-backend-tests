@@ -20,25 +20,23 @@ import java.util.List;
 
 public class APIIntegrityTest extends TestSetup {
 
-	String csvFile = config.getFilepath();
-	String originalFile = config.getFilepath();
 	String dimUrl = null;
 	CSVOps csvOps = new CSVOps();
 	HashMap <String, ArrayList <DimensionValues>> dimOptionsCSV;
 	HashMap <String, ArrayList <DimensionValues>> optionsFromAPI = new HashMap <>();
 	ArrayList <Dimension> dimensions = new ArrayList <>();
-	MetaDataEditorTest.FileUploader fileUploader = new MetaDataEditorTest.FileUploader();
+	String csvFile = null, title = null;
 
 
 	@BeforeTest
 	public void checkDataSetExists() throws Exception {
-		csvFile = csvFile.split(".csv")[0];
+		csvFile = getCsvFile();
+		title = getTitle(csvFile);
 		responseFromAPI = dimAPI.checkEndPoint();
-		if (!responseFromAPI.contains(csvFile)) {
-			fileUploader.uploadFile(originalFile);
-			responseFromAPI = dimAPI.waitForApiToLoad(csvFile);
+		if (!responseFromAPI.contains(csvFile) && !responseFromAPI.contains(title)) {
+			fileUploader.uploadFile(csvFile);
+			responseFromAPI = dimAPI.waitForApiToLoad(csvFile, title);
 		}
-
 	}
 
 
@@ -78,18 +76,20 @@ public class APIIntegrityTest extends TestSetup {
 	}
 
 	public void getCSVDimensions() throws Exception {
-		csvOps.populateDimensionFilters(config.getFilepath());
+		csvOps.populateDimensionFilters(csvFile);
 		dimOptionsCSV = csvOps.getDimOptionsFromCSV();
 	}
 
 	public void getDimensionUrl() throws Exception {
-		Assert.assertTrue(dimAPI.titleExists(csvFile));
+		Assert.assertTrue(dimAPI.titleExists(csvFile) || (dimAPI.titleExists(title)),
+				"Unable to find the dataset with the file name : " + csvFile + " OR with the Title : " + title +
+						"/n Check DB Loader, CSV Splitter logs\n");
 		JSONArray itemsArray = dimAPI.getItems("items");
 		ArrayList <ItemsObj> itemsList = (ArrayList) mapper.readValue(String.valueOf(itemsArray),
 				new TypeReference <List <ItemsObj>>() {
 				});
 		for (ItemsObj item : itemsList) {
-			if (item.getTitle().contains(csvFile)) {
+			if (item.getTitle().contains(csvFile) || item.getTitle().contains(title)) {
 				dimUrl = item.getDimensionsUrl();
 				break;
 			}
@@ -153,9 +153,12 @@ public class APIIntegrityTest extends TestSetup {
 		return toReturn;
 	}
 
-	public String getDimWithMoreOptions() {
+	public String getDimWithMoreOptions() throws Exception {
 		String dimKey = null;
 		int size = 0;
+		if (dimOptionsCSV == null) {
+			getCSVDimensions();
+		}
 		for (String key : dimOptionsCSV.keySet()) {
 			if (dimOptionsCSV.get(key).size() > size) {
 				size = dimOptionsCSV.get(key).size();
