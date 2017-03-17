@@ -30,6 +30,7 @@ public class AnnualBusinessSurvey extends BaseTest {
 	ArrayList <String> selectedSicCodes = new ArrayList <>();
 	ArrayList <String> selectedBizValues = new ArrayList <>();
 	String title = null, csvFile = null;
+
 	@BeforeTest
 	public void init() throws Exception {
 		setUpbeforeRun(annual_biz_dataresource);

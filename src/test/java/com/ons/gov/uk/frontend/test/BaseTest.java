@@ -36,16 +36,16 @@ public class BaseTest extends TestSetup {
 
 	public void checkAndCreateDataResource(String filename, String title) throws Exception {
 		filename = filename.split(".csv")[0];
-			String dataResName = "Test_" + filename;
-			boolean dataResMapped = false;
-			boolean exists = metaDataSetUp.doesDataResourceExist(dataResName);
-			if (!exists) {
-				metaDataSetUp.createDataResource(dataResName, title);
-			}
+		String dataResName = "Test_" + filename;
+		boolean dataResMapped = false;
+		boolean exists = metaDataSetUp.doesDataResourceExist(dataResName);
+		if (!exists) {
+			metaDataSetUp.createDataResource(dataResName, title);
+		}
 		dataResMapped = metaDataSetUp.isTheMetaDataMapped(title);
-			if (!dataResMapped) {
-				metaDataSetUp.updateMetaData(filename, title, dataResName);
-			}
+		if (!dataResMapped) {
+			metaDataSetUp.updateMetaData(filename, title, dataResName);
+		}
 	}
 
 

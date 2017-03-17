@@ -108,8 +108,6 @@ public class APIIntegrityTest extends TestSetup {
 	}
 
 
-
-
 	public ArrayList <DimensionValues> populateOptionsFromAPI(ArrayList <DimensionOption> dimensionOptions, boolean hierarchical) {
 		ArrayList <DimensionValues> options = new ArrayList <>();
 		for (DimensionOption dimOpt : dimensionOptions) {

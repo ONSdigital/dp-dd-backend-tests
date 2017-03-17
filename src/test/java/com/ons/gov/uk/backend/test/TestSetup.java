@@ -26,7 +26,7 @@ public class TestSetup {
 	}
 
 	public void setCsvFile(String fileName) {
-			config.setFilepath(fileName);
+		config.setFilepath(fileName);
 	}
 
 	public String getTitle(String fileName) {

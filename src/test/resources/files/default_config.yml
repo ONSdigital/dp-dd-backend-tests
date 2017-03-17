@@ -1,0 +1,12 @@
+config:
+  base_url: http://localhost:20000/dd
+  fileUploader: http://localhost:20019
+  dbloader: http://localhost:20097
+  postgres: jdbc:postgresql://localhost:5432/data_discovery
+  metadata_editor: http://localhost:23000
+  endPoint_real: http://localhost:20099
+  jobcreator: http://localhost:20100
+  dbloader: http://localhost:20097
+  env: local
+  browser: CHROME
+  file_path: AF001EW_v3_E2E_Tests.csv
