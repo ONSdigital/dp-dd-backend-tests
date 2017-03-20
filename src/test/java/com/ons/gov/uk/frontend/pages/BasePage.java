@@ -377,16 +377,21 @@ public class BasePage {
 		return (ArrayList <WebElement>) findElementsBy(selected_checkboxes_css);
 	}
 
-	public void selectCheckBox(int num) throws Exception {
+	public void selectCheckBox(int num, boolean checkSelected) throws Exception {
 		ArrayList <WebElement> allSelectedChkBox = new ArrayList <>();
-		try {
-			allSelectedChkBox = getAllSelectedChkBoxes();
-		} catch (Exception ee) {
+		if (checkSelected) {
+			try {
+				allSelectedChkBox = getAllSelectedChkBoxes();
+			} catch (Exception ee) {
+				System.out.println("No checkbox selected");
+			}
 		}
 		boolean exists = false;
-		for (WebElement webb : allSelectedChkBox) {
-			if (webb.getAttribute("name").equals(getAllCheckBoxes().get(num).getAttribute("for"))) {
-				exists = true;
+		if (checkSelected) {
+			for (WebElement webb : allSelectedChkBox) {
+				if (webb.getAttribute("name").equals(getAllCheckBoxes().get(num).getAttribute("for"))) {
+					exists = true;
+				}
 			}
 		}
 		if (!exists) {
@@ -456,15 +461,15 @@ public class BasePage {
 		refresh();
 	}
 
-	public ArrayList <WebElement> selectChkBox(int... checkBox) throws Exception {
+	public ArrayList <WebElement> selectChkBox(boolean checkSelected, int... checkBox) throws Exception {
 		ArrayList <WebElement> checkBoxesSelected = new ArrayList <>();
 		for (int checkOption : checkBox) {
-			selectCheckBox(checkOption);
+			selectCheckBox(checkOption, checkSelected);
 		}
 		try {
 			checkBoxesSelected = (ArrayList <WebElement>) findElementsBy(selected_checkboxes_css);
 		} catch (Exception ee) {
-			ee.printStackTrace();
+			System.out.println("No checkboxes to select");
 		}
 //
 //		for (WebElement webElement : findElementsBy(selected_checkboxes_css)) {
@@ -474,35 +479,7 @@ public class BasePage {
 	}
 
 	public void assertLastPage(ArrayList <String> selectedCheckBoxes) throws Exception {
-
 		click(generate_file);
-/*
-		int counter = 30;
-		try {
-			getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(file_download_button_options));
-		} catch (Exception ee) {
-			try {
-				while (counter < 1) {
-					Thread.sleep(2000);
-					assertLastPage(selectedCheckBoxes);
-					counter--;
-				}
-
-			} catch (InterruptedException ee1) {
-			}
-
-		}
-
-		ArrayList <String> actualButtonsForDownload = new ArrayList <>();
-		for (WebElement webElement : findElementsBy(file_download_button_options)) {
-			actualButtonsForDownload.add(webElement.getText().toUpperCase());
-		}
-
-
-		Assert.assertEquals(actualButtonsForDownload, selectedCheckBoxes,
-				"Mismatch between the file formats selected to the file formats available for download");
-		click(csv_file_download);
-*/
 	}
 
 	public ArrayList <String> getCheckBoxValues(ArrayList <WebElement> selectedCheckBoxes) {
@@ -534,9 +511,9 @@ public class BasePage {
 						+ "\n Expected error message : " + error_message_text);
 	}
 
-	public ArrayList <String> selectRandomChkBox(int num) throws Exception {
+	public ArrayList <String> selectRandomChkBox(int num, boolean checkSelected) throws Exception {
 		ArrayList <String> selectedValues = new ArrayList <>();
-		ArrayList <WebElement> selectedElements = selectChkBox(num);
+		ArrayList <WebElement> selectedElements = selectChkBox(checkSelected, num);
 		for (WebElement webElement : selectedElements) {
 			String labelElement = selected_chkBox_label.replace("id", webElement.getAttribute("id"));
 			selectedValues.add(getElement(By.cssSelector(labelElement)).getAttribute("for") + "," + getElement(By.cssSelector(labelElement)).getText());
@@ -549,13 +526,20 @@ public class BasePage {
 		ArrayList <String> returnList = new ArrayList <>();
 		for (String tempStrArr : selected) {
 			String[] tempArr = tempStrArr.split(",");
+			String formed = "";
 			for (int index = 1; index < tempArr.length; index++) {
-				returnList.add(tempArr[index] + " ");
+				if (index == tempArr.length - 1) {
+					formed += tempArr[index];
+				} else {
+					formed += tempArr[index] + ",";
+				}
 			}
+			returnList.add(formed.trim());
 		}
 		return returnList;
 
 	}
+
 
 	public void assertSelection(ArrayList <String> selected, ArrayList <WebElement> elementArrayList) {
 
@@ -631,7 +615,7 @@ public class BasePage {
 			click(choose_download_format);
 		}
 		try {
-			ArrayList <WebElement> selectedChkBox = selectChkBox(1);
+			ArrayList <WebElement> selectedChkBox = selectChkBox(false, 1);
 			assertLastPage(getCheckBoxValues(selectedChkBox));
 			waitForDownloadButton();
 			Assert.assertNotNull(url, "URL is null");
@@ -645,12 +629,13 @@ public class BasePage {
 			}
 			Assert.fail();
 		}
-		try {
-			if (customise) {
-				selectCheckBox(1);
-			}
-		} catch (Exception ee) {
-		}
+//		try {
+//			if (customise) {
+//				selectCheckBox(1,false);
+//			}
+//		} catch (Exception ee) {
+//			ee.printStackTrace();
+//		}
 	}
 
 	public void checkDownloadedFile(ArrayList <String> values, String filter, boolean hierarchy) {

@@ -21,7 +21,7 @@ public class OptionSelector extends BasePage {
 		Assert.assertEquals(getoptionsText(filterText), defaultSelection);
 		getCustomiseLink(filterText).click();
 		// ids need to be removed
-		selectCheckBox(0);
+		selectCheckBox(0, false);
 		selectedOption = returnSelectedChkBox();
 		click(save_selection);
 		Assert.assertEquals(getoptionsText(filterText), selectedOption,
@@ -46,7 +46,7 @@ public class OptionSelector extends BasePage {
 						"Expected  " + filterText + "  : " + defaultSelection);
 		getCustomiseLink(filterText).click();
 		click(disable_all);
-		selectCheckBox(1);
+		selectCheckBox(1, false);
 		selectedOption = returnSelectedChkBox();
 		click(save_selection);
 		Assert.assertEquals(getoptionsText(filterText), selectedOption,

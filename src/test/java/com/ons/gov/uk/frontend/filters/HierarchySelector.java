@@ -26,7 +26,6 @@ public class HierarchySelector extends BasePage {
 		click(search_button);
 	}
 
-	// send the link
 	public void browseHierarchy(boolean heir) {
 		click(browse_aggregates);
 		if (heir) {
@@ -90,11 +89,11 @@ public class HierarchySelector extends BasePage {
 		click(summarySelector.save_selection);
 		searchHierarchy(searchStr);
 		ArrayList <String> values_selected = selectRandomChkBox(RandomStringGen.getRandomInt(
-				getAllCheckBoxes().size() - 1));
+				getAllCheckBoxes().size() - 1), true);
 		click(summarySelector.addMore);
 		browseHierarchy(heir);
 		values_selected.addAll(selectRandomChkBox(RandomStringGen.getRandomInt(
-				getAllCheckBoxes().size() - 1)));
+				getAllCheckBoxes().size() - 1), true));
 		assertSelection(values_selected, getAllRangeOptions());
 		click(save_selection);
 		return values_selected;
@@ -105,11 +104,11 @@ public class HierarchySelector extends BasePage {
 		getCustomiseLink(filterText).click();
 		searchHierarchy(searchStr);
 		ArrayList <String> values_selected = selectRandomChkBox(RandomStringGen.getRandomInt(
-				getAllCheckBoxes().size() - 1));
+				getAllCheckBoxes().size() - 1), true);
 		click(summarySelector.addMore);
 		browseHierarchy(hier);
 		values_selected.addAll(selectRandomChkBox(RandomStringGen.getRandomInt(
-				getAllCheckBoxes().size() - 1)));
+				getAllCheckBoxes().size() - 1), true));
 		assertSelection(values_selected, getAllRangeOptions());
 		click(save_selection);
 		return values_selected;
