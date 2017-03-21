@@ -629,13 +629,6 @@ public class BasePage {
 			}
 			Assert.fail();
 		}
-//		try {
-//			if (customise) {
-//				selectCheckBox(1,false);
-//			}
-//		} catch (Exception ee) {
-//			ee.printStackTrace();
-//		}
 	}
 
 	public void checkDownloadedFile(ArrayList <String> values, String filter, boolean hierarchy) {

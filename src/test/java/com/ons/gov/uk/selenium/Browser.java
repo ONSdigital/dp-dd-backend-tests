@@ -102,6 +102,25 @@ public class Browser {
 					e.printStackTrace();
 				}
 				break;
+			case "BROWSERSTACK_IE11":
+				// INIT browserstack class which will use the browser.json.
+				// more work to be done here.
+
+				DesiredCapabilities capsie = new DesiredCapabilities();
+				capsie.setCapability("browser", "ie");
+				capsie.setCapability("browser_version", "11");
+				capsie.setCapability("os", "Windows");
+				capsie.setCapability("os_version", "10");
+				capsie.setCapability("resolution", "1024x768");
+				capsie.setCapability("browserstack.debug", true);
+				capsie.setCapability("browserstack.local", true);
+				try {
+					webDriver = new RemoteWebDriver(new URL("https://iankent4:xDSMJuAtGbyf3Gzgsg5q@hub-cloud.browserstack.com/wd/hub"),
+							capsie);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+				break;
 			default:
 				System.setProperty("webdriver.gecko.driver", "/home/giri/Downloads/firefox/browser/firefox");
 				webDriver = new FirefoxDriver();
