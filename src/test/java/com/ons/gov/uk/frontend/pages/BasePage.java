@@ -550,7 +550,7 @@ public class BasePage {
 		}
 		for (String tempStr : formatSelected(selected)) {
 			tempStr = tempStr.trim();
-			String temp[] = tempStr.split("\\(found");
+			String temp[] = tempStr.split("\\(.*");
 			Assert.assertTrue(stringExists(compareArrayList, temp[0].trim()),
 					"Selected Option : " + temp[0].trim() + " is not displayed in the selection summary ");
 			//		Assert.assertTrue(compareArrayList.contains(temp[0].trim()),
