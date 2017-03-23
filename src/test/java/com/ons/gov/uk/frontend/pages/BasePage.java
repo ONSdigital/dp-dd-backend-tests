@@ -553,8 +553,6 @@ public class BasePage {
 			String temp[] = tempStr.split("\\(.*");
 			Assert.assertTrue(stringExists(compareArrayList, temp[0].trim()),
 					"Selected Option : " + temp[0].trim() + " is not displayed in the selection summary ");
-			//		Assert.assertTrue(compareArrayList.contains(temp[0].trim()),
-			//				"Selected Option : " + tempStr + " is not displayed in the selection summary ");
 		}
 	}
 

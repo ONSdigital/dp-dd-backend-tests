@@ -19,6 +19,7 @@ public class HierarchySelector extends BasePage {
 	public By add_all = getElementLocator("add_all_linkText");
 	public String selected_chkBox_label = getTextFromProperty("label_selected_chkbox_css");
 	SummarySelector summarySelector = new SummarySelector();
+	ArrayList <WebElement> hierarchy = new ArrayList <>();
 
 	public void searchHierarchy(String searchStr) {
 		click(search_aggregates);
@@ -37,7 +38,6 @@ public class HierarchySelector extends BasePage {
 
 
 	private WebElement topLevelHierarchy() {
-		ArrayList <WebElement> hierarchy = new ArrayList <>();
 		WebElement toClick = null;
 		try {
 			hierarchy = (ArrayList <WebElement>) findElementsBy(customise_hierarchies);
@@ -113,5 +113,32 @@ public class HierarchySelector extends BasePage {
 		click(save_selection);
 		return values_selected;
 	}
+
+	public void compareGeoSorting(String filterText, boolean hier) throws Exception {
+		ArrayList <String> geoValues = new ArrayList <>();
+		ArrayList <String> afterAdding = new ArrayList <>();
+		getCustomiseLink(filterText).click();
+		click(browse_aggregates);
+		hierarchy = (ArrayList <WebElement>) findElementsBy(customise_hierarchies);
+		for (WebElement webElement : hierarchy) {
+			geoValues.add(webElement.getText());
+		}
+		for (WebElement webElement : hierarchy) {
+			if (webElement.getText().contains("United Kingdom")) {
+				webElement.click();
+				break;
+			}
+		}
+		selectRandomChkBox(RandomStringGen.getRandomInt(
+				getAllCheckBoxes().size() - 1), true);
+//		click(save_selection);
+		click(summarySelector.addMore);
+		click(browse_aggregates);
+		hierarchy = (ArrayList <WebElement>) findElementsBy(customise_hierarchies);
+		for (int index = 0; index < hierarchy.size(); index++) {
+			Assert.assertTrue("The list is not ordered for geography browse page", hierarchy.get(index).getText().equalsIgnoreCase(geoValues.get(index)));
+		}
+	}
+
 
 }

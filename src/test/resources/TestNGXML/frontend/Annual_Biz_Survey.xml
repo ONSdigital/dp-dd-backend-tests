@@ -6,4 +6,9 @@
             <class name="com.ons.gov.uk.frontend.test.AnnualBusinessSurvey"/>
         </classes>
     </test>
+    <test name="SAPE Test Geo Ordering" parallel="none">
+        <classes>
+            <class name="com.ons.gov.uk.frontend.test.SmallAreaPopulation"/>
+        </classes>
+    </test>
 </suite>

@@ -98,6 +98,7 @@ public class CPITests extends BaseTest {
 		basePage.checkDownloadedFile(selected_spl_agg, spl_aggr, true);
 		basePage.checkDownloadedFile(selectedProdcom, prodcom, false);
 		System.out.println("downloadCustomisedDS_WithCSV");
+		System.out.println("************  Completed Open Data Tests*************");
 	}
 
 
