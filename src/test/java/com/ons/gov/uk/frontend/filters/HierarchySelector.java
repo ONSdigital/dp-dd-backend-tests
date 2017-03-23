@@ -131,7 +131,6 @@ public class HierarchySelector extends BasePage {
 		}
 		selectRandomChkBox(RandomStringGen.getRandomInt(
 				getAllCheckBoxes().size() - 1), true);
-//		click(save_selection);
 		click(summarySelector.addMore);
 		click(browse_aggregates);
 		hierarchy = (ArrayList <WebElement>) findElementsBy(customise_hierarchies);
