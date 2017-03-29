@@ -5,7 +5,6 @@ import com.ons.gov.uk.frontend.filters.HierarchySelector;
 import com.ons.gov.uk.frontend.filters.OptionSelector;
 import com.ons.gov.uk.frontend.filters.SummarySelector;
 import com.ons.gov.uk.frontend.pages.CPI;
-import com.ons.gov.uk.util.Helper;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -51,7 +50,6 @@ public class CPITests extends BaseTest {
 	public void openCPI() throws Exception {
 		System.out.println("Starting... openCPI");
 		checkForDS(cpi_link);
-		Helper.pause(1000);
 		basePage.click(basePage.customise_data_set);
 		System.out.println("openCPI");
 	}

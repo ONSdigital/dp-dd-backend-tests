@@ -66,9 +66,6 @@ public class HierarchySelector extends BasePage {
 		click(add_all);
 	}
 
-	// Use this to add the number of checkboxes within a hierarchy
-
-
 	public ArrayList <String> hierarchyJourney(String filterText, String searchStr, boolean heir, boolean removeAll) throws Exception {
 		String defaultSelection = getoptionsText(filterText);
 		getCustomiseLink(filterText).click();
