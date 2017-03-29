@@ -1,6 +1,7 @@
 package com.ons.gov.uk.frontend.filters;
 
 import com.ons.gov.uk.frontend.pages.BasePage;
+import com.ons.gov.uk.util.RandomStringGen;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -34,6 +35,14 @@ public class SummarySelector extends BasePage {
 		click(continue_selection);
 		return selectedValues;
 
+	}
+
+	public void removeRandomGroup() {
+		getRemoveGroups().get(RandomStringGen.getRandomInt(getRemoveGroups().size() - 1)).click();
+	}
+
+	public void removeRandomOption() throws Exception {
+		getRemoveLinks().get(RandomStringGen.getRandomInt(getRemoveLinks().size() - 1)).click();
 	}
 
 

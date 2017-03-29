@@ -61,7 +61,7 @@ public class CPITests extends BaseTest {
 	public void customiseNace() {
 		System.out.println("Starting... nace");
 		try {
-			hierarchySelector.hierarchyJourney(spl_aggr, searchKey1, true);
+			hierarchySelector.hierarchyJourney(spl_aggr, searchKey1, true, false);
 		} catch (Exception ee) {
 			ee.printStackTrace();
 			Assert.fail("Exception caught in " + getClass().getSimpleName().toUpperCase());

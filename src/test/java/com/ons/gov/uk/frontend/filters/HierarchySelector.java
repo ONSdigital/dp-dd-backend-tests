@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class HierarchySelector extends BasePage {
 
+
 	public By search_aggregates = getElementLocator("search_linkText");
 	public By search_textBox = getElementLocator("search_textbox_css");
 	public By search_button = getElementLocator("search_button_css");
@@ -20,13 +21,13 @@ public class HierarchySelector extends BasePage {
 	public String selected_chkBox_label = getTextFromProperty("label_selected_chkbox_css");
 	SummarySelector summarySelector = new SummarySelector();
 	ArrayList <WebElement> hierarchy = new ArrayList <>();
-
 	public void searchHierarchy(String searchStr) {
 		click(search_aggregates);
 		sendKeys(search_textBox, searchStr);
 		click(search_button);
 	}
 
+	// send the link
 	public void browseHierarchy(boolean heir) {
 		click(browse_aggregates);
 		if (heir) {
@@ -38,9 +39,12 @@ public class HierarchySelector extends BasePage {
 
 
 	private WebElement topLevelHierarchy() {
+
 		WebElement toClick = null;
 		try {
-			hierarchy = (ArrayList <WebElement>) findElementsBy(customise_hierarchies);
+			if (isElementPresent(customise_hierarchies)) {
+				hierarchy = (ArrayList <WebElement>) findElementsBy(customise_hierarchies);
+			}
 			while (hierarchy.size() > 0) {
 				toClick = hierarchy.get(RandomStringGen.getRandomInt(hierarchy.size() - 1));
 				System.out.println("Browse Parent Hierarchy :    " + toClick.getText());
@@ -65,7 +69,7 @@ public class HierarchySelector extends BasePage {
 	// Use this to add the number of checkboxes within a hierarchy
 
 
-	public ArrayList <String> hierarchyJourney(String filterText, String searchStr, boolean heir) throws Exception {
+	public ArrayList <String> hierarchyJourney(String filterText, String searchStr, boolean heir, boolean removeAll) throws Exception {
 		String defaultSelection = getoptionsText(filterText);
 		getCustomiseLink(filterText).click();
 		addAll();
@@ -76,7 +80,11 @@ public class HierarchySelector extends BasePage {
 				defaultSelection.contains(String.valueOf(selectedOptions)));
 		getCustomiseLink(filterText).click();
 		Assert.assertTrue("Summary selector Page - Remove All Selections not present ", isElementPresent(summarySelector.remove_all_selected));
-		summarySelector.removeGroups();
+		if (removeAll) {
+			click(summarySelector.remove_all_selected);
+		} else {
+			summarySelector.removeGroups();
+		}
 		Assert.assertTrue("Does not have the add more button", getElement(summarySelector.save_selection).getText().contains("Add more"));
 		click(summarySelector.save_selection);
 		click(cancel_button);
@@ -116,7 +124,6 @@ public class HierarchySelector extends BasePage {
 
 	public void compareGeoSorting(String filterText, boolean hier) throws Exception {
 		ArrayList <String> geoValues = new ArrayList <>();
-		ArrayList <String> afterAdding = new ArrayList <>();
 		getCustomiseLink(filterText).click();
 		click(browse_aggregates);
 		hierarchy = (ArrayList <WebElement>) findElementsBy(customise_hierarchies);
@@ -138,6 +145,5 @@ public class HierarchySelector extends BasePage {
 			Assert.assertTrue("The list is not ordered for geography browse page", hierarchy.get(index).getText().equalsIgnoreCase(geoValues.get(index)));
 		}
 	}
-
 
 }

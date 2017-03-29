@@ -58,7 +58,7 @@ public class AnnualBusinessSurvey extends BaseTest {
 	public void customiseSIC() {
 		System.out.println("Starting... sic");
 		try {
-			selectedSicCodes = hierarchySelector.hierarchyJourney(sic07ABS, searchKey1, true);
+			selectedSicCodes = hierarchySelector.hierarchyJourney(sic07ABS, searchKey1, true, true);
 		} catch (Exception ee) {
 			ee.printStackTrace();
 			Assert.fail("Exception caught in " + getClass().getSimpleName().toUpperCase());

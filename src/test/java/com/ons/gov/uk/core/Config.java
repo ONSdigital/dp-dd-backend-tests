@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 public class Config {
-	public static final int DEFAULT_TIMEOUT_VALUE = 7;
+	public static final int DEFAULT_TIMEOUT_VALUE = 5;
 	private String filepath;
 	private String dbLoader, fileuploader;
 	private String datasetEndPointReal;

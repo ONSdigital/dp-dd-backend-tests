@@ -10,16 +10,14 @@ import com.ons.gov.uk.util.PropertyReader;
 import com.opencsv.CSVReader;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
@@ -69,6 +67,7 @@ public class BasePage {
 	// ****** Error Message
 	public String error_message_text = getTextFromProperty("error_message_text");
 	int counter = 100;
+	HashMap <String, WebElement> customiseFilter = new HashMap <>();
 	private ArrayList <WebElement> filterNames = new ArrayList <>();
 	private ArrayList <WebElement> selectedOptions = new ArrayList <>();
 	private ArrayList <WebElement> customiseLinks = new ArrayList <>();
@@ -365,8 +364,16 @@ public class BasePage {
 	}
 
 	public WebElement getCustomiseLink(String filter) {
+		if (filter.contains(" ")) {
+			filter = filter.replaceAll(" ", "%20");
+		}
 		customiseLinks = (ArrayList <WebElement>) findElementsBy(customise_links);
-		return customiseLinks.get(getFilterNameIndex(filter));
+		for (int index = 0; index < customiseLinks.size(); index++) {
+			String attrHref = customiseLinks.get(index).getAttribute("href");
+			String[] divDim = attrHref.split("/");
+			customiseFilter.put(divDim[divDim.length - 1], customiseLinks.get(index));
+		}
+		return customiseFilter.get(filter);
 	}
 
 	public ArrayList <WebElement> getAllCheckBoxes() throws Exception {
@@ -381,9 +388,11 @@ public class BasePage {
 		ArrayList <WebElement> allSelectedChkBox = new ArrayList <>();
 		if (checkSelected) {
 			try {
-				allSelectedChkBox = getAllSelectedChkBoxes();
+				if (isElementPresent(selected_checkboxes_css)) {
+					allSelectedChkBox = getAllSelectedChkBoxes();
+				}
 			} catch (Exception ee) {
-				System.out.println("No checkbox selected");
+				System.out.println("No checkbox previously selected. Will select a filter option.");
 			}
 		}
 		boolean exists = false;
@@ -405,7 +414,7 @@ public class BasePage {
 		while (iter.hasNext()) {
 			WebElement webTemp = iter.next();
 
-			if (webTemp.getText().contains(removeGroup))
+			if (webTemp.getText().contains("Remove group"))
 				iter.remove();
 		}
 		return removeButtons;
@@ -467,14 +476,13 @@ public class BasePage {
 			selectCheckBox(checkOption, checkSelected);
 		}
 		try {
-			checkBoxesSelected = (ArrayList <WebElement>) findElementsBy(selected_checkboxes_css);
+			if (isElementPresent(selected_checkboxes_css)) {
+				checkBoxesSelected = (ArrayList <WebElement>) findElementsBy(selected_checkboxes_css);
+			}
 		} catch (Exception ee) {
-			System.out.println("No checkboxes to select");
+			System.out.println("No checkboxes previously selected. Will select a filter option.");
 		}
-//
-//		for (WebElement webElement : findElementsBy(selected_checkboxes_css)) {
-//			checkBoxesSelected.add(webElement);
-//		}
+
 		return checkBoxesSelected;
 	}
 

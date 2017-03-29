@@ -36,6 +36,10 @@ public class APIIntegrityTest extends TestSetup {
 		if (!responseFromAPI.contains(csvFile) && !responseFromAPI.contains(title)) {
 			fileUploader.uploadFile(csvFile);
 			responseFromAPI = dimAPI.waitForApiToLoad(csvFile, title);
+		} else {
+			System.out.println("*********           FILE ALREADY EXISTS       *************************");
+			System.out.println("*********           FILE ALREADY EXISTS       *************************");
+			System.out.println("*********           FILE ALREADY EXISTS       *************************");
 		}
 	}
 
