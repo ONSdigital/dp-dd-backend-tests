@@ -119,8 +119,10 @@ public class HierarchySelector extends BasePage {
 		return values_selected;
 	}
 
-	public void compareGeoSorting(String filterText, boolean hier) throws Exception {
+	public void compareGeoSorting(String filterText, boolean hier, String hierarchyToSelect) throws Exception {
+		hierarchyToSelect = hierarchyToSelect.length() > 2 ? hierarchyToSelect : "United Kingdom";
 		ArrayList <String> geoValues = new ArrayList <>();
+		ArrayList <String> afterAdding = new ArrayList <>();
 		getCustomiseLink(filterText).click();
 		click(browse_aggregates);
 		hierarchy = (ArrayList <WebElement>) findElementsBy(customise_hierarchies);
@@ -128,19 +130,30 @@ public class HierarchySelector extends BasePage {
 			geoValues.add(webElement.getText());
 		}
 		for (WebElement webElement : hierarchy) {
-			if (webElement.getText().contains("United Kingdom")) {
+			if (webElement.getText().contains(hierarchyToSelect)) {
 				webElement.click();
+				if (hierarchyToSelect.equals("Unitary Authority") || hierarchyToSelect.contains("Westminster")) {
+					org.testng.Assert.assertTrue(isElementPresent(customise_hierarchies), hierarchyToSelect + " does not have multiple hierarchies within it");
+				}
+
 				break;
 			}
 		}
+		topLevelHierarchy();
 		selectRandomChkBox(RandomStringGen.getRandomInt(
 				getAllCheckBoxes().size() - 1), true);
 		click(summarySelector.addMore);
 		click(browse_aggregates);
 		hierarchy = (ArrayList <WebElement>) findElementsBy(customise_hierarchies);
 		for (int index = 0; index < hierarchy.size(); index++) {
-			Assert.assertTrue("The list is not ordered for geography browse page", hierarchy.get(index).getText().equalsIgnoreCase(geoValues.get(index)));
+			org.testng.Assert.assertTrue(hierarchy.get(index).getText().equalsIgnoreCase(geoValues.get(index)), "The list is not ordered for geography browse page");
 		}
+		click(cancel_button);
+		getCustomiseLink(filterText).click();
+		summarySelector.removeGroups();
+		click(save_selection);
+		click(cancel_button);
 	}
+
 
 }

@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 
 public class SmallAreaPopulation extends BaseTest {
+
 	public By sape_link = basePage.getElementLocator("small_area_pop_estimates_linkText");
 	public By cpi_spl_aggregate_link = basePage.getElementLocator("cpi_spl_aggregates_linkText");
 	public String time_filter = basePage.getTextFromProperty("time_filter_text");
@@ -27,7 +28,10 @@ public class SmallAreaPopulation extends BaseTest {
 			System.out.println("************ Starting SAPE Journey Geography Hierarchy Test **********");
 			checkForDS(sape_link);
 			basePage.click(basePage.customise_data_set);
-			hierarchySelector.compareGeoSorting("Geographic_Hierarchy", true);
+			hierarchySelector.compareGeoSorting("Geographic_Hierarchy", true, "");
+			hierarchySelector.compareGeoSorting("Geographic_Hierarchy", true, "Unitary Authority");
+//			hierarchySelector.compareGeoSorting("Geographic_Hierarchy", true, "Great Britain");
+			hierarchySelector.compareGeoSorting("Geographic_Hierarchy", true, "Westminster Parliamentary Constituency");
 			System.out.println("************ Completed SAPE Journey Geography Hierarchy Test **********");
 		}
 	}
@@ -87,7 +91,6 @@ public class SmallAreaPopulation extends BaseTest {
 			System.out.println("************   Test for CPI TIME SELECTOR TESTS is now complete. **************");
 		}
 	}
-
 
 
 }
